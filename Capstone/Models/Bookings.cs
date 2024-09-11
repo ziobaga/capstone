@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Capstone.Models.Enums;
+using Capstone.Models.Auth;
 
 namespace Capstone.Models
 {
-    public class Booking
+    public class Bookings
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -15,9 +16,9 @@ namespace Capstone.Models
 
         // Relazioni
         public int PartitaId { get; set; }
-        public Match Partita { get; set; }
+        public Matches Partita { get; set; }
 
         public int UtenteId { get; set; }
-        public User Utente { get; set; }
+        public Users Utente { get; set; }
     }
 }

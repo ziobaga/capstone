@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Capstone.Models
 {
-    public class Chat
+    public class Chats
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -12,8 +12,8 @@ namespace Capstone.Models
 
         // Relazioni
         public int PartitaId { get; set; }
-        public Match Partita { get; set; }
+        public Matches Partita { get; set; }
 
-        public ICollection<Message> Messaggi { get; set; }
+        public ICollection<Messages> Messaggi { get; set; }
     }
 }

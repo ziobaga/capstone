@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Capstone.Models.Fields>
+
+@{
+    ViewData["Title"] = "Campi Disponibili";
+}
+
+<h2>Campi Disponibili</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Città</th>
+            <th>Indirizzo</th>
+            <th>Tipo di Campo</th>
+            <th>Prezzo Orario</th>
+            <th>Valutazione Media</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var field in Model)
+        {
+            <tr>
+                <td>@field.NomeCampo</td>
+                <td>@field.Città</td>
+                <td>@field.Indirizzo</td>
+                <td>
+                    @if (field.TipoCampo == 0)
+                    {
+                        <span>Calcio a 5</span>
+                    }
+                    else
+                    {
+                        <span>Calcio a 7</span>
+                    }
+                </td>
+                <td>€@field.PrezzoOrario.ToString("0.00")</td>
+                <td>@field.ValutazioneMedia</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@field.Id" class="btn btn-info">Dettagli</a>
+                    <a asp-action="Edit" asp-route-id="@field.Id" class="btn btn-warning">Modifica</a>
+                    <a asp-action="Delete" asp-route-id="@field.Id" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler eliminare questo campo?');">Elimina</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-primary">Aggiungi Nuovo Campo</a>

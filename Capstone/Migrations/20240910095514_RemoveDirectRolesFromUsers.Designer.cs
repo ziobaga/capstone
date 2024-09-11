@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Capstone.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240828091032_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240910095514_RemoveDirectRolesFromUsers")]
+    partial class RemoveDirectRolesFromUsers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,259 +25,7 @@ namespace Capstone.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Capstone.Models.Availability", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CampoId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataOraFine")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataOraInizio")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CampoId");
-
-                    b.ToTable("Availabilities");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Booking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DataPrenotazione")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("PagamentoEffettuato")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("PartitaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StatoPrenotazione")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UtenteId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PartitaId");
-
-                    b.HasIndex("UtenteId");
-
-                    b.ToTable("Bookings");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Chat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DataCreazione")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PartitaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PartitaId")
-                        .IsUnique();
-
-                    b.ToTable("Chats");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Field", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Città")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GestoreId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Indirizzo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NomeCampo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("PrezzoOrario")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("TipoCampo")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("ValutazioneMedia")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GestoreId");
-
-                    b.ToTable("Fields");
-                });
-
-            modelBuilder.Entity("Capstone.Models.FieldManager", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DataCreazione")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FieldManagers");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Match", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CampoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CreatoreId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataOra")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Stato")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoPartita")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CampoId");
-
-                    b.HasIndex("CreatoreId");
-
-                    b.ToTable("Matches");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Message", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ChatId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DataInvio")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MittenteId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Testo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChatId");
-
-                    b.HasIndex("MittenteId");
-
-                    b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Commento")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DataRecensione")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Punteggio")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoRecensione")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ValutatoCampoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ValutatoGiocatoreId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ValutatoreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ValutatoCampoId");
-
-                    b.HasIndex("ValutatoGiocatoreId");
-
-                    b.HasIndex("ValutatoreId");
-
-                    b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Role", b =>
+            modelBuilder.Entity("Capstone.Models.Auth.Roles", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -294,7 +42,7 @@ namespace Capstone.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Capstone.Models.User", b =>
+            modelBuilder.Entity("Capstone.Models.Auth.Users", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -345,6 +93,215 @@ namespace Capstone.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Capstone.Models.Bookings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataPrenotazione")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("PagamentoEffettuato")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PartitaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StatoPrenotazione")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UtenteId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PartitaId");
+
+                    b.HasIndex("UtenteId");
+
+                    b.ToTable("Bookings");
+                });
+
+            modelBuilder.Entity("Capstone.Models.Chats", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataCreazione")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PartitaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PartitaId")
+                        .IsUnique();
+
+                    b.ToTable("Chats");
+                });
+
+            modelBuilder.Entity("Capstone.Models.Fields", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Città")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Indirizzo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeCampo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("PrezzoOrario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TipoCampo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ValutazioneMedia")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Fields");
+                });
+
+            modelBuilder.Entity("Capstone.Models.Matches", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CampoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreatoreId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataFine")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInizio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Stato")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoPartita")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CampoId");
+
+                    b.HasIndex("CreatoreId");
+
+                    b.ToTable("Matches");
+                });
+
+            modelBuilder.Entity("Capstone.Models.Messages", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChatId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataInvio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MittenteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Testo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatId");
+
+                    b.HasIndex("MittenteId");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("Capstone.Models.Reviews", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Commento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DataRecensione")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("FieldsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Punteggio")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TipoRecensione")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ValutatoCampoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ValutatoGiocatoreId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValutatoreId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FieldsId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("ValutatoCampoId");
+
+                    b.HasIndex("ValutatoGiocatoreId");
+
+                    b.HasIndex("ValutatoreId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("Capstone.Models.UserRole", b =>
                 {
                     b.Property<int>("UserId")
@@ -375,26 +332,15 @@ namespace Capstone.Migrations
                     b.ToTable("UserMatch");
                 });
 
-            modelBuilder.Entity("Capstone.Models.Availability", b =>
+            modelBuilder.Entity("Capstone.Models.Bookings", b =>
                 {
-                    b.HasOne("Capstone.Models.Field", "Campo")
-                        .WithMany("Disponibilità")
-                        .HasForeignKey("CampoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Campo");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Booking", b =>
-                {
-                    b.HasOne("Capstone.Models.Match", "Partita")
+                    b.HasOne("Capstone.Models.Matches", "Partita")
                         .WithMany("Prenotazioni")
                         .HasForeignKey("PartitaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Capstone.Models.User", "Utente")
+                    b.HasOne("Capstone.Models.Auth.Users", "Utente")
                         .WithMany("Prenotazioni")
                         .HasForeignKey("UtenteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -405,37 +351,37 @@ namespace Capstone.Migrations
                     b.Navigation("Utente");
                 });
 
-            modelBuilder.Entity("Capstone.Models.Chat", b =>
+            modelBuilder.Entity("Capstone.Models.Chats", b =>
                 {
-                    b.HasOne("Capstone.Models.Match", "Partita")
+                    b.HasOne("Capstone.Models.Matches", "Partita")
                         .WithOne("Chat")
-                        .HasForeignKey("Capstone.Models.Chat", "PartitaId")
+                        .HasForeignKey("Capstone.Models.Chats", "PartitaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Partita");
                 });
 
-            modelBuilder.Entity("Capstone.Models.Field", b =>
+            modelBuilder.Entity("Capstone.Models.Fields", b =>
                 {
-                    b.HasOne("Capstone.Models.FieldManager", "Gestore")
-                        .WithMany("CampiGestiti")
-                        .HasForeignKey("GestoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("Capstone.Models.Auth.Users", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Gestore");
+                    b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Capstone.Models.Match", b =>
+            modelBuilder.Entity("Capstone.Models.Matches", b =>
                 {
-                    b.HasOne("Capstone.Models.Field", "Campo")
+                    b.HasOne("Capstone.Models.Fields", "Campo")
                         .WithMany("Partite")
                         .HasForeignKey("CampoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Capstone.Models.User", "Creatore")
+                    b.HasOne("Capstone.Models.Auth.Users", "Creatore")
                         .WithMany("PartiteCreate")
                         .HasForeignKey("CreatoreId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -446,15 +392,15 @@ namespace Capstone.Migrations
                     b.Navigation("Creatore");
                 });
 
-            modelBuilder.Entity("Capstone.Models.Message", b =>
+            modelBuilder.Entity("Capstone.Models.Messages", b =>
                 {
-                    b.HasOne("Capstone.Models.Chat", "Chat")
+                    b.HasOne("Capstone.Models.Chats", "Chat")
                         .WithMany("Messaggi")
                         .HasForeignKey("ChatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Capstone.Models.User", "Mittente")
+                    b.HasOne("Capstone.Models.Auth.Users", "Mittente")
                         .WithMany("MessaggiInviati")
                         .HasForeignKey("MittenteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -465,23 +411,35 @@ namespace Capstone.Migrations
                     b.Navigation("Mittente");
                 });
 
-            modelBuilder.Entity("Capstone.Models.Review", b =>
+            modelBuilder.Entity("Capstone.Models.Reviews", b =>
                 {
-                    b.HasOne("Capstone.Models.Field", "ValutatoCampo")
+                    b.HasOne("Capstone.Models.Fields", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("FieldsId");
+
+                    b.HasOne("Capstone.Models.Auth.Users", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Capstone.Models.Fields", "ValutatoCampo")
                         .WithMany()
                         .HasForeignKey("ValutatoCampoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Capstone.Models.User", "ValutatoGiocatore")
+                    b.HasOne("Capstone.Models.Auth.Users", "ValutatoGiocatore")
                         .WithMany("RecensioniRicevute")
                         .HasForeignKey("ValutatoGiocatoreId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Capstone.Models.User", "Valutatore")
+                    b.HasOne("Capstone.Models.Auth.Users", "Valutatore")
                         .WithMany("RecensioniLasciate")
                         .HasForeignKey("ValutatoreId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("User");
 
                     b.Navigation("ValutatoCampo");
 
@@ -492,14 +450,14 @@ namespace Capstone.Migrations
 
             modelBuilder.Entity("Capstone.Models.UserRole", b =>
                 {
-                    b.HasOne("Capstone.Models.Role", "Role")
+                    b.HasOne("Capstone.Models.Auth.Roles", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Capstone.Models.User", "User")
-                        .WithMany()
+                    b.HasOne("Capstone.Models.Auth.Users", "User")
+                        .WithMany("UserRole")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -511,50 +469,25 @@ namespace Capstone.Migrations
 
             modelBuilder.Entity("UserMatch", b =>
                 {
-                    b.HasOne("Capstone.Models.Match", null)
+                    b.HasOne("Capstone.Models.Matches", null)
                         .WithMany()
                         .HasForeignKey("MatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Capstone.Models.User", null)
+                    b.HasOne("Capstone.Models.Auth.Users", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Capstone.Models.Chat", b =>
-                {
-                    b.Navigation("Messaggi");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Field", b =>
-                {
-                    b.Navigation("Disponibilità");
-
-                    b.Navigation("Partite");
-                });
-
-            modelBuilder.Entity("Capstone.Models.FieldManager", b =>
-                {
-                    b.Navigation("CampiGestiti");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Match", b =>
-                {
-                    b.Navigation("Chat")
-                        .IsRequired();
-
-                    b.Navigation("Prenotazioni");
-                });
-
-            modelBuilder.Entity("Capstone.Models.Role", b =>
+            modelBuilder.Entity("Capstone.Models.Auth.Roles", b =>
                 {
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("Capstone.Models.User", b =>
+            modelBuilder.Entity("Capstone.Models.Auth.Users", b =>
                 {
                     b.Navigation("MessaggiInviati");
 
@@ -565,6 +498,28 @@ namespace Capstone.Migrations
                     b.Navigation("RecensioniLasciate");
 
                     b.Navigation("RecensioniRicevute");
+
+                    b.Navigation("UserRole");
+                });
+
+            modelBuilder.Entity("Capstone.Models.Chats", b =>
+                {
+                    b.Navigation("Messaggi");
+                });
+
+            modelBuilder.Entity("Capstone.Models.Fields", b =>
+                {
+                    b.Navigation("Partite");
+
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("Capstone.Models.Matches", b =>
+                {
+                    b.Navigation("Chat")
+                        .IsRequired();
+
+                    b.Navigation("Prenotazioni");
                 });
 #pragma warning restore 612, 618
         }

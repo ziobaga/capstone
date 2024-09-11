@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
+﻿using Capstone.Models.Auth;
 using Capstone.Models.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Capstone.Models
 {
-    public class Field
+    public class Fields
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -18,10 +18,9 @@ namespace Capstone.Models
         public decimal ValutazioneMedia { get; set; }
 
         // Relazioni
-        public int GestoreId { get; set; }
-        public FieldManager Gestore { get; set; }
-
-        public ICollection<Availability> Disponibilità { get; set; }
-        public ICollection<Match> Partite { get; set; }
+        public int UserId { get; set; }
+        public Users User { get; set; }
+        public ICollection<Matches> Partite { get; set; }
+        public ICollection<Reviews> Reviews { get; set; } = new List<Reviews>();
     }
 }

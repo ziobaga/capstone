@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Capstone.Models.Auth;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Capstone.Models
 {
-    public class Message
+    public class Messages
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -13,9 +14,9 @@ namespace Capstone.Models
 
         // Relazioni
         public int ChatId { get; set; }
-        public Chat Chat { get; set; }
+        public Chats Chat { get; set; }
 
         public int MittenteId { get; set; }
-        public User Mittente { get; set; }
+        public Users Mittente { get; set; }
     }
 }

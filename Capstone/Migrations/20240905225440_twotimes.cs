@@ -6,41 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Capstone.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class twotimes : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "FieldManagers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataCreazione = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FieldManagers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeRuolo = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -74,62 +44,36 @@ namespace Capstone.Migrations
                     TipoCampo = table.Column<int>(type: "int", nullable: false),
                     PrezzoOrario = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValutazioneMedia = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    GestoreId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fields", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Fields_FieldManagers_GestoreId",
-                        column: x => x.GestoreId,
-                        principalTable: "FieldManagers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_UserRoles_Roles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Roles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserRoles_Users_UserId",
+                        name: "FK_Fields_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Availabilities",
+                name: "Roles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DataOraInizio = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DataOraFine = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CampoId = table.Column<int>(type: "int", nullable: false)
+                    NomeRuolo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UsersId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Availabilities", x => x.Id);
+                    table.PrimaryKey("PK_Roles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Availabilities_Fields_CampoId",
-                        column: x => x.CampoId,
-                        principalTable: "Fields",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Roles_Users_UsersId",
+                        column: x => x.UsersId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -138,7 +82,8 @@ namespace Capstone.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DataOra = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataInizio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataFine = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TipoPartita = table.Column<int>(type: "int", nullable: false),
                     Stato = table.Column<int>(type: "int", nullable: false),
                     CampoId = table.Column<int>(type: "int", nullable: false),
@@ -173,7 +118,8 @@ namespace Capstone.Migrations
                     TipoRecensione = table.Column<int>(type: "int", nullable: false),
                     ValutatoreId = table.Column<int>(type: "int", nullable: false),
                     ValutatoGiocatoreId = table.Column<int>(type: "int", nullable: true),
-                    ValutatoCampoId = table.Column<int>(type: "int", nullable: true)
+                    ValutatoCampoId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -183,19 +129,49 @@ namespace Capstone.Migrations
                         column: x => x.ValutatoCampoId,
                         principalTable: "Fields",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reviews_Users_ValutatoGiocatoreId",
                         column: x => x.ValutatoGiocatoreId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reviews_Users_ValutatoreId",
                         column: x => x.ValutatoreId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserRoles_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -300,11 +276,6 @@ namespace Capstone.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Availabilities_CampoId",
-                table: "Availabilities",
-                column: "CampoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Bookings_PartitaId",
                 table: "Bookings",
                 column: "PartitaId");
@@ -321,9 +292,9 @@ namespace Capstone.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fields_GestoreId",
+                name: "IX_Fields_UserId",
                 table: "Fields",
-                column: "GestoreId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Matches_CampoId",
@@ -346,6 +317,11 @@ namespace Capstone.Migrations
                 column: "MittenteId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reviews_UserId",
+                table: "Reviews",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_ValutatoCampoId",
                 table: "Reviews",
                 column: "ValutatoCampoId");
@@ -361,6 +337,11 @@ namespace Capstone.Migrations
                 column: "ValutatoreId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Roles_UsersId",
+                table: "Roles",
+                column: "UsersId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserMatch_UserId",
                 table: "UserMatch",
                 column: "UserId");
@@ -374,9 +355,6 @@ namespace Capstone.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Availabilities");
-
             migrationBuilder.DropTable(
                 name: "Bookings");
 
@@ -406,9 +384,6 @@ namespace Capstone.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "FieldManagers");
         }
     }
 }

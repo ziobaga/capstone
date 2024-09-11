@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Capstone.Models.Enums;
 using System.ComponentModel.DataAnnotations;
-using Capstone.Models.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Capstone.Models
+namespace Capstone.Models.Auth
 {
-    public class User
+    public class Users
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -30,21 +30,23 @@ namespace Capstone.Models
         [StringLength(50)]
         public string PasswordHash { get; set; }
 
-        [Required]
-        [StringLength(50)]
+
+
         public RuoloPreferito RuoloPreferito { get; set; }
         public decimal ValutazioneMedia { get; set; }
         public int PartiteGiocate { get; set; }
         public DateTime DataCreazione { get; set; }
 
         // Relazioni
-        public ICollection<Booking> Prenotazioni { get; set; }
-        public ICollection<Review> RecensioniLasciate { get; set; }
-        public ICollection<Review> RecensioniRicevute { get; set; }  // Rinomina per chiarezza
-        public ICollection<Message> MessaggiInviati { get; set; }
+        public ICollection<Bookings> Prenotazioni { get; set; }
+        public ICollection<Reviews> RecensioniLasciate { get; set; }
+        public ICollection<Reviews> RecensioniRicevute { get; set; }  // Rinomina per chiarezza
+        public ICollection<Messages> MessaggiInviati { get; set; }
 
-        public ICollection<Match> PartiteCreate { get; set; }  // Per partite create dall'utente
-        public ICollection<Match> PartitePartecipate { get; set; } = new List<Match>(); // Per partite a cui l'utente partecipa
+        public ICollection<Matches> PartiteCreate { get; set; }  // Per partite create dall'utente
+        public ICollection<Matches> PartitePartecipate { get; set; } = new List<Matches>(); // Per partite a cui l'utente partecipa
+
+        public List<UserRole> UserRole { get; set; } = [];
     }
 
 }

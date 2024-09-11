@@ -147,3 +147,5 @@ C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\obj\
 C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\obj\Debug\net8.0\Capstone.pdb
 C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\obj\Debug\net8.0\Capstone.genruntimeconfig.cache
 C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\obj\Debug\net8.0\ref\Capstone.dll
+C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\obj\Debug\net8.0\Capstone.sourcelink.json
+C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\bin\Debug\net8.0\Stripe.net.dll

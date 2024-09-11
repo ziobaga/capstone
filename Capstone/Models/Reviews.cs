@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using Capstone.Models.Auth;
 using Capstone.Models.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Capstone.Models
 {
-    public class Review
+    public class Reviews
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -16,13 +17,16 @@ namespace Capstone.Models
 
         // Relazioni
         public int ValutatoreId { get; set; }
-        public User Valutatore { get; set; }
+        public Users Valutatore { get; set; }
 
         public int? ValutatoGiocatoreId { get; set; }  // Nullable per gestire la possibilità di null
-        public User ValutatoGiocatore { get; set; }
+        public Users ValutatoGiocatore { get; set; }
 
         public int? ValutatoCampoId { get; set; }  // Nullable per gestire la possibilità di null
-        public Field ValutatoCampo { get; set; }
+        public Fields ValutatoCampo { get; set; }
+
+        public int UserId { get; set; }
+        public Users User { get; set; }
     }
 
 }

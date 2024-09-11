@@ -4,6 +4,6 @@
     {
         InAttesa,
         Confermata,
-        Annullata
+        Rinviata
     }
 }

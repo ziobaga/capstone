@@ -1,0 +1,40 @@
+﻿@model Capstone.Models.Fields
+
+@{
+    ViewData["Title"] = "Aggiungi Campo";
+}
+
+<h2>Aggiungi Nuovo Campo</h2>
+
+<form asp-action="CreateField">
+    <div class="form-group">
+        <label for="NomeCampo">Nome Campo</label>
+        <input type="text" class="form-control" id="NomeCampo" name="NomeCampo" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Città">Città</label>
+        <input type="text" class="form-control" id="Città" name="Città" required />
+    </div>
+
+    <div class="form-group">
+        <label for="Indirizzo">Indirizzo</label>
+        <input type="text" class="form-control" id="Indirizzo" name="Indirizzo" required />
+    </div>
+
+    <div class="form-group">
+        <label for="TipoCampo">Tipo di Campo</label>
+        <select class="form-control" id="TipoCampo" name="TipoCampo">
+            <option value="0">Calcio a 5</option>
+            <option value="1">Calcio a 7</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="PrezzoOrario">Prezzo Orario (€)</label>
+        <input type="number" class="form-control" id="PrezzoOrario" name="PrezzoOrario" step="0.01" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Aggiungi Campo</button>
+</form>
+

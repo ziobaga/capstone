@@ -1,19 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Capstone.Models.Auth;
+using Microsoft.EntityFrameworkCore;
 
 namespace Capstone.Models.Context
 {
     public class DataContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Field> Fields { get; set; }
-        public DbSet<FieldManager> FieldManagers { get; set; }
-        public DbSet<Match> Matches { get; set; }
-        public DbSet<Booking> Bookings { get; set; }
-        public DbSet<Availability> Availabilities { get; set; }
-        public DbSet<Review> Reviews { get; set; }
-        public DbSet<Chat> Chats { get; set; }
-        public DbSet<Message> Messages { get; set; }
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<Users> Users { get; set; }
+        public DbSet<Fields> Fields { get; set; }
+       
+        public DbSet<Matches> Matches { get; set; }
+        public DbSet<Bookings> Bookings { get; set; }
+        
+        public DbSet<Reviews> Reviews { get; set; }
+        public DbSet<Chats> Chats { get; set; }
+        public DbSet<Messages> Messages { get; set; }
+        public DbSet<Roles> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
 
         public DataContext(DbContextOptions<DataContext> opt) : base(opt)
@@ -28,41 +29,48 @@ namespace Capstone.Models.Context
                 .HasKey(ur => new { ur.UserId, ur.RoleId });
 
             // Configurazione della relazione molti-a-molti tra User e Match
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<Users>()
                 .HasMany(u => u.PartitePartecipate)
                 .WithMany(m => m.Partecipanti)
                 .UsingEntity<Dictionary<string, object>>(
                     "UserMatch",
-                    j => j.HasOne<Match>().WithMany().HasForeignKey("MatchId"),
-                    j => j.HasOne<User>().WithMany().HasForeignKey("UserId"));
+                    j => j.HasOne<Matches>().WithMany().HasForeignKey("MatchId"),
+                    j => j.HasOne<Users>().WithMany().HasForeignKey("UserId"));
+
+            // Relazione tra Field e Users (Gestore)
+            modelBuilder.Entity<Fields>()
+                .HasOne(f => f.User)
+                .WithMany()  // Un User può gestire più campi, ma non ha una proprietà di navigazione inversa
+                .HasForeignKey(f => f.UserId)
+                .OnDelete(DeleteBehavior.Restrict);  // Impedisce l'eliminazione a cascata
 
             // Configurazione della relazione uno-a-molti tra User e Match (Creatore)
-            modelBuilder.Entity<Match>()
+            modelBuilder.Entity<Matches>()
                 .HasOne(m => m.Creatore)
                 .WithMany(u => u.PartiteCreate)
                 .HasForeignKey(m => m.CreatoreId)
                 .OnDelete(DeleteBehavior.Restrict);  // Impedisce l'eliminazione a cascata
 
             // Relazione con Valutatore (User)
-            modelBuilder.Entity<Review>()
+            modelBuilder.Entity<Reviews>()
                 .HasOne(r => r.Valutatore)
                 .WithMany(u => u.RecensioniLasciate)  // Utente che lascia la recensione
                 .HasForeignKey(r => r.ValutatoreId)
                 .OnDelete(DeleteBehavior.Restrict);  // Evita cicli di cancellazione
 
             // Relazione con ValutatoGiocatore (User)
-            modelBuilder.Entity<Review>()
+            modelBuilder.Entity<Reviews>()
                 .HasOne(r => r.ValutatoGiocatore)
                 .WithMany(u => u.RecensioniRicevute)  // Utente che riceve la recensione
                 .HasForeignKey(r => r.ValutatoGiocatoreId)
-                .OnDelete(DeleteBehavior.Cascade);  // Elimina recensioni se il giocatore è cancellato
+                .OnDelete(DeleteBehavior.Restrict);  // Elimina recensioni se il giocatore è cancellato
 
             // Relazione con ValutatoCampo (Field)
-            modelBuilder.Entity<Review>()
+            modelBuilder.Entity<Reviews>()
                 .HasOne(r => r.ValutatoCampo)
                 .WithMany()
                 .HasForeignKey(r => r.ValutatoCampoId)
-                .OnDelete(DeleteBehavior.Cascade);  // Elimina recensioni se il campo è cancellato
+                .OnDelete(DeleteBehavior.Restrict);  // Elimina recensioni se il campo è cancellato
 
             base.OnModelCreating(modelBuilder);
         }

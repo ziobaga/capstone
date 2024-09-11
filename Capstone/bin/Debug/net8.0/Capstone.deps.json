@@ -16,6 +16,7 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.8",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.8",
           "Microsoft.IdentityModel.JsonWebTokens": "8.0.2",
+          "Stripe.net": "45.11.0",
           "System.Data.SqlClient": "4.8.6",
           "System.Net.Mail.Abstractions": "1.1.21"
         },
@@ -817,6 +818,18 @@
           }
         }
       },
+      "Stripe.net/45.11.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.Configuration.ConfigurationManager": "6.0.1"
+        },
+        "runtime": {
+          "lib/net6.0/Stripe.net.dll": {
+            "assemblyVersion": "45.11.0.0",
+            "fileVersion": "45.11.0.0"
+          }
+        }
+      },
       "System.Buffers/4.5.0": {},
       "System.CodeDom/4.4.0": {
         "runtime": {
@@ -1601,6 +1614,13 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "Stripe.net/45.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nTUZr5XBXqhgIzy5Bo2MvS3cEBCUKp9WiIzsb+d689/AGgy1cmasSAu4gNtLZm3tkJ/QuM4spH77uBdu1sRSRw==",
+      "path": "stripe.net/45.11.0",
+      "hashPath": "stripe.net.45.11.0.nupkg.sha512"
     },
     "System.Buffers/4.5.0": {
       "type": "package",
