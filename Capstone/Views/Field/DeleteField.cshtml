@@ -1,0 +1,22 @@
+﻿@model Capstone.Models.Fields
+
+@{
+    ViewData["Title"] = "Conferma Eliminazione Campo";
+}
+
+<h2>Conferma Eliminazione</h2>
+
+<h3>Sei sicuro di voler eliminare questo campo?</h3>
+
+<div>
+    <h4>@Model.NomeCampo</h4>
+    <p>Città: @Model.Città</p>
+    <p>Indirizzo: @Model.Indirizzo</p>
+    <p>Prezzo Orario: €@Model.PrezzoOrario</p>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Elimina</button>
+    <a asp-action="FieldList" class="btn btn-secondary">Annulla</a>
+</form>

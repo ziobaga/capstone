@@ -38,13 +38,13 @@
                 <td>€@field.PrezzoOrario.ToString("0.00")</td>
                 <td>@field.ValutazioneMedia</td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@field.Id" class="btn btn-info">Dettagli</a>
-                    <a asp-action="Edit" asp-route-id="@field.Id" class="btn btn-warning">Modifica</a>
-                    <a asp-action="Delete" asp-route-id="@field.Id" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler eliminare questo campo?');">Elimina</a>
+                    <a asp-action="FieldDetails" asp-route-id="@field.Id" class="btn btn-info">Dettagli</a>
+                    <a asp-action="EditField" asp-route-id="@field.Id" class="btn btn-warning">Modifica</a>
+                    <a asp-action="DeleteField" asp-route-id="@field.Id" class="btn btn-danger">Elimina</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a asp-action="Create" class="btn btn-primary">Aggiungi Nuovo Campo</a>
+<a asp-action="CreateField" class="btn btn-primary">Aggiungi Nuovo Campo</a>

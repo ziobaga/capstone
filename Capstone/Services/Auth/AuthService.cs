@@ -1,6 +1,6 @@
-﻿using Capstone.Models;
-using Capstone.Models.Auth;
+﻿using Capstone.Models.Auth;
 using Capstone.Models.Context;
+using Capstone.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -9,52 +9,57 @@ namespace Capstone.Services.Auth
     public class AuthService : IAuthService
     {
         private readonly DataContext _ctx;
+        private readonly IPasswordHelper _passwordHelper;
 
-        public AuthService(DataContext dataContext)
+        public AuthService(DataContext dataContext, IPasswordHelper passwordHelper)
         {
             _ctx = dataContext;
+            _passwordHelper = passwordHelper;
+
         }
 
         // Metodo per registrare un nuovo utente
-        public async Task<Users> RegisterAsync(Users user)
+        public async Task<Users> RegisterAsync(RegisterViewModel model)
         {
             try
             {
-                var existingUser = await _ctx.Users.FirstOrDefaultAsync(u => u.Username == user.Username);
+                var existingUser = await _ctx.Users.FirstOrDefaultAsync(u => u.Username == model.Username);
                 if (existingUser != null)
                 {
                     throw new Exception("L'Username inserito è già in uso!");
                 }
 
                 // Hash della password
-                if (string.IsNullOrEmpty(user.PasswordHash))
+                if (string.IsNullOrEmpty(model.Password))
                 {
                     throw new Exception("La password non può essere vuota.");
                 }
 
-                user.PasswordHash = PasswordHelper.HashPassword(user.PasswordHash);
+                var userRegister = new Users
+                {
+                    Username = model.Username,
+                    Email = model.Email,
+                    PasswordHash = string.Empty,
+                    Nome = model.Nome,
+                    Cognome = model.Cognome,
+                    DataCreazione = DateTime.Now
+                };
 
-                // Aggiungi l'utente al contesto
-                await _ctx.Users.AddAsync(user);
-                await _ctx.SaveChangesAsync();
+                userRegister.PasswordHash = _passwordHelper.HashPassword(model.Password);
 
                 // Assegna il ruolo all'utente tramite la tabella UserRoles
-                var userRole = await _ctx.Roles.FirstOrDefaultAsync(r => r.Id == 1); // Ruolo Admin
+                var userRole = await _ctx.Roles.FirstOrDefaultAsync(r => r.Id == 3); // Ruolo User
                 if (userRole == null)
                 {
                     throw new Exception("Ruolo non trovato");
                 }
 
-                var userRoleLink = new UserRole
-                {
-                    UserId = user.Id,
-                    RoleId = userRole.Id
-                };
+                userRegister.Role.Add(userRole!);
 
-                await _ctx.UserRoles.AddAsync(userRoleLink);
+                await _ctx.Users.AddAsync(userRegister);
                 await _ctx.SaveChangesAsync();
 
-                return user;
+                return userRegister;
             }
             catch (Exception ex)
             {
@@ -63,23 +68,25 @@ namespace Capstone.Services.Auth
                 return null;
             }
         }
+        //Metodo per sapere l'id di chi logga
+        public async Task<Users> GetUserByIdAsync(int userId)
+        {
+            return await _ctx.Users.FindAsync(userId);
+        }
 
         // Metodo per il login di un utente
-        public async Task<Users> LoginAsync(Users user)
+        public async Task<Users> LoginAsync(LoginViewModel user)
         {
-            // Hash della password in ingresso
-            string hashedPassword = PasswordHelper.HashPassword(user.PasswordHash);
-
+            var hashedPass = _passwordHelper.HashPassword(user.Password);
             // Trova l'utente in base a username e password
             var existingUser = await _ctx.Users
-                .Include(u => u.UserRole) // Carica i ruoli tramite la tabella di collegamento
-                .ThenInclude(ur => ur.Role) // Carica i dettagli dei ruoli
-                .Where(u => u.Username == user.Username && u.PasswordHash == hashedPassword)
+                .Include(u => u.Role) // Carica i ruoli tramite la tabella di collegamento
+                .Where(u => u.Email == user.Email && u.PasswordHash == hashedPass)
                 .FirstOrDefaultAsync();
 
             if (existingUser == null)
             {
-                throw new Exception("Username o password non corretti.");
+                throw new Exception("Utente non trovato.");
             }
 
             return existingUser;

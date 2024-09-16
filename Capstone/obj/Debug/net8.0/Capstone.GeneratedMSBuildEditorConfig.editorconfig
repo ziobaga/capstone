@@ -30,8 +30,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmllbGRcQ3JlYXRlRmllbGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Field/DeleteField.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmllbGRcRGVsZXRlRmllbGQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Field/EditField.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmllbGRcRWRpdEZpZWxkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Field/FieldDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmllbGRcRmllbGREZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Field/FieldList.cshtml]
@@ -44,6 +52,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Match/CreateMatch.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hcQ3JlYXRlTWF0Y2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Match/EditMatch.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hcRWRpdE1hdGNoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Match/MatchList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hcTWF0Y2hMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Review/CreateReview.cshtml]

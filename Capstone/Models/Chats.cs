@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Capstone.Models
 {
@@ -14,6 +14,6 @@ namespace Capstone.Models
         public int PartitaId { get; set; }
         public Matches Partita { get; set; }
 
-        public ICollection<Messages> Messaggi { get; set; }
+        public ICollection<Messages> Messaggi { get; set; } = [];
     }
 }

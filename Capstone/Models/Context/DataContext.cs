@@ -7,15 +7,15 @@ namespace Capstone.Models.Context
     {
         public DbSet<Users> Users { get; set; }
         public DbSet<Fields> Fields { get; set; }
-       
+
         public DbSet<Matches> Matches { get; set; }
         public DbSet<Bookings> Bookings { get; set; }
-        
+
         public DbSet<Reviews> Reviews { get; set; }
         public DbSet<Chats> Chats { get; set; }
         public DbSet<Messages> Messages { get; set; }
         public DbSet<Roles> Roles { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
+
 
         public DataContext(DbContextOptions<DataContext> opt) : base(opt)
         {
@@ -25,8 +25,7 @@ namespace Capstone.Models.Context
         // Configurazione delle chiavi composite per UserRole
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserRole>()
-                .HasKey(ur => new { ur.UserId, ur.RoleId });
+
 
             // Configurazione della relazione molti-a-molti tra User e Match
             modelBuilder.Entity<Users>()

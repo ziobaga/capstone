@@ -25,7 +25,7 @@ namespace Capstone.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(Users u)
+        public async Task<IActionResult> Register(RegisterViewModel u)
         {
             try
             {
@@ -52,14 +52,14 @@ namespace Capstone.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Mappa LoginViewModel all'entità Users
+                // Mappa LoginViewModel all'entitÃ  Users
                 var user = new Users
                 {
                     Username = model.Email,
                     PasswordHash = model.Password
                 };
 
-                var existingUser = await _authSvc.LoginAsync(user);
+                var existingUser = await _authSvc.LoginAsync(model);
                 if (existingUser == null)
                 {
                     ModelState.AddModelError("LoginError", "Credenziali non valide.");
@@ -67,15 +67,15 @@ namespace Capstone.Controllers
                 }
 
                 var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, existingUser.Username),
-            new Claim(ClaimTypes.NameIdentifier, existingUser.Id.ToString())
-        };
-
-                foreach (var userRole in existingUser.UserRole)
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, userRole.Role.NomeRuolo));
-                }
+                    new Claim(ClaimTypes.Name, existingUser.Username),
+                    new Claim(ClaimTypes.NameIdentifier, existingUser.Id.ToString())
+                };
+
+                existingUser.Role.ForEach(r =>
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, r.NomeRuolo));
+                });
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);

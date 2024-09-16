@@ -1,4 +1,5 @@
 using Capstone.Models.Context;
+using Capstone.Services;
 using Capstone.Services.Auth;
 using Capstone.Services.Booking;
 using Capstone.Services.Chat;
@@ -62,6 +63,7 @@ namespace Capstone
                 .AddScoped<IGoogleMapsService, GoogleMapsService>()
                 .AddScoped<IMatchService, MatchService>()
                 .AddScoped<IMessageService, MessageService>()
+                .AddScoped<IPasswordHelper, PasswordHelper>()
                 .AddScoped<IReviewService, ReviewService>()
                 .AddScoped<IUserService, UserService>();
 

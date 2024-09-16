@@ -3,9 +3,9 @@ using System.Text;
 
 namespace Capstone.Services
 {
-    public class PasswordHelper
+    public class PasswordHelper : IPasswordHelper
     {
-        public static string HashPassword(string password)
+        public string HashPassword(string password)
         {
             using (var sha256 = SHA256.Create())
             {

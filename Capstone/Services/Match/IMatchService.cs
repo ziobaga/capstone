@@ -5,9 +5,10 @@ namespace Capstone.Services.Match
     public interface IMatchService
     {
         Task<Matches> GetMatchByIdAsync(int id);
-        Task<IEnumerable<Matches>> GetAllMatchesAsync();
+        Task<List<Matches>> GetMatchesAsync();
         Task<Matches> CreateMatchAsync(Matches match);
-        Task<bool> UpdateMatchAsync(Matches match);
-        Task<bool> DeleteMatchAsync(int id);
+        Task<Matches> UpdateMatchAsync(int matchId, Matches updatedMatch);
+        Task CancelMatchAsync(int matchId, int userId);
     }
 }
+

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Capstone.Models.Auth
 {
@@ -10,6 +10,6 @@ namespace Capstone.Models.Auth
 
         public string NomeRuolo { get; set; }
 
-        public ICollection<UserRole> UserRoles { get; set; }
+        public List<Users> Users { get; set; } = [];
     }
 }

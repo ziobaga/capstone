@@ -20,7 +20,7 @@ namespace Capstone.Models
         // Relazioni
         public int UserId { get; set; }
         public Users User { get; set; }
-        public ICollection<Matches> Partite { get; set; }
+        public ICollection<Matches> Partite { get; set; } = [];
         public ICollection<Reviews> Reviews { get; set; } = new List<Reviews>();
     }
 }

@@ -38,16 +38,15 @@ namespace Capstone.Models.Auth
         public DateTime DataCreazione { get; set; }
 
         // Relazioni
-        public ICollection<Bookings> Prenotazioni { get; set; }
-        public ICollection<Reviews> RecensioniLasciate { get; set; }
-        public ICollection<Reviews> RecensioniRicevute { get; set; }  // Rinomina per chiarezza
-        public ICollection<Messages> MessaggiInviati { get; set; }
+        public ICollection<Bookings> Prenotazioni { get; set; } = [];
+        public ICollection<Reviews> RecensioniLasciate { get; set; } = [];
+        public ICollection<Reviews> RecensioniRicevute { get; set; } = [];  // Rinomina per chiarezza
+        public ICollection<Messages> MessaggiInviati { get; set; } = [];
 
-        public ICollection<Matches> PartiteCreate { get; set; }  // Per partite create dall'utente
-        public ICollection<Matches> PartitePartecipate { get; set; } = new List<Matches>(); // Per partite a cui l'utente partecipa
+        public ICollection<Matches> PartiteCreate { get; set; } = [];  // Per partite create dall'utente
+        public ICollection<Matches> PartitePartecipate { get; set; } = []; // Per partite a cui l'utente partecipa
 
-        public List<UserRole> UserRole { get; set; } = [];
+        public List<Roles> Role { get; set; } = [];
     }
 
 }
-

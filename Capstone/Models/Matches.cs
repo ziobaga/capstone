@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System;
+﻿using Capstone.Models.Auth;
 using Capstone.Models.Enums;
-using Capstone.Models.Auth;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Capstone.Models
 {
@@ -13,7 +12,8 @@ namespace Capstone.Models
 
         public DateTime DataInizio { get; set; }
 
-        public DateTime DataFine { get; set; }
+        public TimeSpan OraInizio { get; set; }
+        public TimeSpan OraFine { get; set; }
         public TipoPartita TipoPartita { get; set; } // Enum per calcio a 5 o a 7
         public StatoPartita Stato { get; set; } // Enum per stato partita
 
@@ -26,7 +26,7 @@ namespace Capstone.Models
         public int CreatoreId { get; set; }
         public Users Creatore { get; set; }
 
-        public ICollection<Bookings> Prenotazioni { get; set; }
+        public ICollection<Bookings> Prenotazioni { get; set; } = [];
         public Chats Chat { get; set; }
     }
 }

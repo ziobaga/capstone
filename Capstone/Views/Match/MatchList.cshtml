@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Capstone.Models.Matches>
+
+@{
+    ViewData["Title"] = "Partite Disponibili";
+}
+
+<h2>Lista Partite</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Data Inizio</th>
+            <th>Ora inizio</th>
+            <th>Ora Fine</th>
+            <th>Tipo Partita</th>
+            <th>Creatore</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var match in Model)
+        {
+            <tr>
+                <td>@match.Id</td>
+                <td>@match.DataInizio</td>
+                <td>@match.OraInizio</td>
+                <td>@match.OraFine</td>
+                <td>@match.TipoPartita</td>
+                <td>@match.Creatore.Nome</td>
+                <td>
+                    <a href="/matches/edit/@match.Id">Modifica</a> |
+                    <a href="/matches/cancel/@match.Id">Annulla</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

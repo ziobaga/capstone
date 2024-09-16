@@ -1,0 +1,35 @@
+﻿@model Capstone.Models.Matches
+
+<h2>Crea una nuova partita</h2>
+
+<form method="post" action= "CreateMatch">
+    <div>
+        <label>Data</label>
+        <input type="date" name="DataInizio" required />
+    </div>
+    <div>
+        <label>Ora di Inizio</label>
+        <input type="time" name="OraInizio" required />
+    </div>
+    <div>
+        <label>Ora di Fine</label>
+        <input type="time" name="OraFine" required />
+    </div>
+    <div>
+        <label>Tipo Partita</label>
+        <select name="TipoPartita" required>
+            <option value="1">Calcio a 5</option>
+            <option value="2">Calcio a 7</option>
+        </select>
+    </div>
+    <div>
+        <label>Campo</label>
+        <select name="CampoId" required>
+            @foreach (var campo in ViewBag.Campi)
+            {
+                <option value="@campo.Id">@campo.NomeCampo</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Crea Partita</button>
+</form>

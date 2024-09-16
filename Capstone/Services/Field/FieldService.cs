@@ -13,15 +13,28 @@ namespace Capstone.Services.Field
             _context = context;
         }
 
-        public async Task<Fields> CreateFieldAsync(Fields field)
+        public async Task<Fields> CreateFieldAsync(Fields model, int userId)
         {
-            if (field == null)
+            // Crea una nuova istanza di Fields e assegna i valori dal model
+            var newField = new Fields
             {
-                throw new ArgumentNullException(nameof(field));
-            }
-            await _context.Fields.AddAsync(field);
+                NomeCampo = model.NomeCampo,
+                Indirizzo = model.Indirizzo,
+                Città = model.Città,
+                TipoCampo = model.TipoCampo,
+                PrezzoOrario = model.PrezzoOrario,
+                ValutazioneMedia = 0,  // Inizialmente la valutazione media è 0
+                UserId = userId  // Usa l'ID passato dal controller
+            };
+
+            // Aggiungi il nuovo campo al contesto
+            _context.Fields.Add(newField);
+
+            // Salva le modifiche nel database
             await _context.SaveChangesAsync();
-            return field;
+
+            // Restituisci il campo creato
+            return newField;
         }
 
         public async Task<IEnumerable<Fields>> GetAllFieldsAsync()
@@ -45,6 +58,11 @@ namespace Capstone.Services.Field
             _context.Fields.Remove(field);
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public bool FieldExists(int id)
+        {
+            return _context.Fields.Any(e => e.Id == id);
         }
 
         public async Task<bool> UpdateFieldAsync(Fields field)
