@@ -1,6 +1,5 @@
 ﻿using Capstone.Models;
 using Capstone.Models.Context;
-using Capstone.Models.Enums;
 using Capstone.Services.Field;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +12,10 @@ namespace Capstone.Controllers
         private readonly IFieldService _fieldService;
         private readonly DataContext _context;
 
-        public FieldController(IFieldService fieldService)
+        public FieldController(IFieldService fieldService, DataContext dataContext)
         {
             _fieldService = fieldService;
+            _context = dataContext;
         }
 
         // GET: Field/List
@@ -71,7 +71,7 @@ namespace Capstone.Controllers
 
         // POST: Field/Edit/5
         [HttpPost]  // Metodo POST per salvare le modifiche
-        public async Task<IActionResult> GetEditField(int id)
+        public async Task<IActionResult> EditField(int id, Fields model)
         {
             // Trova il campo esistente nel database
             var existingField = await _fieldService.GetFieldByIdAsync(id);
@@ -80,23 +80,12 @@ namespace Capstone.Controllers
                 return NotFound();
             }
 
-            // Recupera i valori dal form
-            var nomeCampo = Request.Form["NomeCampo"].ToString();
-            var indirizzo = Request.Form["Indirizzo"].ToString();
-            var citta = Request.Form["Città"].ToString();
-            var tipoCampoString = Request.Form["TipoCampo"].ToString();
-            var prezzoOrarioString = Request.Form["PrezzoOrario"].ToString();
-
-            // Parsing dei valori
-            var tipoCampo = (TipoCampo)Enum.Parse(typeof(TipoCampo), tipoCampoString);  // Enum per il tipo di campo
-            var prezzoOrario = decimal.Parse(prezzoOrarioString);  // Prezzo orario come decimal
-
-            // Aggiorna le proprietà dell'entità esistente
-            existingField.NomeCampo = nomeCampo;
-            existingField.Indirizzo = indirizzo;
-            existingField.Città = citta;
-            existingField.TipoCampo = tipoCampo;
-            existingField.PrezzoOrario = prezzoOrario;
+            // Recupera e aggiorna le proprietà dell'entità esistente
+            existingField.NomeCampo = model.NomeCampo;
+            existingField.Indirizzo = model.Indirizzo;
+            existingField.Città = model.Città;
+            existingField.TipoCampo = model.TipoCampo;
+            existingField.PrezzoOrario = model.PrezzoOrario;
 
             try
             {
@@ -108,6 +97,7 @@ namespace Capstone.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
+                // Verifica se l'entità esiste ancora nel database
                 if (!_fieldService.FieldExists(id))
                 {
                     return NotFound();
@@ -118,6 +108,7 @@ namespace Capstone.Controllers
                 }
             }
 
+            // Reindirizza alla vista della lista dei campi
             return RedirectToAction(nameof(FieldList));
         }
 

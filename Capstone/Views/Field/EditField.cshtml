@@ -6,7 +6,7 @@
 
 <h2>Modifica Campo</h2>
 
-<form asp-action="GetEditField" method="post">
+<form asp-action="EditField">
     <input type="hidden" asp-for="Id" />
 
     <div class="form-group">
@@ -30,8 +30,8 @@
     <div class="form-group">
         <label for="TipoCampo">Tipo di Campo</label>
         <select class="form-control" asp-for="TipoCampo">
-            <option value=@(Model.TipoCampo)>Calcio a 5</option>
-            <option value=@(Model.TipoCampo)>Calcio a 7</option>
+            <option value="0">Calcio a 5</option>
+            <option value="1">Calcio a 7</option>
         </select>
         <span asp-validation-for="TipoCampo" class="text-danger"></span>
     </div>
@@ -42,5 +42,5 @@
         <span asp-validation-for="PrezzoOrario" class="text-danger"></span>
     </div>
 
-    <a asp-action="FieldList" class="btn btn-primary">Salva Modifiche</a>
+    <button type="submit" class="btn btn-primary">Salva Modifiche</button>
 </form>
