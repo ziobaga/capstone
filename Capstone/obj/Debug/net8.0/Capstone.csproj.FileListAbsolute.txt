@@ -149,3 +149,7 @@ C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\obj\
 C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\obj\Debug\net8.0\ref\Capstone.dll
 C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\obj\Debug\net8.0\Capstone.sourcelink.json
 C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\bin\Debug\net8.0\Stripe.net.dll
+C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\bin\Debug\net8.0\Microsoft.AspNetCore.Connections.Abstractions.dll
+C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Common.dll
+C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\bin\Debug\net8.0\Microsoft.Extensions.Features.dll
+C:\Users\zioba\OneDrive\Desktop\EPICODE\Repository GitHub\capstone\Capstone\bin\Debug\net8.0\Microsoft.Extensions.Options.dll

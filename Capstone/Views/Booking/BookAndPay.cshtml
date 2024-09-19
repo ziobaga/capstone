@@ -1,0 +1,41 @@
+﻿@model Capstone.Models.Matches
+
+<h2>Dettagli della Partita</h2>
+
+<p><strong>Data:</strong> @Model.DataInizio.ToString("dd/MM/yyyy")</p>
+<p><strong>Ora Inizio:</strong> @Model.OraInizio.ToString(@"hh\:mm")</p>
+<p><strong>Ora Fine:</strong> @Model.OraFine.ToString(@"hh\:mm")</p>
+<p><strong>Campo:</strong> @Model.Campo.NomeCampo, @Model.Campo.Città</p>
+
+<hr />
+
+<h3>Partecipanti</h3>
+@if (Model.Partecipanti != null && Model.Partecipanti.Any())
+{
+    <ul>
+        @foreach (var partecipante in Model.Partecipanti)
+        {
+            <li>@partecipante.Nome @partecipante.Cognome (@partecipante.Email)</li>
+        }
+    </ul>
+}
+else
+{
+    <p>Non ci sono partecipanti attualmente registrati per questa partita.</p>
+}
+
+<h3>Effettua la prenotazione e paga con Stripe</h3>
+
+<form asp-action="ProcessPayment" method="post">
+    <input type="hidden" name="matchId" value="@Model.Id" />
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_51Q0mODP563WlEe7GzbpE8o1vcQJohTT8ZVmlc0ELLPCGM1cdMX0tSfFW060DWExEoSl51A4OchRsjEmsqWP0Yyti00tyuIYFwP"
+            data-amount="@((long)((Model.OraFine - Model.OraInizio).TotalHours * (double)Model.Campo.PrezzoOrario * 100))"
+            data-name="Prenotazione Partita"
+        data-description="Prenota e paga la partita"
+        data-currency="eur"
+        data-locale="auto">
+    </script>
+</form>
+
+<a asp-action="MatchList" class="btn btn-secondary">Annulla</a>

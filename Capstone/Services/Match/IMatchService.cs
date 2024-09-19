@@ -8,7 +8,7 @@ namespace Capstone.Services.Match
         Task<List<Matches>> GetMatchesAsync();
         Task<Matches> CreateMatchAsync(Matches match);
         Task<Matches> UpdateMatchAsync(int matchId, Matches updatedMatch);
-        Task CancelMatchAsync(int matchId, int userId);
+        Task DeleteMatchAsync(int matchId, int userId);
     }
 }
 

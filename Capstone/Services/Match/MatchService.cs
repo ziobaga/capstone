@@ -68,7 +68,7 @@ namespace Capstone.Services.Match
             return match;
         }
 
-        public async Task CancelMatchAsync(int matchId, int userId)
+        public async Task DeleteMatchAsync(int matchId, int userId)
         {
             var match = await _context.Matches.FirstOrDefaultAsync(m => m.Id == matchId && m.CreatoreId == userId);
             if (match == null)

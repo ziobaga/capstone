@@ -1,0 +1,50 @@
+﻿@model Capstone.Models.Chats
+
+<h2>Chat della Partita</h2>
+
+<div id="chatMessages">
+    <ul id="messagesList">
+        @foreach (var messaggio in Model.Messaggi)
+        {
+            <li><strong>@messaggio.Mittente.Nome:</strong> @messaggio.Testo (@messaggio.DataInvio.ToString("dd/MM/yyyy hh:mm"))</li>
+        }
+    </ul>
+</div>
+
+<input type="text" id="messageInput" placeholder="Scrivi un messaggio..." />
+<button id="sendButton">Invia</button>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.3/signalr.min.js"></script>
+    <script type="text/javascript">
+        const matchId = @Model.Id;
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chathub?matchId=" + matchId) // Passa l'ID della partita come query string
+            .build();
+
+        // Ricevi un messaggio dal server e aggiungilo alla lista
+        connection.on("ReceiveMessage", function (user, message) {
+            const msg = document.createElement("li");
+            msg.textContent = `${user}: ${message}`;
+            document.getElementById("messagesList").appendChild(msg);
+        });
+
+        // Avvia la connessione SignalR
+        connection.start().catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        // Invia un messaggio quando il bottone "Invia" è premuto
+        document.getElementById("sendButton").addEventListener("click", function (event) {
+            const user = '@User.Identity.Name'; // Prendi il nome dell'utente corrente
+            const message = document.getElementById("messageInput").value;
+            const matchId = @Model.Id; // O l'ID della partita che stai gestendo
+            console.log("test");
+            connection.invoke("SendMessage", matchId, message).catch(function (err) {
+                console.log("sono qui");
+                return console.error(err.toString());
+            });
+            event.preventDefault();
+        });
+    </script>
+}

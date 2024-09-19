@@ -1,0 +1,78 @@
+﻿@model Capstone.Models.Matches
+
+@{
+    ViewData["Title"] = "Dettagli della Partita";
+}
+
+<h2>Dettagli della Partita</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Partita @Model.Id</h4>
+
+        <dl class="row">
+            <dt class="col-sm-3">Data</dt>
+            <dd class="col-sm-9">@Model.DataInizio.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-3">Ora di Inizio</dt>
+            <dd class="col-sm-9">@Model.OraInizio.ToString(@"hh\:mm")</dd>
+
+            <dt class="col-sm-3">Ora di Fine</dt>
+            <dd class="col-sm-9">@Model.OraFine.ToString(@"hh\:mm")</dd>
+
+            <dt class="col-sm-3">Tipo di Partita</dt>
+            <dd class="col-sm-9">
+                @switch (Model.TipoPartita)
+                {
+                    case Capstone.Models.Enums.TipoPartita.CalcioA5:
+                        @:Calcio a 5
+                        break;
+                    case Capstone.Models.Enums.TipoPartita.CalcioA7:
+                        @:Calcio a 7
+                        break;
+                }
+            </dd>
+
+            <dt class="col-sm-3">Campo</dt>
+            <dd class="col-sm-9">@Model.Campo.NomeCampo (@Model.Campo.Città, @Model.Campo.Indirizzo)</dd>
+
+            <dt class="col-sm-3">Creatore</dt>
+            <dd class="col-sm-9">
+                @if (Model.Creatore != null)
+                {
+                    @Model.Creatore.Nome @Model.Creatore.Cognome
+                }
+                else
+                {
+                    <span>Creatore sconosciuto</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">Partecipanti</dt>
+            <dd class="col-sm-9">
+                <ul>
+                    @foreach (var partecipante in Model.Partecipanti)
+                    {
+                        <li>@partecipante.Nome @partecipante.Cognome</li>
+                    }
+                </ul>
+            </dd>
+
+            <dt class="col-sm-3">Chat Creata</dt>
+            <dd class="col-sm-9">
+                @if (Model.Chat != null)
+                {
+                    @Model.Chat.DataCreazione.ToString("dd/MM/yyyy HH:mm")
+                }
+                else
+                {
+                    @:Nessuna chat creata
+                }
+            </dd>
+        </dl>
+
+        <a asp-action="MatchList" class="btn btn-primary">Torna alla lista</a>
+        <a asp-action="EditMatch" asp-route-id="@Model.Id" class="btn btn-warning">Modifica</a>
+        <a asp-action="CancelMatch" asp-route-id="@Model.Id" class="btn btn-danger">Annulla Partita</a>
+    </div>
+</div>

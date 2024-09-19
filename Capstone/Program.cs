@@ -21,6 +21,8 @@ namespace Capstone
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddSignalR();
+
             builder.Services.AddControllersWithViews();
 
             var conn = builder.Configuration.GetConnectionString("DB");
@@ -89,6 +91,9 @@ namespace Capstone
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            // Configura l'endpoint per SignalR
+            app.MapHub<ChatHub>("/chathub");
 
             app.Run();
         }

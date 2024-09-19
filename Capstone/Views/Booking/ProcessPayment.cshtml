@@ -1,0 +1,25 @@
+﻿@model Capstone.Models.Matches
+
+<h2>Dettagli della Partita</h2>
+
+<p><strong>Data:</strong> @Model.DataInizio.ToString("dd/MM/yyyy")</p>
+<p><strong>Ora Inizio:</strong> @Model.OraInizio.ToString(@"hh\:mm")</p>
+<p><strong>Ora Fine:</strong> @Model.OraFine.ToString(@"hh\:mm")</p>
+<p><strong>Campo:</strong> @Model.Campo.NomeCampo, @Model.Campo.Città</p>
+
+<hr />
+
+<h3>Partecipanti</h3>
+@if (Model.Partecipanti != null && Model.Partecipanti.Any())
+{
+    <ul>
+        @foreach (var partecipante in Model.Partecipanti)
+        {
+            <li>@partecipante.Nome @partecipante.Cognome (@partecipante.Email)</li>
+        }
+    </ul>
+}
+else
+{
+    <p>Non ci sono partecipanti attualmente registrati per questa partita.</p>
+}

@@ -1,1 +1,50 @@
-﻿
+﻿@model Capstone.Models.Matches
+
+@{
+    ViewData["Title"] = "Modifica Partita";
+}
+
+<h2>Modifica Partita</h2>
+
+<form asp-action="EditMatch" asp-route-id="@Model.Id">
+    <div class="form-group">
+        <label for="DataInizio">Data Inizio</label>
+        <input type="date" class="form-control" asp-for="DataInizio" />
+        <span asp-validation-for="DataInizio" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="OraInizio">Ora di Inizio</label>
+        <input type="time" class="form-control" asp-for="OraInizio" />
+        <span asp-validation-for="OraInizio" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="OraFine">Ora di Fine</label>
+        <input type="time" class="form-control" asp-for="OraFine" />
+        <span asp-validation-for="OraFine" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="TipoCampo">Tipo di Partita</label>
+        <select class="form-control" asp-for="TipoPartita">
+            <option value="0">Calcio a 5</option>
+            <option value="1">Calcio a 7</option>
+        </select>
+        <span asp-validation-for="TipoPartita" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="CampoId">Campo</label>
+        <select class="form-control" asp-for="CampoId">
+            @foreach (var campo in ViewBag.Campi)
+            {
+                <option value="@campo.Id">@campo.NomeCampo</option>
+            }
+        </select>
+        <span asp-validation-for="CampoId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Salva Modifiche</button>
+    <a asp-action="MatchList" class="btn btn-primary">Torna alla Lista</a>
+</form>

@@ -26,6 +26,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Booking/BookAndPay.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xCb29rQW5kUGF5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Booking/ProcessPayment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xQcm9jZXNzUGF5bWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Chat/ForMatch.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxGb3JNYXRjaC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Field/CreateField.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmllbGRcQ3JlYXRlRmllbGQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -58,8 +70,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hcQ3JlYXRlTWF0Y2guY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Match/DeleteMatch.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hcRGVsZXRlTWF0Y2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Match/EditMatch.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hcRWRpdE1hdGNoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Match/MatchDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hcTWF0Y2hEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Match/MatchList.cshtml]

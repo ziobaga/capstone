@@ -1,38 +1,51 @@
-﻿@model IEnumerable<Capstone.Models.Matches>
+﻿@model Capstone.Models.ViewModels.MatchListViewModel
 
-@{
-    ViewData["Title"] = "Partite Disponibili";
-}
-
-<h2>Lista Partite</h2>
-
-<table>
+<h2>Le Tue Partite</h2>
+<table class="table">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Data Inizio</th>
-            <th>Ora inizio</th>
-            <th>Ora Fine</th>
-            <th>Tipo Partita</th>
+            <th>Data</th>
+            <th>Ora Inizio</th>
             <th>Campo</th>
-            <th>Creatore</th>
             <th>Azioni</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var match in Model)
+        @foreach (var match in Model.UserMatches)
         {
             <tr>
-                <td>@match.Id</td>
-                <td>@match.DataInizio</td>
-                <td>@match.OraInizio</td>
-                <td>@match.OraFine</td>
-                <td>@match.TipoPartita</td>
+                <td>@match.DataInizio.ToString("dd/MM/yyyy")</td>
+                <td>@match.OraInizio.ToString(@"hh\:mm")</td>
                 <td>@match.Campo.NomeCampo</td>
-                <td>@match.Creatore.Nome</td>
                 <td>
-                    <a href="/matches/edit/@match.Id">Modifica</a> |
-                    <a href="/matches/cancel/@match.Id">Annulla</a>
+                    <a asp-action="EditMatch" asp-route-id="@match.Id" class="btn btn-warning">Modifica</a>
+                    <a asp-action="DeleteMatch" asp-route-id="@match.Id" class="btn btn-danger">Annulla</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Altre Partite</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Ora Inizio</th>
+            <th>Campo</th>
+            <th>Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var match in Model.OtherMatches)
+        {
+            <tr>
+                <td>@match.DataInizio.ToString("dd/MM/yyyy")</td>
+                <td>@match.OraInizio.ToString(@"hh\:mm")</td>
+                <td>@match.Campo.NomeCampo</td>
+                <td>
+                    <a asp-action="MatchDetails" asp-route-id="@match.Id" class="btn btn-primary">Dettagli</a>
+                    <a asp-controller="Booking" asp-action="BookAndPay" asp-route-id="@match.Id" class="btn btn-success">Partecipa</a>
                 </td>
             </tr>
         }
