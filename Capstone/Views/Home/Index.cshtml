@@ -1,7 +1,43 @@
-﻿@{
+﻿@model HomeViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <h1>@User.Identity.Name</h1>
 
+<h3>Partite che hai creato</h3>
+@if (Model.PartiteCreate != null && Model.PartiteCreate.Any())
+{
+    <ul>
+        @foreach (var partita in Model.PartiteCreate)
+        {
+            <li>
+                Partita del @partita.DataInizio.ToString("dd/MM/yyyy") alle @partita.OraInizio.ToString(@"hh\:mm") presso @partita.Campo.NomeCampo
+                <a href="@Url.Action("ForMatch", "Chat", new { matchId = partita.Id })" class="btn btn-primary">Accedi alla Chat</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Non hai creato partite.</p>
+}
 
+<h3>Partite a cui hai partecipato</h3>
+@if (Model.PartitePartecipate != null && Model.PartitePartecipate.Any())
+{
+    <ul>
+        @foreach (var booking in Model.PartitePartecipate)
+        {
+            <li>
+                Partita del @booking.Partita.DataInizio.ToString("dd/MM/yyyy") alle @booking.Partita.OraInizio.ToString(@"hh\:mm") presso @booking.Partita.Campo.NomeCampo
+                <a href="@Url.Action("ForMatch", "Chat", new { matchId = booking.Partita.Id })" class="btn btn-primary">Accedi alla Chat</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Non hai partecipato a nessuna partita.</p>
+}

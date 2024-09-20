@@ -1,50 +1,36 @@
 ﻿@model IEnumerable<Capstone.Models.Fields>
 
-@{
-    ViewData["Title"] = "Campi Disponibili";
-}
-
-<h2>Campi Disponibili</h2>
+<h2>Lista dei Campi</h2>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Nome</th>
+            <th>Nome Campo</th>
             <th>Città</th>
             <th>Indirizzo</th>
-            <th>Tipo di Campo</th>
             <th>Prezzo Orario</th>
-            <th>Valutazione Media</th>
-            <th></th>
+            @if (User.IsInRole("gestore") || User.IsInRole("admin"))
+            {
+                <th>Azioni</th>
+            }
         </tr>
     </thead>
     <tbody>
-        @foreach (var field in Model)
+        @foreach (var campo in Model)
         {
             <tr>
-                <td>@field.NomeCampo</td>
-                <td>@field.Città</td>
-                <td>@field.Indirizzo</td>
-                <td>
-                    @if (field.TipoCampo == 0)
-                    {
-                        <span>Calcio a 5</span>
-                    }
-                    else
-                    {
-                        <span>Calcio a 7</span>
-                    }
-                </td>
-                <td>€@field.PrezzoOrario.ToString("0.00")</td>
-                <td>@field.ValutazioneMedia</td>
-                <td>
-                    <a asp-action="FieldDetails" asp-route-id="@field.Id" class="btn btn-info">Dettagli</a>
-                    <a asp-action="EditField" asp-route-id="@field.Id" class="btn btn-warning">Modifica</a>
-                    <a asp-action="DeleteField" asp-route-id="@field.Id" class="btn btn-danger">Elimina</a>
-                </td>
+                <td>@campo.NomeCampo</td>
+                <td>@campo.Città</td>
+                <td>@campo.Indirizzo</td>
+                <td>@campo.PrezzoOrario €</td>
+                @if (User.IsInRole("gestore") || User.IsInRole("admin"))
+                {
+                    <td>
+                        <a asp-action="EditField" asp-route-id="@campo.Id" class="btn btn-warning">Modifica</a>
+                        <a asp-action="DeleteField" asp-route-id="@campo.Id" class="btn btn-danger">Elimina</a>
+                    </td>
+                }
             </tr>
         }
     </tbody>
 </table>
-
-<a asp-action="CreateField" class="btn btn-primary">Aggiungi Nuovo Campo</a>

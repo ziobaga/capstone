@@ -12,22 +12,20 @@ public class ChatHub : Hub
         _context = context;
     }
 
-    // Metodo chiamato dal client per inviare un messaggio
-    public async Task SendMessage(string message, int matchId)
+    // Metodo chiamato dal client per inviare un messaggio tramite SignalR
+    public async Task SendMessage(int matchId, string message)
     {
-        // Trova l'ID dell'utente connesso
+        // Ottieni l'ID dell'utente connesso
         var userId = int.Parse(Context.UserIdentifier);
         var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
         if (user == null)
         {
-            // Se l'utente non esiste, termina l'esecuzione
             throw new HubException("Utente non trovato.");
         }
 
         // Trova la chat associata alla partita
         var chat = await _context.Chats.FirstOrDefaultAsync(c => c.PartitaId == matchId);
-
         if (chat == null)
         {
             // Se non esiste una chat per la partita, creane una
@@ -57,28 +55,15 @@ public class ChatHub : Hub
     public override async Task OnConnectedAsync()
     {
         var matchId = Context.GetHttpContext().Request.Query["matchId"];
-
-        // Controlla se il matchId non è vuoto o nullo
-        if (!string.IsNullOrEmpty(matchId))
-        {
-            // Aggiungi l'utente al gruppo di SignalR basato sull'ID della partita
-            await Groups.AddToGroupAsync(Context.ConnectionId, matchId);
-        }
-
+        await Groups.AddToGroupAsync(Context.ConnectionId, matchId);
         await base.OnConnectedAsync();
     }
 
+    // Rimuove l'utente dalla chat della partita quando si disconnette
     public override async Task OnDisconnectedAsync(Exception exception)
     {
         var matchId = Context.GetHttpContext().Request.Query["matchId"];
-
-        // Controlla se il matchId non è vuoto o nullo
-        if (!string.IsNullOrEmpty(matchId))
-        {
-            // Rimuovi l'utente dal gruppo di SignalR
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, matchId);
-        }
-
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, matchId);
         await base.OnDisconnectedAsync(exception);
     }
 }

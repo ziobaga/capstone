@@ -59,7 +59,27 @@ namespace Capstone.Controllers
 
             if (existingBooking != null)
             {
-                return BadRequest("Hai già prenotato per questa partita.");
+                if (existingBooking.PagamentoEffettuato)
+                {
+                    return BadRequest("Hai già prenotato e pagato per questa partita.");
+                }
+                // Se esiste una prenotazione senza pagamento, proseguiamo con il pagamento
+            }
+            else
+            {
+                // Creazione della prenotazione con stato "In Attesa di Pagamento"
+                var booking = new Bookings
+                {
+                    DataPrenotazione = DateTime.Now,
+                    StatoPrenotazione = StatoPrenotazione.InAttesa,
+                    PagamentoEffettuato = false,
+                    PartitaId = match.Id,
+                    UtenteId = userId
+                };
+
+                _context.Bookings.Add(booking);
+                await _context.SaveChangesAsync();
+                existingBooking = booking; // Usa la prenotazione appena creata
             }
 
             // Calcola la durata della partita in ore
@@ -70,19 +90,6 @@ namespace Capstone.Controllers
 
             // Calcola il totale da pagare (moltiplica la durata per il prezzo orario)
             var importoDaPagare = durataPartita * prezzoOrario * 100; // Converti in centesimi per Stripe
-
-            // Creazione della prenotazione con stato "In Attesa di Pagamento"
-            var booking = new Bookings
-            {
-                DataPrenotazione = DateTime.Now,
-                StatoPrenotazione = StatoPrenotazione.InAttesa,
-                PagamentoEffettuato = false,
-                PartitaId = match.Id,
-                UtenteId = userId
-            };
-
-            _context.Bookings.Add(booking);
-            await _context.SaveChangesAsync();
 
             // Integrazione con Stripe per il pagamento
             try
@@ -100,9 +107,17 @@ namespace Capstone.Controllers
                 if (charge.Status == "succeeded")
                 {
                     // Aggiorna lo stato della prenotazione
-                    booking.PagamentoEffettuato = true;
-                    booking.StatoPrenotazione = StatoPrenotazione.Confermata;
+                    existingBooking.PagamentoEffettuato = true;
+                    existingBooking.StatoPrenotazione = StatoPrenotazione.Confermata;
                     await _context.SaveChangesAsync();
+
+                    // Aggiungi il creatore ai partecipanti della partita dopo il pagamento
+                    var creatore = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+                    if (creatore != null)
+                    {
+                        match.Partecipanti.Add(creatore);
+                        await _context.SaveChangesAsync();
+                    }
 
                     // Verifica se esiste già una chat per la partita
                     var chat = await _context.Chats.FirstOrDefaultAsync(c => c.PartitaId == match.Id);
@@ -114,7 +129,6 @@ namespace Capstone.Controllers
                         await _context.SaveChangesAsync();
                     }
 
-                    // Passa il modello di tipo `Chats` alla vista, non `Matches`
                     return RedirectToAction("ForMatch", "Chat", new { matchId = match.Id });
                 }
                 else
@@ -127,6 +141,7 @@ namespace Capstone.Controllers
                 return BadRequest($"Errore durante il pagamento: {ex.Message}");
             }
         }
+
 
     }
 }

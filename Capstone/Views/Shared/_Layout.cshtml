@@ -24,52 +24,67 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi</a>
-                        </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">
-                                    Logout
-                                </a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
                             </li>
                         }
-                        @if (!User.Identity.IsAuthenticated)
-                        {
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">
-                                Login</a>
-                            </li>
-                        }
-
-                        @if (User.IsInRole("gestore"))
-                        {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Field" asp-action="CreateField">Aggiungi campo</a>
-                        </li>
-                        
-                        }
-                        @if (User.IsInRole("user"))
+                        else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Match" asp-action="CreateMatch">Crea partita</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
                             </li>
-
                         }
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+    <div class="container-fluid">
+        <div class="row">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="col-md-3 bg-light p-3">
+                    <h4>Menu</h4>
+                    <ul class="list-group">
+                        @if (User.IsInRole("user"))
+                        {
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Match" asp-action="CreateMatch">Crea partita</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("gestore") || User.IsInRole("admin"))
+                        {
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi (Gestore/Admin)</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite (Gestore/Admin)</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Field" asp-action="CreateField">Aggiungi campo</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+            <div class="col-md-9">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
@@ -77,6 +92,7 @@
             &copy; 2024 - Capstone - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

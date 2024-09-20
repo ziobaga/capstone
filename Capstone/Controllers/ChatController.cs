@@ -25,15 +25,19 @@ namespace Capstone.Controllers
             // Recupera la chat associata alla partita
             var chat = await _context.Chats
                 .Include(c => c.Messaggi)
-                .ThenInclude(m => m.Mittente)
-                .FirstOrDefaultAsync(c => c.PartitaId == matchId);
+        .ThenInclude(m => m.Mittente)
+        .Include(c => c.Partita)  // Include la partita associata alla chat
+        .ThenInclude(p => p.Campo) // Include il campo associato alla partita
+        .Include(c => c.Partita)
+        .ThenInclude(p => p.Partecipanti) // Include i partecipanti
+        .FirstOrDefaultAsync(c => c.PartitaId == matchId);
 
             if (chat == null)
             {
                 return NotFound("Nessuna chat trovata per questa partita.");
             }
 
-            // Passa il modello di tipo `Chats` alla vista
+            // Passa la chat e i suoi messaggi alla vista
             return View(chat);
         }
 

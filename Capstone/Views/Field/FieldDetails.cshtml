@@ -10,48 +10,34 @@
     <h4>Campo: @Model.NomeCampo</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            Indirizzo
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Indirizzo
-        </dd>
+        <dt class="col-sm-2">Indirizzo</dt>
+        <dd class="col-sm-10">@Model.Indirizzo</dd>
 
-        <dt class="col-sm-2">
-            Città
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Città
-        </dd>
+        <dt class="col-sm-2">Città</dt>
+        <dd class="col-sm-10">@Model.Città</dd>
 
-        <dt class="col-sm-2">
-            Tipo di Campo
-        </dt>
-        <dd class="col-sm-10">
-            @Model.TipoCampo
-        </dd>
+        <dt class="col-sm-2">Tipo di Campo</dt>
+        <dd class="col-sm-10">@Model.TipoCampo</dd>
 
-        <dt class="col-sm-2">
-            Prezzo Orario
-        </dt>
-        <dd class="col-sm-10">
-            @Model.PrezzoOrario.ToString("C")
-        </dd>
+        <dt class="col-sm-2">Prezzo Orario</dt>
+        <dd class="col-sm-10">@Model.PrezzoOrario.ToString("C")</dd>
 
-        <dt class="col-sm-2">
-            Valutazione Media
-        </dt>
-        <dd class="col-sm-10">
-            @Model.ValutazioneMedia
-        </dd>
+        <dt class="col-sm-2">Valutazione Media</dt>
+        <dd class="col-sm-10">@Model.ValutazioneMedia</dd>
     </dl>
 </div>
 
 <div>
-    <a asp-action="EditField" asp-route-id="@Model.Id" class="btn btn-primary">Modifica</a>
     <a asp-action="FieldList" class="btn btn-secondary">Torna alla lista</a>
 </div>
 
-<form asp-action="DeleteField" asp-route-id="@Model.Id" method="post" class="mt-3">
-    <button type="submit" class="btn btn-danger">Elimina</button>
-</form>
+@if (User.IsInRole("admin") || User.IsInRole("gestore"))
+{
+    <div>
+        <a asp-action="EditField" asp-route-id="@Model.Id" class="btn btn-primary">Modifica</a>
+
+        <form asp-action="DeleteField" asp-route-id="@Model.Id" method="post" class="mt-3">
+            <button type="submit" class="btn btn-danger">Elimina</button>
+        </form>
+    </div>
+}

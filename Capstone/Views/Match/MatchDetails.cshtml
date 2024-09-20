@@ -1,4 +1,5 @@
-﻿@model Capstone.Models.Matches
+﻿@using System.Security.Claims
+@model Capstone.Models.Matches
 
 @{
     ViewData["Title"] = "Dettagli della Partita";
@@ -72,7 +73,16 @@
         </dl>
 
         <a asp-action="MatchList" class="btn btn-primary">Torna alla lista</a>
-        <a asp-action="EditMatch" asp-route-id="@Model.Id" class="btn btn-warning">Modifica</a>
-        <a asp-action="CancelMatch" asp-route-id="@Model.Id" class="btn btn-danger">Annulla Partita</a>
+
+        @if (Model.CreatoreId == int.Parse(User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier)))
+        {
+            <a asp-action="EditMatch" asp-route-id="@Model.Id" class="btn btn-warning">Modifica</a>
+            <a asp-action="CancelMatch" asp-route-id="@Model.Id" class="btn btn-danger">Annulla Partita</a>
+        }
+
+        @if (Model.Partecipanti.Any(p => p.Id == int.Parse(User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier))))
+        {
+            <a asp-action="ForMatch" asp-controller="Chat" asp-route-matchId="@Model.Id" class="btn btn-success">Accedi alla Chat</a>
+        }
     </div>
 </div>
