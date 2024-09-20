@@ -17,6 +17,8 @@ namespace Capstone.Models
         public decimal PrezzoOrario { get; set; }
         public decimal ValutazioneMedia { get; set; }
 
+        public List<string> ImmaginiCampo { get; set; } = new List<string>();
+
         // Relazioni
         public int UserId { get; set; }
         public Users User { get; set; }

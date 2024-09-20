@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5qT/PbF+dZLOiZ0MWGf5uuAJZrmQY+mK4oLBI6hLIk8=",
+  "Hash": "ytCX+smRL5x7q2em8WzRFXie/6Cee+jCIgi5/RVsrKM=",
   "Source": "Capstone",
   "BasePath": "_content/Capstone",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\icona-profilo-avatar-predefinito-immagine-utente-social-media-icona-avatar-grigia-silhouette-profilo-vuoto-illustrazione-vettoriale_561158-3485.avif",
+      "SourceId": "Capstone",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\",
+      "BasePath": "_content/Capstone",
+      "RelativePath": "images/icona-profilo-avatar-predefinito-immagine-utente-social-media-icona-avatar-grigia-silhouette-profilo-vuoto-illustrazione-vettoriale_561158-3485.avif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\icona-profilo-avatar-predefinito-immagine-utente-social-media-icona-avatar-grigia-silhouette-profilo-vuoto-illustrazione-vettoriale_561158-3485.avif"
     },
     {
       "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\js\\site.js",

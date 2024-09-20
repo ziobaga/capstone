@@ -1,10 +1,22 @@
-﻿@model HomeViewModel
+﻿@using System.Security.Claims
+@using Microsoft.EntityFrameworkCore
+@model HomeViewModel
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <h1>@User.Identity.Name</h1>
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (Model.ProfiloIncompleto) // Usa la nuova proprietà per verificare se il profilo è incompleto
+    {
+        <div class="alert alert-info">
+            Completa il tuo profilo! <a asp-controller="Profile" asp-action="EditProfile">Clicca qui</a> per modificare il profilo.
+        </div>
+    }
+}
 
 <h3>Partite che hai creato</h3>
 @if (Model.PartiteCreate != null && Model.PartiteCreate.Any())

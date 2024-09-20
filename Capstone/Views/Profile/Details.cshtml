@@ -1,0 +1,42 @@
+﻿@model Capstone.Models.Auth.Users
+
+<h2>Dettagli del Profilo</h2>
+
+<div>
+    <h4>@Model.Nome @Model.Cognome</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Username
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Username
+        </dd>
+
+        <dt class="col-sm-2">
+            Email
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Email
+        </dd>
+
+        <dt class="col-sm-2">
+            Residenza
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Residenza
+        </dd>
+
+        <dt class="col-sm-2">
+            Immagine del Profilo
+        </dt>
+        <dd class="col-sm-10">
+            @if (!string.IsNullOrEmpty(Model.ImmagineProfilo))
+            {
+                <img src="~/@Model.ImmagineProfilo" alt="Immagine del profilo" width="150" />
+            }
+        </dd>
+    </dl>
+
+    <a asp-action="EditProfile" class="btn btn-primary">Modifica Profilo</a>
+</div>

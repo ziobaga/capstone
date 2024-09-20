@@ -29,12 +29,6 @@ namespace Capstone.Services.Auth
                     throw new Exception("L'Username inserito è già in uso!");
                 }
 
-                // Hash della password
-                if (string.IsNullOrEmpty(model.Password))
-                {
-                    throw new Exception("La password non può essere vuota.");
-                }
-
                 var userRegister = new Users
                 {
                     Username = model.Username,
@@ -42,13 +36,14 @@ namespace Capstone.Services.Auth
                     PasswordHash = string.Empty,
                     Nome = model.Nome,
                     Cognome = model.Cognome,
-                    DataCreazione = DateTime.Now
+                    DataCreazione = DateTime.Now,
+                    ImmagineProfilo = "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg", // Immagine di default
+                    Residenza = null
                 };
 
                 userRegister.PasswordHash = _passwordHelper.HashPassword(model.Password);
 
-                // Assegna il ruolo all'utente tramite la tabella UserRoles
-                var userRole = await _ctx.Roles.FirstOrDefaultAsync(r => r.Id == 3); // Ruolo User
+                var userRole = await _ctx.Roles.FirstOrDefaultAsync(r => r.Id == 3);
                 if (userRole == null)
                 {
                     throw new Exception("Ruolo non trovato");
@@ -57,17 +52,26 @@ namespace Capstone.Services.Auth
                 userRegister.Role.Add(userRole!);
 
                 await _ctx.Users.AddAsync(userRegister);
-                await _ctx.SaveChangesAsync();
+
+                try
+                {
+                    await _ctx.SaveChangesAsync();
+                }
+                catch (DbUpdateException ex)
+                {
+                    Console.WriteLine($"Errore durante il salvataggio nel database: {ex.InnerException?.Message}");
+                    throw;
+                }
 
                 return userRegister;
             }
             catch (Exception ex)
             {
-                // Log l'errore
                 Console.WriteLine($"Errore durante la registrazione: {ex.Message}");
                 return null;
             }
         }
+
         //Metodo per sapere l'id di chi logga
         public async Task<Users> GetUserByIdAsync(int userId)
         {
@@ -88,6 +92,9 @@ namespace Capstone.Services.Auth
             {
                 throw new Exception("Utente non trovato.");
             }
+
+
+
 
             return existingUser;
         }

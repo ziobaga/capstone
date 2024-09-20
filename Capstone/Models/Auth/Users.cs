@@ -17,6 +17,10 @@ namespace Capstone.Models.Auth
         [StringLength(20)]
         public string Cognome { get; set; }
 
+        public string? Residenza { get; set; } // Nuovo campo per residenza
+
+        public string? ImmagineProfilo { get; set; } // Nuovo campo per immagine profilo
+
         [Required]
         [StringLength(20)]
         public required string Username { get; set; }
@@ -27,7 +31,7 @@ namespace Capstone.Models.Auth
         public string Email { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(256)]
         public string PasswordHash { get; set; }
 
 

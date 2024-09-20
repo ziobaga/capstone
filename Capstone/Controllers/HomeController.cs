@@ -26,6 +26,21 @@ namespace Capstone.Controllers
             // Ottieni l'ID dell'utente autenticato
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
+            // Recupera l'utente dal database
+            var user = await _context.Users
+         .Include(u => u.PartiteCreate) // Include le partite create
+         .Include(u => u.Prenotazioni)  // Include le prenotazioni dell'utente
+         .ThenInclude(p => p.Partita)   // Include le partite associate alle prenotazioni
+         .FirstOrDefaultAsync(u => u.Id == userId);
+
+            if (user == null)
+            {
+                return NotFound("Utente non trovato.");
+            }
+
+            // Verifica se il profilo è completo (es. Residenza o ImmagineProfilo mancanti)
+            bool profiloIncompleto = string.IsNullOrEmpty(user.Residenza) || string.IsNullOrEmpty(user.ImmagineProfilo);
+
             // Verifica le partite create dall'utente
             var partiteCreate = await _context.Matches
                 .Where(m => m.CreatoreId == userId)
@@ -43,7 +58,8 @@ namespace Capstone.Controllers
             var model = new HomeViewModel
             {
                 PartiteCreate = partiteCreate,
-                PartitePartecipate = partitePartecipate
+                PartitePartecipate = partitePartecipate,
+                ProfiloIncompleto = profiloIncompleto
             };
 
             return View(model);
