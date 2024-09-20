@@ -15,6 +15,17 @@
         <input asp-for="Cognome" class="form-control" />
         <span asp-validation-for="Cognome" class="text-danger"></span>
     </div>
+
+    <div class="form-group">
+        <label for="RuoloPreferito">Ruolo Preferito</label>
+        <select asp-for="RuoloPreferito" class="form-control">
+            <option value="0">Portiere</option>
+            <option value="1">Difensore</option>
+            <option value="2">Centrocampista</option>
+            <option value="3">Attaccante</option>
+        </select>
+    </div>
+
     <div class="form-group">
         <label for="Residenza">Residenza</label>
         <input asp-for="Residenza" class="form-control" />
@@ -25,7 +36,7 @@
         <input type="file" asp-for="ImmagineProfiloFile" class="form-control" />
         @if (!string.IsNullOrEmpty(Model.ImmagineProfilo))
         {
-            <img src="@Url.Content(Model.ImmagineProfilo)" alt="Immagine del profilo" width="100" />
+            <img src="~/@Model.ImmagineProfilo" alt="Immagine del profilo" width="150" />
         }
     </div>
 

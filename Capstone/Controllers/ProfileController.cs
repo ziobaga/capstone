@@ -48,15 +48,7 @@ namespace Capstone.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditProfile(EditProfileViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                // Log degli errori per capire cosa sta andando storto
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Console.WriteLine(error.ErrorMessage);
-                }
-                return View(model); // Ritorna la view con il modello in caso di errore
-            }
+
 
             var user = await _context.Users.FindAsync(model.UserId);
 
@@ -69,6 +61,7 @@ namespace Capstone.Controllers
             user.Nome = model.Nome;
             user.Cognome = model.Cognome;
             user.Residenza = model.Residenza;
+            user.RuoloPreferito = model.RuoloPreferito;
 
             // Se l'utente ha caricato una nuova immagine di profilo
             if (model.ImmagineProfiloFile != null && model.ImmagineProfiloFile.Length > 0)
@@ -117,6 +110,16 @@ namespace Capstone.Controllers
             }
 
             return View(user); // Mostra i dettagli del profilo
+        }
+
+        public async Task<IActionResult> ViewProfile(int userid)
+        {
+            var user = await _context.Users.FindAsync(userid);
+            if (user == null)
+            {
+                return NotFound("Utente non trovato.");
+            }
+            return View(user); // Usa la stessa vista dei dettagli del profilo
         }
     }
 }

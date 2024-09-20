@@ -13,8 +13,12 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\icona-profilo-avatar-predefinito-immagine-utente-social-media-icona-avatar-grigia-silhouette-profilo-vuoto-illustrazione-vettoriale_561158-3485.avif",
-      "PackagePath": "staticwebassets\\images\\icona-profilo-avatar-predefinito-immagine-utente-social-media-icona-avatar-grigia-silhouette-profilo-vuoto-illustrazione-vettoriale_561158-3485.avif"
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\default.jpg",
+      "PackagePath": "staticwebassets\\images\\default.jpg"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\imgDefault.avif",
+      "PackagePath": "staticwebassets\\images\\imgDefault.avif"
     },
     {
       "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\js\\site.js",
@@ -247,6 +251,14 @@
     {
       "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\Screenshot 2024-05-24 155008.png",
+      "PackagePath": "staticwebassets\\uploads\\Screenshot 2024-05-24 155008.png"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\Screenshot 2024-05-27 173333.png",
+      "PackagePath": "staticwebassets\\uploads\\Screenshot 2024-05-27 173333.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Capstone.Microsoft.AspNetCore.StaticWebAssets.props",

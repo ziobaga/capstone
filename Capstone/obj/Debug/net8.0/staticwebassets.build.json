@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ytCX+smRL5x7q2em8WzRFXie/6Cee+jCIgi5/RVsrKM=",
+  "Hash": "T4RUj7bRGeKv3PKltkQojVh6nRwi/n+9uozWRfdARPI=",
   "Source": "Capstone",
   "BasePath": "_content/Capstone",
   "Mode": "Default",
@@ -93,12 +93,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\icona-profilo-avatar-predefinito-immagine-utente-social-media-icona-avatar-grigia-silhouette-profilo-vuoto-illustrazione-vettoriale_561158-3485.avif",
+      "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\default.jpg",
       "SourceId": "Capstone",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\",
       "BasePath": "_content/Capstone",
-      "RelativePath": "images/icona-profilo-avatar-predefinito-immagine-utente-social-media-icona-avatar-grigia-silhouette-profilo-vuoto-illustrazione-vettoriale_561158-3485.avif",
+      "RelativePath": "images/default.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -109,7 +109,26 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\icona-profilo-avatar-predefinito-immagine-utente-social-media-icona-avatar-grigia-silhouette-profilo-vuoto-illustrazione-vettoriale_561158-3485.avif"
+      "OriginalItemSpec": "wwwroot\\images\\default.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\imgDefault.avif",
+      "SourceId": "Capstone",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\",
+      "BasePath": "_content/Capstone",
+      "RelativePath": "images/imgDefault.avif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\imgDefault.avif"
     },
     {
       "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\js\\site.js",
@@ -1212,6 +1231,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\Screenshot 2024-05-24 155008.png",
+      "SourceId": "Capstone",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\",
+      "BasePath": "_content/Capstone",
+      "RelativePath": "uploads/Screenshot 2024-05-24 155008.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Screenshot 2024-05-24 155008.png"
+    },
+    {
+      "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\Screenshot 2024-05-27 173333.png",
+      "SourceId": "Capstone",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\",
+      "BasePath": "_content/Capstone",
+      "RelativePath": "uploads/Screenshot 2024-05-27 173333.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\Screenshot 2024-05-27 173333.png"
     }
   ]
 }

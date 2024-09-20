@@ -1,4 +1,6 @@
-﻿namespace Capstone.Models.ViewModels
+﻿using Capstone.Models.Enums;
+
+namespace Capstone.Models.ViewModels
 {
     public class EditProfileViewModel
     {
@@ -10,5 +12,7 @@
 
         // File di immagine caricato dall'utente
         public IFormFile ImmagineProfiloFile { get; set; }
+
+        public RuoloPreferito RuoloPreferito { get; set; }
     }
 }

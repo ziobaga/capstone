@@ -37,7 +37,7 @@ namespace Capstone.Services.Auth
                     Nome = model.Nome,
                     Cognome = model.Cognome,
                     DataCreazione = DateTime.Now,
-                    ImmagineProfilo = "https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg", // Immagine di default
+                    ImmagineProfilo = "/images/default.jpg", // Immagine di default
                     Residenza = null
                 };
 

@@ -15,7 +15,10 @@
     <ul>
         @foreach (var partecipante in Model.Partecipanti)
         {
-            <li>@partecipante.Nome @partecipante.Cognome (@partecipante.Email)</li>
+            <li>
+                @partecipante.Nome @partecipante.Cognome (@partecipante.Email)
+                <a href="@Url.Action("UserDetails", "Profile", new { userId = partecipante.Id })" class="btn btn-info">Vedi profilo</a>
+            </li>
         }
     </ul>
 }
