@@ -1,4 +1,5 @@
-﻿@model Capstone.Models.Chats
+﻿@using System.Security.Claims
+@model Capstone.Models.Chats
 
 <h2>Chat della Partita</h2>
 
@@ -21,7 +22,19 @@
     <ul>
         @foreach (var partecipante in Model.Partita.Partecipanti)
         {
-            <li>@partecipante.Nome @partecipante.Cognome (@partecipante.Email)</li>
+            <li>
+                @partecipante.Nome @partecipante.Cognome (@partecipante.Email)
+                @if (partecipante.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                {
+                    <!-- Se l'utente clicca sul proprio profilo, reindirizza ai dettagli con pulsante modifica -->
+                    <a href="@Url.Action("Details", "Profile")" class="btn btn-info">Il mio profilo</a>
+                }
+                else
+                {
+                    <!-- Se l'utente clicca sul profilo di un altro partecipante, visualizza "ViewProfile" -->
+                    <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="btn btn-info">Vedi profilo</a>
+                }
+            </li>
         }
     </ul>
 }

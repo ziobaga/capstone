@@ -116,11 +116,18 @@ namespace Capstone.Controllers
                     .Where(m => m.CreatoreId != userId) // Partite create da altri utenti
                     .ToListAsync();
 
+                // Recupera gli ID delle partite per le quali l'utente ha prenotazioni confermate
+                var bookedMatches = await _context.Bookings
+                    .Where(b => b.UtenteId == userId && b.StatoPrenotazione == StatoPrenotazione.Confermata)
+                    .Select(b => b.PartitaId)
+                    .ToListAsync();
+
                 // Crea il ViewModel per passare entrambe le liste alla vista
                 var viewModel = new MatchListViewModel
                 {
                     UserMatches = userMatches,    // Partite create dall'utente
-                    OtherMatches = otherMatches   // Partite create da altri utenti
+                    OtherMatches = otherMatches,   // Partite create da altri utenti
+                    BookedMatchIds = bookedMatches // Passa gli ID delle partite a cui l'utente partecipa
                 };
 
                 return View(viewModel);

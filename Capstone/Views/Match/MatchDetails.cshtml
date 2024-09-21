@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@using System.Text.RegularExpressions
 @model Capstone.Models.Matches
 
 @{
@@ -54,8 +55,19 @@
                 <ul>
                     @foreach (var partecipante in Model.Partecipanti)
                     {
-                        @partecipante.Nome @partecipante.Cognome
-                        <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="btn btn-info">Vedi profilo</a>
+                        <li>
+                            @partecipante.Nome @partecipante.Cognome
+                            @if (partecipante.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                            {
+                                <!-- Se l'utente clicca sul proprio profilo, reindirizza ai dettagli con pulsante modifica -->
+                                <a href="@Url.Action("Details", "Profile")" class="btn btn-info">Il mio profilo</a>
+                            }
+                            else
+                            {
+                                <!-- Se l'utente clicca sul profilo di un altro partecipante, visualizza "ViewProfile" -->
+                                <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="btn btn-info">Vedi profilo</a>
+                            }
+                        </li>
                     }
                 </ul>
             </dd>
@@ -85,5 +97,7 @@
         {
             <a asp-action="ForMatch" asp-controller="Chat" asp-route-matchId="@Model.Id" class="btn btn-success">Accedi alla Chat</a>
         }
+        <a href="@Url.Action("CreateReview", "Review", new { matchId = Model.Id })" class="btn btn-primary">Valuta il campo</a>
+
     </div>
 </div>

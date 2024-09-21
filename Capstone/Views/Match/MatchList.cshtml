@@ -20,6 +20,7 @@
                 <td>
                     <a asp-action="EditMatch" asp-route-id="@match.Id" class="btn btn-warning">Modifica</a>
                     <a asp-action="DeleteMatch" asp-route-id="@match.Id" class="btn btn-danger">Annulla</a>
+                    <a asp-action="MatchDetails" asp-route-id="@match.Id" class="btn btn-primary">Dettagli</a>
                 </td>
             </tr>
         }
@@ -45,7 +46,16 @@
                 <td>@(match.Campo != null ? match.Campo.NomeCampo : "Campo non disponibile")</td>
                 <td>
                     <a asp-action="MatchDetails" asp-route-id="@match.Id" class="btn btn-primary">Dettagli</a>
-                    <a asp-controller="Booking" asp-action="BookAndPay" asp-route-id="@match.Id" class="btn btn-success">Partecipa</a>
+
+                    @* Verifica se l'utente è già registrato per questa partita *@
+                    @if (!Model.BookedMatchIds.Contains(match.Id))
+                    {
+                        <a asp-controller="Booking" asp-action="BookAndPay" asp-route-id="@match.Id" class="btn btn-success">Partecipa</a>
+                    }
+                    else
+                    {
+                        <span class="text-success">Già registrato</span>
+                    }
                 </td>
             </tr>
         }

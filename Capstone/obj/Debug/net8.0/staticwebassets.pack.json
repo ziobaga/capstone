@@ -261,6 +261,22 @@
       "PackagePath": "staticwebassets\\uploads\\Screenshot 2024-05-27 173333.png"
     },
     {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\Screenshot 2024-05-31 171747.png",
+      "PackagePath": "staticwebassets\\uploads\\Screenshot 2024-05-31 171747.png"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\Screenshot 2024-06-04 125135.png",
+      "PackagePath": "staticwebassets\\uploads\\Screenshot 2024-06-04 125135.png"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\Screenshot 2024-07-03 093723.png",
+      "PackagePath": "staticwebassets\\uploads\\Screenshot 2024-07-03 093723.png"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\Screenshot 2024-07-08 020912.png",
+      "PackagePath": "staticwebassets\\uploads\\Screenshot 2024-07-08 020912.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Capstone.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

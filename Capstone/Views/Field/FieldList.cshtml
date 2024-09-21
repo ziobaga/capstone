@@ -30,6 +30,14 @@
                         <a asp-action="DeleteField" asp-route-id="@campo.Id" class="btn btn-danger">Elimina</a>
                     </td>
                 }
+                @if (User.IsInRole("user"))
+                {
+                    <td>
+                        <a asp-action="CreateMatch" asp-controller="Match" asp-route-fieldId="@field.Id" class="btn btn-success">Crea una Partita</a>
+                        <!-- Link per vedere le partite disponibili su questo campo -->
+                        <a asp-action="AvailableMatches" asp-controller="Match" asp-route-fieldId="@field.Id" class="btn btn-primary">Vedi Partite Disponibili</a>
+                    </td>
+                }
             </tr>
         }
     </tbody>

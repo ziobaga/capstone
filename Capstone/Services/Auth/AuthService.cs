@@ -43,7 +43,7 @@ namespace Capstone.Services.Auth
 
                 userRegister.PasswordHash = _passwordHelper.HashPassword(model.Password);
 
-                var userRole = await _ctx.Roles.FirstOrDefaultAsync(r => r.Id == 3);
+                var userRole = await _ctx.Roles.FirstOrDefaultAsync(r => r.Id == 1);
                 if (userRole == null)
                 {
                     throw new Exception("Ruolo non trovato");

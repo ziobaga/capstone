@@ -1,4 +1,5 @@
-﻿@model Capstone.Models.Matches
+﻿@using System.Security.Claims
+@model Capstone.Models.Matches
 
 <h2>Dettagli della Partita</h2>
 
@@ -17,7 +18,16 @@
         {
             <li>
                 @partecipante.Nome @partecipante.Cognome (@partecipante.Email)
-                <a href="@Url.Action("UserDetails", "Profile", new { userId = partecipante.Id })" class="btn btn-info">Vedi profilo</a>
+                @if (partecipante.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                {
+                    <!-- Se l'utente clicca sul proprio profilo, reindirizza ai dettagli con pulsante modifica -->
+                    <a href="@Url.Action("Details", "Profile")" class="btn btn-info">Il mio profilo</a>
+                }
+                else
+                {
+                    <!-- Se l'utente clicca sul profilo di un altro partecipante, visualizza "ViewProfile" -->
+                    <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="btn btn-info">Vedi profilo</a>
+                }
             </li>
         }
     </ul>

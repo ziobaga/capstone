@@ -1,43 +1,67 @@
 ﻿using Capstone.Models;
-using Capstone.Services.Review;
+using Capstone.Models.Context;
+using Capstone.Models.Enums;
+using Capstone.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
-namespace Capstone.Controllers
+public class ReviewsController : Controller
 {
-    public class ReviewController : Controller
+    private readonly DataContext _context;
+
+    public ReviewsController(DataContext context)
     {
-        private readonly IReviewService _reviewService;
+        _context = context;
+    }
 
-        public ReviewController(IReviewService reviewService)
+    // GET: Reviews/Create
+    public async Task<IActionResult> CreateReview(int matchId)
+    {
+        var match = await _context.Matches
+            .Include(m => m.Campo)
+            .FirstOrDefaultAsync(m => m.Id == matchId);
+
+        if (match == null)
         {
-            _reviewService = reviewService;
+            return NotFound("Partita non trovata.");
         }
 
-        // GET: Review/Create
-        public IActionResult CreateReview(int campoId)
+        var model = new ReviewViewModel
         {
-            var model = new Reviews
+            MatchId = matchId,
+            CampoId = match.Campo.Id,
+            NomeCampo = match.Campo.NomeCampo
+        };
+
+        return View(model);
+    }
+
+    // POST: Reviews/Create
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateReview(ReviewViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var review = new Reviews
             {
-                ValutatoCampoId = campoId,
-                DataRecensione = DateTime.Now
+                Punteggio = model.Punteggio,
+                Commento = model.Commento,
+                DataRecensione = DateTime.Now,
+                TipoRecensione = TipoRecensione.Campo,
+                ValutatoreId = userId,
+                ValutatoCampoId = model.CampoId
             };
-            return View(model);
+
+            _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", "Matches", new { id = model.MatchId });
         }
 
-        // POST: Review/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateReview([Bind("Punteggio,Commento,ValutatoCampoId")] Reviews review)
-        {
-            if (ModelState.IsValid)
-            {
-                review.DataRecensione = DateTime.Now;
-                review.ValutatoreId = int.Parse(User.FindFirst("UserId").Value); // Assumendo che l'ID dell'utente loggato sia nei claims
-                await _reviewService.AddReviewAsync(review);
-                return RedirectToAction("FieldDetails", "Field", new { id = review.ValutatoCampoId });
-            }
-
-            return View(review);
-        }
+        return View(model);
     }
 }

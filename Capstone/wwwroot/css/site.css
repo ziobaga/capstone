@@ -20,3 +20,28 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*STAR*/
+.star-rating {
+    direction: rtl;
+    display: inline-flex;
+}
+
+    .star-rating input {
+        display: none;
+    }
+
+    .star-rating label {
+        font-size: 2em;
+        color: #ccc;
+        cursor: pointer;
+    }
+
+    .star-rating input:checked ~ label {
+        color: gold;
+    }
+
+    .star-rating label:hover,
+    .star-rating label:hover ~ label {
+        color: gold;
+    }
