@@ -9,97 +9,126 @@
     <link rel="stylesheet" href="~/Capstone.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Capstone</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+<body class="overflow-hidden myBlack">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 p-0">
+                <nav class="navbar navbar-expand myBg sticky-top px-4 py-0">
+                    <div class="navbar-nav align-items-center flex-grow-1 justify-content-between px-4 py-2">
+                        <li>
+                            <a class="text-white mt-5 fs-4" asp-area="" asp-controller="Home" asp-action="Index">
+                                <img src="@Url.Content("~/images/logo-match1.png")" alt="Logo" class="img-fluid myImg" width="80" height="80" />
+                            </a>
                         </li>
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">Logout</a>
+                                <a class="fs-2" asp-area="" asp-controller="Auth" asp-action="Logout">
+                                    <i class="bi bi-door-closed myIcon"></i>
+                                </a>
                             </li>
                         }
-                        else
+                        @if (!User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="Register">Register</a>
+                                <a class="fs-2" asp-area="" asp-controller="Auth" asp-action="Login">
+                                    <i class="bi bi-door-closed-fill myIcon"></i>
+                                </a>
                             </li>
                         }
-                    </ul>
-                </div>
+                    </div>
+                </nav>
             </div>
-        </nav>
-    </header>
+        </div>
 
-    <div class="container-fluid">
         <div class="row">
-            @if (User.Identity.IsAuthenticated)
-            {
-                <div class="col-md-3 bg-light p-3">
-                    <h4>Menu</h4>
-                    <ul class="list-group">
+            <!-- Sidebar visibile solo per schermi più grandi di 700px -->
+            <div class="col-2 myBg d-none d-md-block" id="scrollStyle">
+                <ul class="list-unstyled ps-3 pb-4 mySideBar">
+                    @if (User.Identity.IsAuthenticated)
+                    {
                         @if (User.IsInRole("user"))
                         {
                             <li class="list-group-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Profile" asp-action="Details">Profilo</a>
+                                <a class="fs-5 mylink" asp-area="" asp-controller="Profile" asp-action="Details">Profilo</a>
                             </li>
                             <li class="list-group-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi</a>
+                                <a class="fs-5 mylink" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi</a>
                             </li>
                             <li class="list-group-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite</a>
+                                <a class="fs-5 mylink" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite</a>
                             </li>
                             <li class="list-group-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Match" asp-action="CreateMatch">Crea partita</a>
+                                <a class="fs-5 mylink" asp-area="" asp-controller="Match" asp-action="CreateMatch">Crea partita</a>
                             </li>
                         }
                         @if (User.IsInRole("gestore") || User.IsInRole("admin"))
                         {
                             <li class="list-group-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi (Gestore/Admin)</a>
+                                <a class="fs-5 mylink" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi (Gestore/Admin)</a>
                             </li>
                             <li class="list-group-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite (Gestore/Admin)</a>
+                                <a class="fs-5 mylink" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite (Gestore/Admin)</a>
                             </li>
                             <li class="list-group-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Field" asp-action="CreateField">Aggiungi campo</a>
+                                <a class="fs-5 mylink" asp-area="" asp-controller="Field" asp-action="CreateField">Aggiungi campo</a>
                             </li>
+                        }
+                    }
+                </ul>
+            </div>
+
+            <!-- Dropdown visibile solo per schermi più piccoli di 700px -->
+            <div class="col-12 d-md-none p-0">
+                <div class="dropdown myBg p-2 text-right">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menu
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("user"))
+                            {
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Profile" asp-action="Details">Profilo</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Match" asp-action="CreateMatch">Crea partita</a></li>
+                            }
+                            @if (User.IsInRole("gestore") || User.IsInRole("admin"))
+                            {
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi (Gestore/Admin)</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite (Gestore/Admin)</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Field" asp-action="CreateField">Aggiungi campo</a></li>
+                            }
                         }
                     </ul>
                 </div>
-            }
-            <div class="col-md-9">
-                <main role="main" class="pb-3">
+            </div>
+
+            <!-- Main content -->
+            <div class="col-md-10 col-12 p-0" id="scrollStyleTwo">
+                <main role="main" class="py-5 container-fluid">
                     @RenderBody()
                 </main>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - Capstone - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsuWaJh3QTK6gQGId71xvW8FkeoWDw5bk&libraries=places&callback=initMap">
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -1,62 +1,83 @@
 ﻿@using System.Security.Claims
 @model Capstone.Models.Chats
 
-<h2>Chat della Partita</h2>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+        <div class="bg-custom rounded p-5 my-4 mx-3 shadow">
+            <div class="text-center mb-4">
+                <h2 class="text-green">Chat della Partita</h2>
+            </div>
 
-<!-- Messaggio di conferma registrazione -->
-<p class="alert alert-success">Sei stato registrato correttamente a questa partita!</p>
+            <!-- Messaggio di conferma registrazione -->
+            <p class="alert alert-success">Sei stato registrato correttamente a questa partita!</p>
 
-<!-- Dettagli della partita -->
-<h3>Dettagli della Partita</h3>
-<div>
-    <p><strong>Data:</strong> @Model.Partita.DataInizio.ToString("dd/MM/yyyy")</p>
-    <p><strong>Ora Inizio:</strong> @Model.Partita.OraInizio.ToString(@"hh\:mm")</p>
-    <p><strong>Ora Fine:</strong> @Model.Partita.OraFine.ToString(@"hh\:mm")</p>
-    <p><strong>Campo:</strong> @Model.Partita.Campo.NomeCampo, @Model.Partita.Campo.Città</p>
-</div>
+            <!-- Dettagli della partita -->
+            <hr class="myBorder" />
+            <div class="mb-4">
+                <h4 class="mb-3">Dettagli della Partita</h4>
+                <p><strong>Data:</strong> @Model.Partita.DataInizio.ToString("dd/MM/yyyy")</p>
+                <p><strong>Ora Inizio:</strong> @Model.Partita.OraInizio.ToString(@"hh\:mm")</p>
+                <p><strong>Ora Fine:</strong> @Model.Partita.OraFine.ToString(@"hh\:mm")</p>
+                <p><strong>Campo:</strong> @Model.Partita.Campo.NomeCampo, @Model.Partita.Campo.Città</p>
+            </div>
 
-<!-- Sezione partecipanti -->
-<h3>Partecipanti</h3>
-@if (Model.Partita.Partecipanti != null && Model.Partita.Partecipanti.Any())
-{
-    <ul>
-        @foreach (var partecipante in Model.Partita.Partecipanti)
-        {
-            <li>
-                @partecipante.Nome @partecipante.Cognome (@partecipante.Email)
-                @if (partecipante.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+            <!-- Partecipanti -->
+            <hr class="myBorder" />
+            <div class="mb-4">
+                <h4 class="mb-3">Partecipanti</h4>
+                @if (Model.Partita.Partecipanti != null && Model.Partita.Partecipanti.Any())
                 {
-                    <!-- Se l'utente clicca sul proprio profilo, reindirizza ai dettagli con pulsante modifica -->
-                    <a href="@Url.Action("Details", "Profile")" class="btn btn-info">Il mio profilo</a>
+                    <ul class="list-group">
+                        @foreach (var partecipante in Model.Partita.Partecipanti)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <!-- Nome del partecipante cliccabile -->
+                                <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="text-decoration-none" style="color: #58ae82;">
+                                    @partecipante.Nome @partecipante.Cognome (@partecipante.Email)
+                                </a>
+                                @if (partecipante.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                                {
+                                    <a href="@Url.Action("Details", "Profile")" class="btn firstButton btn-sm">Il mio profilo</a>
+                                }
+                            </li>
+                        }
+                    </ul>
                 }
                 else
                 {
-                    <!-- Se l'utente clicca sul profilo di un altro partecipante, visualizza "ViewProfile" -->
-                    <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="btn btn-info">Vedi profilo</a>
+                    <p>Non ci sono partecipanti registrati per questa partita.</p>
                 }
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>Non ci sono partecipanti registrati per questa partita.</p>
-}
+            </div>
 
-<!-- Chat -->
-<hr />
-<h3>Chat</h3>
-<div id="chatMessages">
-    <ul id="messagesList">
-        @foreach (var messaggio in Model.Messaggi)
-        {
-            <li><strong>@messaggio.Mittente.Nome:</strong> @messaggio.Testo (@messaggio.DataInvio.ToString("dd/MM/yyyy hh:mm"))</li>
-        }
-    </ul>
+            <!-- Sezione Chat -->
+            <hr class="myBorder" />
+            <div class="mb-4">
+                <h4 class="mb-3">Chat</h4>
+                <div id="chatMessages" class="border p-3 rounded bg-light" style="height: 300px; overflow-y: scroll;">
+                    <ul id="messagesList" class="list-unstyled">
+                        @foreach (var messaggio in Model.Messaggi)
+                        {
+                            <li>
+                                <strong>@messaggio.Mittente.Nome:</strong> @messaggio.Testo
+                                <small class="text-muted">(@messaggio.DataInvio.ToString("dd/MM/yyyy HH:mm"))</small>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+                <!-- Input per inviare messaggi -->
+                <div class="input-group mt-3">
+                    <input type="text" id="messageInput" class="form-control" placeholder="Scrivi un messaggio..." />
+                    <button id="sendButton" class="btn firstButton">Invia</button>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a asp-controller="Match" asp-action="MatchList" class="btn secondButton">Torna alla Lista</a>
+            </div>
+        </div>
+    </div>
 </div>
-
-<input type="text" id="messageInput" placeholder="Scrivi un messaggio..." />
-<button id="sendButton">Invia</button>
 
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.3/signalr.min.js"></script>

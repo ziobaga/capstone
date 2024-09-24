@@ -1,0 +1,43 @@
+﻿@model Capstone.Models.ViewModels.AvailableMatchesViewModel
+
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
+        <div class="bg-custom rounded p-5 my-4 mx-3 shadow">
+            <div class="text-center mb-4">
+                <h2 class="text-green">Partite disponibili per il campo</h2>
+            </div>
+
+            <hr class="myBorder" />
+
+            <div class="row">
+                @foreach (var match in Model.Matches)
+                {
+                    <div class="col-12 mb-4">
+                        <div class="card mb-4 shadow-sm h-100 myCard">
+                            <div class="card-body">
+                                <h5 class="card-title">Partita del @match.DataInizio.ToString("dd/MM/yyyy")</h5>
+                                <p class="card-text">
+                                    <strong>Ora Inizio:</strong> @match.OraInizio.ToString(@"hh\:mm")<br />
+                                    <strong>Ora Fine:</strong> @match.OraFine.ToString(@"hh\:mm")<br />
+                                    <strong>Campo:</strong> @match.Campo.NomeCampo
+                                </p>
+
+                                <div class="d-flex justify-content-between">
+                                    @if (Model.BookedMatchIds.Contains(match.Id))
+                                    {
+                                        <span class="text-success">Già registrato</span>
+                                    }
+                                    else
+                                    {
+                                        <!-- Pulsante per prenotare -->
+                                        <a asp-action="BookAndPay" asp-controller="Booking" asp-route-id="@match.Id" class="btn firstButton">Prenota</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 ﻿using Capstone.Models;
 using Capstone.Models.Context;
+using Capstone.Models.ViewModels;
 using Capstone.Services.Field;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -46,7 +47,7 @@ namespace Capstone.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> CreateField(Fields model)
+        public async Task<IActionResult> CreateField(FieldViewModel model)
         {
             // Ottieni l'ID dell'utente loggato
             var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -138,5 +139,19 @@ namespace Capstone.Controllers
             // Reindirizza alla lista dei campi dopo la cancellazione
             return RedirectToAction(nameof(FieldList));
         }
+
+        // public IActionResult FieldNear(string address)
+        // {
+        // Verifica che l'indirizzo non sia nullo
+        //if (string.IsNullOrEmpty(address))
+        //  {
+        //     return NotFound("Indirizzo non fornito.");
+        // }
+
+        // Passa l'indirizzo alla vista tramite ViewBag
+        //  ViewBag.Address = address;
+        //   return View();
+        //}
+
     }
 }

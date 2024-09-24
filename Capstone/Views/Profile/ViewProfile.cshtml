@@ -1,60 +1,78 @@
 ﻿@model Capstone.Models.Auth.Users
 
-<h2>Dettagli del Profilo</h2>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="position-relative bg-custom rounded p-5 my-4 mx-3 shadow">
 
-<div>
-    <h4>@Model.Nome @Model.Cognome</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">Username</dt>
-        <dd class="col-sm-10">@Model.Username</dd>
-
-        <dt class="col-sm-2">Email</dt>
-        <dd class="col-sm-10">@Model.Email</dd>
-
-        <dt class="col-sm-2">Residenza</dt>
-        <dd class="col-sm-10">@Model.Residenza</dd>
-
-        <dt class="col-sm-2">Immagine del Profilo</dt>
-        <dd class="col-sm-10">
+            <!-- Immagine del profilo in alto a sinistra -->
             @if (!string.IsNullOrEmpty(Model.ImmagineProfilo))
             {
-                <img src="~/@Model.ImmagineProfilo" alt="Immagine del profilo" width="150" />
+                <img src="~/@Model.ImmagineProfilo" alt="Immagine del profilo"
+                     class="position-absolute rounded-circle border border-white shadow"
+                     style="top: -50px; left: 20px; width: 100px; height: 100px; z-index: 1;" />
             }
             else
             {
-                <img src="~/images/default-avatar.png" alt="Immagine di default" width="150" />
+                <img src="~/images/default-avatar.png" alt="Immagine di default"
+                     class="position-absolute rounded-circle border border-white shadow"
+                     style="top: -50px; left: 20px; width: 100px; height: 100px; z-index: 1;" />
             }
-        </dd>
 
-        <dt class="col-sm-2">Ruolo Preferito</dt>
-        <dd class="col-sm-10">
-            @switch (Model.RuoloPreferito)
-            {
-                case Capstone.Models.Enums.RuoloPreferito.Attaccante:
-                    @:Attaccante
-                    break;
-                case Capstone.Models.Enums.RuoloPreferito.Difensore:
-                    @:Difensore
-                    break;
-                case Capstone.Models.Enums.RuoloPreferito.Centrocampista:
-                    @:Centrocampista
-                    break;
-                case Capstone.Models.Enums.RuoloPreferito.Portiere:
-                    @:Portiere
-                    break;
-                default:
-                    @:Ruolo non specificato
-                    break;
-            }
-        </dd>
+            <div class="text-center mb-4 mt-5">
+                <h2 class="text-green">Dettagli del Profilo</h2>
+                <h4 class="myText">@Model.Nome @Model.Cognome</h4>
+            </div>
 
-        <dt class="col-sm-2">Valutazione Media</dt>
-        <dd class="col-sm-10">@Model.ValutazioneMedia</dd>
+            <hr class="myBorder" />
 
-        <dt class="col-sm-2">Partite Giocate</dt>
-        <dd class="col-sm-10">@Model.PartiteGiocate</dd>
-    </dl>
+            <dl class="row myText">
+                <!-- Username -->
+                <dt class="col-sm-4">Username:</dt>
+                <dd class="col-sm-8">@Model.Username</dd>
 
-    <a asp-action="MatchList" class="btn btn-secondary">Torna alla lista partite</a>
+                <!-- Email -->
+                <dt class="col-sm-4">Email:</dt>
+                <dd class="col-sm-8">@Model.Email</dd>
+
+                <!-- Residenza -->
+                <dt class="col-sm-4">Residenza:</dt>
+                <dd class="col-sm-8">@Model.Residenza</dd>
+
+                <!-- Ruolo Preferito -->
+                <dt class="col-sm-4">Ruolo:</dt>
+                <dd class="col-sm-8">
+                    @switch (Model.RuoloPreferito)
+                    {
+                        case Capstone.Models.Enums.RuoloPreferito.Attaccante:
+                            @:Attaccante
+                            break;
+                        case Capstone.Models.Enums.RuoloPreferito.Difensore:
+                            @:Difensore
+                            break;
+                        case Capstone.Models.Enums.RuoloPreferito.Centrocampista:
+                            @:Centrocampista
+                            break;
+                        case Capstone.Models.Enums.RuoloPreferito.Portiere:
+                            @:Portiere
+                            break;
+                        default:
+                            @:Ruolo non specificato
+                            break;
+                    }
+                </dd>
+
+                <!-- Valutazione Media 
+                <dt class="col-sm-4">Valutazione Media:</dt>
+                <dd class="col-sm-8">Model.ValutazioneMedia</dd>
+
+                 Partite Giocate 
+                <dt class="col-sm-4">Partite Giocate:</dt>
+                <dd class="col-sm-8">Model.PartiteGiocate</dd>
+            </dl>-->
+
+            <div class="d-flex justify-content-center mt-4">
+                <a asp-action="MatchList" asp-controller="Match" class="btn secondButton px-4">Torna alla lista partite</a>
+            </div>
+        </div>
+    </div>
 </div>

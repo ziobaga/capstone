@@ -6,50 +6,108 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>@User.Identity.Name</h1>
+<!-- Header -->
+<header class="myBg text-white text-center py-5 myBorder">
+    <div class="container">
+        <h1 class="display-4 fst-italic">Benvenuti su Match!</h1>
+        <p class="lead">Il calcetto a portata di click!</p>
+    </div>
+</header>
 
+<!-- Profilo incompleto -->
 @if (User.Identity.IsAuthenticated)
 {
-    if (Model.ProfiloIncompleto) // Usa la nuova proprietà per verificare se il profilo è incompleto
-    {
-        <div class="alert alert-info">
-            Completa il tuo profilo! <a asp-controller="Profile" asp-action="EditProfile">Clicca qui</a> per modificare il profilo.
-        </div>
-    }
+    <div class="container py-4">
+        <h1>@User.Identity.Name</h1>
+
+        @if (Model.ProfiloIncompleto)
+        {
+            <div class="alert alert-info">
+                Completa il tuo profilo! <a asp-controller="Profile" asp-action="EditProfile">Clicca qui</a> per modificare il profilo.
+            </div>
+        }
+    </div>
 }
 
-<h3>Partite che hai creato</h3>
-@if (Model.PartiteCreate != null && Model.PartiteCreate.Any())
-{
-    <ul>
-        @foreach (var partita in Model.PartiteCreate)
+<!-- Partite create -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center fs-2 mb-4">Partite che hai creato</h2>
+        @if (Model.PartiteCreate != null && Model.PartiteCreate.Any())
         {
-            <li>
-                Partita del @partita.DataInizio.ToString("dd/MM/yyyy") alle @partita.OraInizio.ToString(@"hh\:mm") presso @partita.Campo.NomeCampo
-                <a href="@Url.Action("ForMatch", "Chat", new { matchId = partita.Id })" class="btn btn-primary">Accedi alla Chat</a>
-            </li>
+            <div class="row">
+                @foreach (var partita in Model.PartiteCreate)
+                {
+                    <div class="col-md-4 mb-4">
+                        <a href="@Url.Action("ForMatch", "Chat", new { matchId = partita.Id })" class="text-decoration-none text-dark">
+                            <div class="card mb-4 shadow-sm h-100 myCard myCardHoover">
+                                <div class="card-body">
+                                    <h5 class="card-title">Partita del @partita.DataInizio.ToString("dd/MM/yyyy")</h5>
+                                    <p class="card-text">
+                                        <strong>Ora Inizio:</strong> @partita.OraInizio.ToString(@"hh\:mm")<br />
+                                        <strong>Campo:</strong> @partita.Campo.NomeCampo
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
         }
-    </ul>
-}
-else
-{
-    <p>Non hai creato partite.</p>
-}
+        else
+        {
+            <p class="text-center">Non hai creato partite.</p>
+        }
+    </div>
+</section>
 
-<h3>Partite a cui hai partecipato</h3>
-@if (Model.PartitePartecipate != null && Model.PartitePartecipate.Any())
-{
-    <ul>
-        @foreach (var booking in Model.PartitePartecipate)
+<hr />
+
+<!-- Partite partecipate -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center fs-2 mb-4">Partite a cui hai partecipato</h2>
+        @if (Model.PartitePartecipate != null && Model.PartitePartecipate.Any())
         {
-            <li>
-                Partita del @booking.Partita.DataInizio.ToString("dd/MM/yyyy") alle @booking.Partita.OraInizio.ToString(@"hh\:mm") presso @booking.Partita.Campo.NomeCampo
-                <a href="@Url.Action("ForMatch", "Chat", new { matchId = booking.Partita.Id })" class="btn btn-primary">Accedi alla Chat</a>
-            </li>
+            <div class="row">
+                @foreach (var booking in Model.PartitePartecipate)
+                {
+                    <div class="col-md-4 mb-4">
+                        <a href="@Url.Action("ForMatch", "Chat", new { matchId = booking.Partita.Id })" class="text-decoration-none text-dark">
+                            <div class="card mb-4 shadow-sm h-100 myCard myCardHoover">
+                                <div class="card-body">
+                                    <h5 class="card-title">Partita del @booking.Partita.DataInizio.ToString("dd/MM/yyyy")</h5>
+                                    <p class="card-text">
+                                        <strong>Ora Inizio:</strong> @booking.Partita.OraInizio.ToString(@"hh\:mm")<br />
+                                        <strong>Campo:</strong> @booking.Partita.Campo.NomeCampo
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
         }
-    </ul>
-}
-else
-{
-    <p>Non hai partecipato a nessuna partita.</p>
-}
+        else
+        {
+            <p class="text-center">Non hai partecipato a nessuna partita.</p>
+        }
+    </div>
+</section>
+
+<!-- Sezione Servizi -->
+<section class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-4 fw-bold ">La Nostra Passione</h2>
+        <p class="text-center">
+            Su <strong>Match!</strong>, il campo da gioco è solo l'inizio. Crediamo che ogni partita di calcetto sia un'occasione per divertirsi, mettersi alla prova e creare nuovi legami. La nostra missione è offrire una piattaforma facile e intuitiva, dove tu e i tuoi amici possiate organizzare e prenotare partite in modo semplice e veloce.
+
+            Con passione e impegno, lavoriamo per garantire che ogni volta che indossi gli scarpini, il tuo unico pensiero sia giocare. Noi ci occupiamo del resto!
+        </p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="myBg text-white text-center py-3">
+    <p class="mb-0 ">Grazie per aver scelto Match!</p>
+</footer>

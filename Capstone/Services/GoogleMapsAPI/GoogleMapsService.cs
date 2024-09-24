@@ -1,35 +1,22 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Capstone.Services.GoogleMapsAPI
 {
     public class GoogleMapsService : IGoogleMapsService
     {
-        private readonly IConfiguration _configuration;
-        private readonly HttpClient _httpClient;
-
-        public GoogleMapsService(IConfiguration configuration, HttpClient httpClient)
+        public Task<IActionResult> CampiVicinanze(double lat, double lng)
         {
-            _configuration = configuration;
-            _httpClient = httpClient;
+            throw new NotImplementedException();
         }
 
-        public async Task<string> GetCoordinatesFromAddressAsync(string address)
+        public Task Deg2Rad(double deg)
         {
-            string apiKey = _configuration["GoogleMaps:ApiKey"];
-            string url = $"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={apiKey}";
+            throw new NotImplementedException();
+        }
 
-            var response = await _httpClient.GetStringAsync(url);
-            var json = JObject.Parse(response);
-
-            var location = json["results"]?[0]?["geometry"]?["location"];
-            if (location != null)
-            {
-                var lat = location["lat"].ToString();
-                var lng = location["lng"].ToString();
-                return $"{lat},{lng}";
-            }
-
-            return null;
+        public Task GetDistance(double lat1, double lon1, double lat2, double lon2)
+        {
+            throw new NotImplementedException();
         }
     }
 }

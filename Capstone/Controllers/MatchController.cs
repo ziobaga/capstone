@@ -22,12 +22,61 @@ namespace Capstone.Controllers
             StripeConfiguration.ApiKey = "sk_test_51Q0mODP563WlEe7GsBqEQglmxgCiUBn1hXytJSGH76JropG9s1n8f3eXxsHlLZ8lrN9DG3L4BFvMhbhMWTxMyaTJ00vmj2MlP4";
         }
 
-        // 1. GET: Visualizzare il form per creare una nuova partita
-        public IActionResult CreateMatch()
+
+        // GET: Match/AvailableMatches
+        [HttpGet]
+        public async Task<IActionResult> AvailableMatches(int fieldId)
         {
-            // Recupera i campi dal database per popolare il dropdown
-            var campi = _context.Fields.ToList();
-            ViewBag.Campi = campi;
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            // Recupera le partite per il campo specificato
+            var matches = await _context.Matches
+                .Include(m => m.Campo)
+                .Where(m => m.CampoId == fieldId)
+                .ToListAsync();
+
+            // Recupera le partite a cui l'utente è già registrato
+            var bookedMatches = await _context.Bookings
+                .Where(b => b.UtenteId == userId && b.PagamentoEffettuato)
+                .Select(b => b.PartitaId)
+                .ToListAsync();
+
+            // Passa entrambe le liste alla vista
+            var viewModel = new AvailableMatchesViewModel
+            {
+                Matches = matches,
+                BookedMatchIds = bookedMatches
+            };
+
+            return View(viewModel);
+        }
+
+        // 1. GET: Visualizzare il form per creare una nuova partita
+        public IActionResult CreateMatch(int? fieldId)
+        {
+            if (fieldId.HasValue)
+            {
+                // Recupera il campo selezionato
+                var campo = _context.Fields.FirstOrDefault(f => f.Id == fieldId);
+                if (campo == null)
+                {
+                    return NotFound("Campo non trovato");
+                }
+
+                // Crea un nuovo oggetto Matches con il Campo preimpostato
+                var match = new Matches
+                {
+                    CampoId = campo.Id // Preimposta il campo
+                };
+
+                ViewBag.Campo = campo; // Passa il campo selezionato alla vista
+            }
+            else
+            {
+                // Carica tutti i campi per il dropdown se l'utente sta creando una partita generica
+                var campi = _context.Fields.ToList();
+                ViewBag.Campi = campi;
+            }
 
             return View(new Matches());
         }
@@ -102,18 +151,11 @@ namespace Capstone.Controllers
                 // Ottieni l'ID dell'utente autenticato
                 var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-                // Recupera le partite create dall'utente loggato
-                var userMatches = await _context.Matches
+                // Recupera le partite a cui l'utente partecipa
+                var matchesPartecipate = await _context.Matches
                     .Include(m => m.Campo)
                     .Include(m => m.Partecipanti)
-                    .Where(m => m.CreatoreId == userId) // Partite create dall'utente loggato
-                    .ToListAsync();
-
-                // Recupera le partite create da altri utenti (non create dall'utente loggato)
-                var otherMatches = await _context.Matches
-                    .Include(m => m.Campo)
-                    .Include(m => m.Partecipanti)
-                    .Where(m => m.CreatoreId != userId) // Partite create da altri utenti
+                    .Where(m => m.Partecipanti.Any(p => p.Id == userId)) // Partite a cui partecipa l'utente loggato
                     .ToListAsync();
 
                 // Recupera gli ID delle partite per le quali l'utente ha prenotazioni confermate
@@ -122,12 +164,19 @@ namespace Capstone.Controllers
                     .Select(b => b.PartitaId)
                     .ToListAsync();
 
+                // Recupera le partite a cui l'utente non partecipa
+                var matchesNonPartecipate = await _context.Matches
+                    .Include(m => m.Campo)
+                    .Include(m => m.Partecipanti)
+                    .Where(m => !m.Partecipanti.Any(p => p.Id == userId)) // Partite a cui NON partecipa l'utente loggato
+                    .ToListAsync();
+
                 // Crea il ViewModel per passare entrambe le liste alla vista
                 var viewModel = new MatchListViewModel
                 {
-                    UserMatches = userMatches,    // Partite create dall'utente
-                    OtherMatches = otherMatches,   // Partite create da altri utenti
-                    BookedMatchIds = bookedMatches // Passa gli ID delle partite a cui l'utente partecipa
+                    MatchesPartecipate = matchesPartecipate,    // Partite a cui partecipa l'utente
+                    MatchesNonPartecipate = matchesNonPartecipate, // Partite a cui non partecipa l'utente
+                    BookedMatchIds = bookedMatches ?? new List<int>()
                 };
 
                 return View(viewModel);
@@ -137,6 +186,7 @@ namespace Capstone.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
 
 
 

@@ -1,42 +1,84 @@
-﻿@model Capstone.Models.Fields
+﻿@model Capstone.Models.ViewModels.FieldViewModel
 
 @{
     ViewData["Title"] = "Aggiungi Campo";
 }
 
-<h2>Aggiungi Nuovo Campo</h2>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+        <div class="bg-custom rounded p-5 my-4 mx-3 shadow">
+            <div class="text-center mb-4">
+                <h2 class="text-green">Aggiungi Nuovo Campo</h2>
+            </div>
 
-<form asp-action="CreateField">
-    <div class="form-group">
-        <label for="NomeCampo">Nome Campo</label>
-        <input type="text" class="form-control" id="NomeCampo" name="NomeCampo" required />
+            <hr class="myBorder" />
+
+            <form asp-action="CreateField" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="NomeCampo" class="myText">Nome Campo</label>
+                    <input type="text" class="form-control myBgForm myText" id="NomeCampo" name="NomeCampo" required />
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="ImmagineCampoFile" class="myText">Immagine Campo</label>
+                    <input type="file" class="form-control myBgForm myText" id="ImmagineCampoFile" name="ImmagineCampoFile" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Città" class="myText">Città</label>
+                    <input type="text" class="form-control myBgForm myText" id="Città" name="Città" required />
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="campo-indirizzo" class="myText">Indirizzo del Campo</label>
+                    <input id="campo-indirizzo" class="form-control myBgForm myText" placeholder="Inserisci l'indirizzo del campo" type="text" />
+
+                    <input type="hidden" id="campo-lat" name="campo-lat">
+                    <input type="hidden" id="campo-lng" name="campo-lng">
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="TipoCampo" class="myText">Tipo di Campo</label>
+                    <select class="form-control myBgForm myText" id="TipoCampo" name="TipoCampo">
+                        <option value="0">Calcio a 5</option>
+                        <option value="1">Calcio a 7</option>
+                    </select>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="PrezzoOrario" class="myText">Prezzo Orario (€)</label>
+                    <input type="number" class="form-control myBgForm myText" id="PrezzoOrario" name="PrezzoOrario" step="0.01" required />
+                </div>
+
+                <!-- Bottoni -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn firstButton">Aggiungi Campo</button>
+                    <a asp-action="FieldList" class="btn secondButton">Annulla</a>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 
-    
 
-    <div class="form-group">
-        <label for="Città">Città</label>
-        <input type="text" class="form-control" id="Città" name="Città" required />
-    </div>
+<!--<script>
+    function initMap() {
+        var campoAutocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('Indirizzo'), {
+            types: ['geocode']
+        });
 
-    <div class="form-group">
-        <label for="Indirizzo">Indirizzo</label>
-        <input type="text" class="form-control" id="Indirizzo" name="Indirizzo" required />
-    </div>
+        campoAutocomplete.addListener('place_changed', function () {
+            var place = campoAutocomplete.getPlace();
+            if (!place.geometry) {
+                return;
+            }
 
-    <div class="form-group">
-        <label for="TipoCampo">Tipo di Campo</label>
-        <select class="form-control" id="TipoCampo" name="TipoCampo">
-            <option value="0">Calcio a 5</option>
-            <option value="1">Calcio a 7</option>
-        </select>
-    </div>
+            var latitude = place.geometry.location.lat();
+            var longitude = place.geometry.location.lng();
 
-    <div class="form-group">
-        <label for="PrezzoOrario">Prezzo Orario (€)</label>
-        <input type="number" class="form-control" id="PrezzoOrario" name="PrezzoOrario" step="0.01" required />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Aggiungi Campo</button>
-</form>
-
+            document.getElementById("campo-lat").value = latitude;
+            document.getElementById("campo-lng").value = longitude;
+        });
+    }
+</script>-->

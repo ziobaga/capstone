@@ -1,35 +1,69 @@
 ﻿@model Capstone.Models.Matches
 
-<h2>Crea una nuova partita</h2>
+@{
+    ViewData["Title"] = "Crea una nuova partita";
+}
 
-<form asp-action= "CreateMatch">
-    <div>
-        <label>Data</label>
-        <input type="date" name="DataInizio" required />
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <div class="bg-custom rounded p-5 my-4 mx-3 shadow">
+            <div class="text-center mb-4">
+                <h2 class="text-green">Nuova Partita <i class="fa-solid fa-futbol text-green"></i></h2>
+            </div>
+
+            <hr class="myBorder" />
+
+            <form asp-action="CreateMatch" method="post">
+                <div class="form-group">
+                    <label class="myText">Data</label>
+                    <input type="date" name="DataInizio" required class="form-control myBgForm myText" />
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="myText">Ora di Inizio</label>
+                    <input type="time" name="OraInizio" required class="form-control myBgForm myText" />
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="myText">Ora di Fine</label>
+                    <input type="time" name="OraFine" required class="form-control myBgForm myText" />
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="myText">Tipo di Partita</label>
+                    <select name="TipoPartita" required class="form-control myBgForm myText">
+                        <option value="0">Calcio a 5</option>
+                        <option value="1">Calcio a 7</option>
+                    </select>
+                </div>
+
+                <div class="form-group mt-3">
+                    @if (ViewBag.Campo != null)
+                    {
+                        <label class="myText">Campo</label>
+                        <input type="hidden" name="CampoId" value="@ViewBag.Campo.Id" />
+                        <input type="text" value="@ViewBag.Campo.NomeCampo" disabled class="form-control myBgForm myText" />
+                    }
+                    else
+                    {
+                        <label class="myText">Campo</label>
+                        <select name="CampoId" required class="form-control myBgForm myText">
+                            @foreach (var campo in ViewBag.Campi)
+                            {
+                                <option value="@campo.Id">@campo.NomeCampo</option>
+                            }
+                        </select>
+                    }
+                </div>
+
+                <!-- Raggruppa i bottoni in un d-flex per posizionarli vicini -->
+                <div class="d-flex justify-content-between mt-4">
+                    <input type="submit" value="Crea Partita" class="btn firstButton" />
+                    <a asp-action="Index" asp-controller="Home" class="btn secondButton">Torna al Menù</a>
+                </div>
+            </form>
+        </div>
     </div>
-    <div>
-        <label>Ora di Inizio</label>
-        <input type="time" name="OraInizio" required />
-    </div>
-    <div>
-        <label>Ora di Fine</label>
-        <input type="time" name="OraFine" required />
-    </div>
-    <div>
-        <label>Tipo Partita</label>
-        <select name="TipoPartita" required>
-            <option value="0">Calcio a 5</option>
-            <option value="1">Calcio a 7</option>
-        </select>
-    </div>
-    <div>
-        <label>Campo</label>
-        <select name="CampoId" required>
-            @foreach (var campo in ViewBag.Campi)
-            {
-                <option value="@campo.Id">@campo.NomeCampo</option>
-            }
-        </select>
-    </div>
-    <button type="submit">Crea Partita</button>
-</form>
+</div>
+
+

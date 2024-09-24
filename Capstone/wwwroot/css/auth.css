@@ -1,0 +1,116 @@
+﻿/*#191C24 grigio
+#000000 nero
+#CC1617 rosso acceso
+#800E12 rosso meno acceso
+#581B20 rosso sbiadito
+#6C7293 scritte (bluastro? boh)*/
+
+
+
+.bg-custom {
+    background-color: #58ae82 !important;
+    border-radius: 8px !important;
+}
+
+
+.text-placeholder {
+    color: white !important;
+}
+
+
+.form-control.bg-secondary {
+    background-color: #000000 !important;
+    border: none !important;
+    color: #f8f9fa !important;
+    border-radius: 5px !important;
+    padding: 15px !important;
+}
+
+.form-control:focus,
+.form-control:active {
+    box-shadow: 0 0 0 0.2rem rgba(204, 22, 23, 0.8);
+    outline: none;
+}
+
+::placeholder {
+    color: white !important;
+}
+
+.form-check-label {
+    color: white !important;
+}
+
+a.text-red {
+    color: white !important;
+    transition: color 0.2s ease-in-out !important;
+}
+
+    a.text-red:hover {
+        color: #a61214 !important;
+    }
+
+
+.alert-danger {
+    background-color: #69262b !important;
+    border-color: #ff4b5c !important;
+    color: #f8f9fa !important;
+}
+
+
+.col-12.col-sm-10.col-md-8.col-lg-6.col-xl-5 {
+    max-width: 500px !important;
+    margin: auto !important;
+}
+
+.p-5 {
+    padding: 3rem !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-background-clip: inherit;
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: inset 0 0 20px 20px #23232329;
+}
+
+.btn-pw {
+    color: white !important;
+    border-radius: 1.4em !important;
+    background-color: black !important;
+    border-color: black !important;
+}
+
+    .btn-pw:hover {
+        background-color: black !important;
+        border-color: black !important;
+    }
+
+    btn1:focus,
+    btn1:active,
+    .btn-pw:focus,
+    .btn-pw:active {
+        box-shadow: 0 0 7px 3px rgba(0, 0, 0, 0.6) !important;
+        outline: none !important;
+    }
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+/* Stile del bottone */
+.custom-file-upload label {
+    cursor: pointer;
+    color: white !important;
+    border-radius: 2em !important;
+    background-color: #CC1617 !important;
+    border-color: #CC1617 !important;
+}
+
+    /* Modifica il colore di sfondo al passaggio del mouse */
+    .custom-file-upload label:hover {
+        background-color: #a61214 !important;
+        border-color: #a61214 !important;
+    }

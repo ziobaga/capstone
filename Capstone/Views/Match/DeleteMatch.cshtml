@@ -1,39 +1,36 @@
 ﻿@model Capstone.Models.Matches
 
-<h2>Conferma eliminazione</h2>
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <div class="bg-custom rounded p-5 my-4 mx-3 shadow">
+            <div class="text-center mb-4">
+                <h2 class="text-danger">Conferma Eliminazione</h2>
+                <p class="myText">Sei sicuro di voler eliminare la partita <strong>#@Model.Id</strong>?</p>
+            </div>
 
-<p>Sei sicuro di voler eliminare la partita "@Model.Id"?</p>
+            <hr class="myBorder" />
 
-<div>
-    <h4>Partita</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Data Inizio
-        </dt>
-        <dd class="col-sm-10">
-            @Model.DataInizio.ToString("dd/MM/yyyy")
-        </dd>
+            <div class="myText">
+                <h4 class="myText">Dettagli della Partita</h4>
+                <dl class="row">
+                    <dt class="col-sm-4">Data Inizio:</dt>
+                    <dd class="col-sm-8">@Model.DataInizio.ToString("dd/MM/yyyy")</dd>
 
-        <dt class="col-sm-2">
-            Ora Inizio
-        </dt>
-        <dd class="col-sm-10">
-            @Model.OraInizio.ToString(@"hh\:mm")
-        </dd>
+                    <dt class="col-sm-4">Ora Inizio:</dt>
+                    <dd class="col-sm-8">@Model.OraInizio.ToString(@"hh\:mm")</dd>
 
-        <dt class="col-sm-2">
-            Campo
-        </dt>
-        <dd class="col-sm-10">
-            @Model.Campo.NomeCampo
-        </dd>
-    </dl>
+                    <dt class="col-sm-4">Campo:</dt>
+                    <dd class="col-sm-8">@Model.Campo.NomeCampo</dd>
+                </dl>
+            </div>
 
-    <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
-        <input type="hidden" asp-for="Id" />
-        <button type="submit" class="btn btn-danger">Elimina</button>
-        <a asp-action="MatchList" class="btn btn-secondary">Annulla</a>
-    </form>
+            <div class="d-flex justify-content-between mt-4">
+                <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn deleteButton ">Elimina</button>
+                </form>
+                <a asp-action="MatchList" class="btn secondButton ">Annulla</a>
+            </div>
+        </div>
+    </div>
 </div>
-

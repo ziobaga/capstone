@@ -1,63 +1,54 @@
 ﻿@model Capstone.Models.ViewModels.MatchListViewModel
 
-<h2>Le Tue Partite</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Data</th>
-            <th>Ora Inizio</th>
-            <th>Campo</th>
-            <th>Azioni</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var match in Model.UserMatches)
-        {
-            <tr>
-                <td>@match.DataInizio.ToString("dd/MM/yyyy")</td>
-                <td>@match.OraInizio.ToString(@"hh\:mm")</td>
-                <td>@(match.Campo != null ? match.Campo.NomeCampo : "Campo non disponibile")</td>
-                <td>
-                    <a asp-action="EditMatch" asp-route-id="@match.Id" class="btn btn-warning">Modifica</a>
-                    <a asp-action="DeleteMatch" asp-route-id="@match.Id" class="btn btn-danger">Annulla</a>
-                    <a asp-action="MatchDetails" asp-route-id="@match.Id" class="btn btn-primary">Dettagli</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<h2>Partite a cui partecipi</h2>
+<div class="row">
+    @foreach (var match in Model.MatchesPartecipate)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm myCard">
+                <div class="card-body">
+                    <h5 class="card-title">@match.DataInizio.ToString("dd/MM/yyyy")</h5>
+                    <p class="card-text">
+                        <strong>Ora Inizio:</strong> @match.OraInizio.ToString(@"hh\:mm")<br />
+                        <strong>Campo:</strong> @(match.Campo != null ? match.Campo.NomeCampo : "Campo non disponibile")
+                    </p>
+                    <div class="d-flex gap-2">
+                        <a asp-action="MatchDetails" asp-route-id="@match.Id" class="btn secondButton btn-sm">Dettagli</a>
+                        <a asp-action="ForMatch" asp-controller="Chat" asp-route-matchId="@match.Id" class="btn firstButton btn-sm">Accedi alla Chat</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
-<h2>Altre Partite</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Data</th>
-            <th>Ora Inizio</th>
-            <th>Campo</th>
-            <th>Azioni</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var match in Model.OtherMatches)
-        {
-            <tr>
-                <td>@match.DataInizio.ToString("dd/MM/yyyy")</td>
-                <td>@match.OraInizio.ToString(@"hh\:mm")</td>
-                <td>@(match.Campo != null ? match.Campo.NomeCampo : "Campo non disponibile")</td>
-                <td>
-                    <a asp-action="MatchDetails" asp-route-id="@match.Id" class="btn btn-primary">Dettagli</a>
+<hr />
 
-                    @* Verifica se l'utente è già registrato per questa partita *@
-                    @if (!Model.BookedMatchIds.Contains(match.Id))
-                    {
-                        <a asp-controller="Booking" asp-action="BookAndPay" asp-route-id="@match.Id" class="btn btn-success">Partecipa</a>
-                    }
-                    else
-                    {
-                        <span class="text-success">Già registrato</span>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<h2>Partite a cui non partecipi</h2>
+<div class="row">
+    @foreach (var match in Model.MatchesNonPartecipate)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm myCard">
+                <div class="card-body">
+                    <h5 class="card-title">@match.DataInizio.ToString("dd/MM/yyyy")</h5>
+                    <p class="card-text">
+                        <strong>Ora Inizio:</strong> @match.OraInizio.ToString(@"hh\:mm")<br />
+                        <strong>Campo:</strong> @(match.Campo != null ? match.Campo.NomeCampo : "Campo non disponibile")
+                    </p>
+                    <div class="d-flex gap-2">
+                        <a asp-action="MatchDetails" asp-route-id="@match.Id" class="btn secondButton btn-sm">Dettagli</a>
+                        @if (Model.BookedMatchIds != null && !Model.BookedMatchIds.Contains(match.Id))
+                        {
+                            <a asp-controller="Booking" asp-action="BookAndPay" asp-route-id="@match.Id" class="btn firstButton btn-sm">Partecipa</a>
+                        }
+                        else
+                        {
+                            <span class="text-success">Già registrato</span>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

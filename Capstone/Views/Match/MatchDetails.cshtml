@@ -2,102 +2,122 @@
 @using System.Text.RegularExpressions
 @model Capstone.Models.Matches
 
-@{
-    ViewData["Title"] = "Dettagli della Partita";
-}
+<div class="row justify-content-center">
+    <!-- Rendi la colonna più ampia -->
+    <div class="col-12 col-md-10 col-lg-8">
+        <div class="bg-custom rounded p-5 my-4 mx-3 shadow">
+            <div class="text-center mb-4">
+                <h2 class="text-green">Dettagli della Partita</h2>
+                <h4 class="myText">Partita #@Model.Id</h4>
+            </div>
 
-<h2>Dettagli della Partita</h2>
+            <hr class="myBorder" />
 
-<div class="card">
-    <div class="card-body">
-        <h4 class="card-title">Partita @Model.Id</h4>
+            <dl class="row myText">
+                <!-- Data -->
+                <dt class="col-sm-4">Data:</dt>
+                <dd class="col-sm-8">@Model.DataInizio.ToString("dd/MM/yyyy")</dd>
 
-        <dl class="row">
-            <dt class="col-sm-3">Data</dt>
-            <dd class="col-sm-9">@Model.DataInizio.ToString("dd/MM/yyyy")</dd>
+                <!-- Ora di Inizio -->
+                <dt class="col-sm-4">Ora di Inizio:</dt>
+                <dd class="col-sm-8">@Model.OraInizio.ToString(@"hh\:mm")</dd>
 
-            <dt class="col-sm-3">Ora di Inizio</dt>
-            <dd class="col-sm-9">@Model.OraInizio.ToString(@"hh\:mm")</dd>
+                <!-- Ora di Fine -->
+                <dt class="col-sm-4">Ora di Fine:</dt>
+                <dd class="col-sm-8">@Model.OraFine.ToString(@"hh\:mm")</dd>
 
-            <dt class="col-sm-3">Ora di Fine</dt>
-            <dd class="col-sm-9">@Model.OraFine.ToString(@"hh\:mm")</dd>
-
-            <dt class="col-sm-3">Tipo di Partita</dt>
-            <dd class="col-sm-9">
-                @switch (Model.TipoPartita)
-                {
-                    case Capstone.Models.Enums.TipoPartita.CalcioA5:
-                        @:Calcio a 5
-                        break;
-                    case Capstone.Models.Enums.TipoPartita.CalcioA7:
-                        @:Calcio a 7
-                        break;
-                }
-            </dd>
-
-            <dt class="col-sm-3">Campo</dt>
-            <dd class="col-sm-9">@Model.Campo.NomeCampo (@Model.Campo.Città, @Model.Campo.Indirizzo)</dd>
-
-            <dt class="col-sm-3">Creatore</dt>
-            <dd class="col-sm-9">
-                @if (Model.Creatore != null)
-                {
-                    @Model.Creatore.Nome @Model.Creatore.Cognome
-                }
-                else
-                {
-                    <span>Creatore sconosciuto</span>
-                }
-            </dd>
-
-            <dt class="col-sm-3">Partecipanti</dt>
-            <dd class="col-sm-9">
-                <ul>
-                    @foreach (var partecipante in Model.Partecipanti)
+                <!-- Tipo di Partita -->
+                <dt class="col-sm-4">Tipo di Partita:</dt>
+                <dd class="col-sm-8">
+                    @switch (Model.TipoPartita)
                     {
-                        <li>
-                            @partecipante.Nome @partecipante.Cognome
-                            @if (partecipante.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
-                            {
-                                <!-- Se l'utente clicca sul proprio profilo, reindirizza ai dettagli con pulsante modifica -->
-                                <a href="@Url.Action("Details", "Profile")" class="btn btn-info">Il mio profilo</a>
-                            }
-                            else
-                            {
-                                <!-- Se l'utente clicca sul profilo di un altro partecipante, visualizza "ViewProfile" -->
-                                <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="btn btn-info">Vedi profilo</a>
-                            }
-                        </li>
+                        case Capstone.Models.Enums.TipoPartita.CalcioA5:
+                            @:Calcio a 5
+                            break;
+                        case Capstone.Models.Enums.TipoPartita.CalcioA7:
+                            @:Calcio a 7
+                            break;
                     }
-                </ul>
-            </dd>
+                </dd>
 
-            <dt class="col-sm-3">Chat Creata</dt>
-            <dd class="col-sm-9">
-                @if (Model.Chat != null)
+                <!-- Campo -->
+                <dt class="col-sm-4">Campo:</dt>
+                <dd class="col-sm-8">@Model.Campo.NomeCampo (@Model.Campo.Città, @Model.Campo.Indirizzo)</dd>
+
+                <!-- Creatore -->
+                <dt class="col-sm-4">Creatore:</dt>
+                <dd class="col-sm-8">
+                    @if (Model.Creatore != null)
+                    {
+                        @Model.Creatore.Nome @Model.Creatore.Cognome
+                    }
+                    else
+                    {
+                        <span>Creatore sconosciuto</span>
+                    }
+                </dd>
+
+                <!-- Partecipanti -->
+                <dt class="col-sm-4">Partecipanti:</dt>
+                <dd class="col-sm-8">
+                    <ul>
+                        @foreach (var partecipante in Model.Partecipanti)
+                        {
+                            <li>
+                                <!-- Rendi il nome cliccabile -->
+                                @if (partecipante.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                                {
+                                    <a href="@Url.Action("Details", "Profile")" class=" text-decoration-none" style="color: #58ae82">
+                                        <strong>@partecipante.Nome @partecipante.Cognome (Il mio profilo)</strong>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="text-decoration-none" style="color: #58ae82">
+                                        @partecipante.Nome @partecipante.Cognome
+                                    </a>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </dd>
+
+                <!-- Chat Creata -->
+                <dt class="col-sm-4">Chat Creata:</dt>
+                <dd class="col-sm-8">
+                    @if (Model.Chat != null)
+                    {
+                        @Model.Chat.DataCreazione.ToString("dd/MM/yyyy HH:mm")
+                    }
+                    else
+                    {
+                        @:Nessuna chat creata
+                    }
+                </dd>
+            </dl>
+
+            <!-- Bottoni di azione in una sola riga -->
+            <div class="d-flex justify-content-between mt-4 flex-wrap">
+                <a asp-action="MatchList" class="btn secondButton mb-2">Torna alla lista</a>
+
+                @if (Model.CreatoreId == int.Parse(User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier)))
                 {
-                    @Model.Chat.DataCreazione.ToString("dd/MM/yyyy HH:mm")
+                    <a asp-action="EditMatch" asp-route-id="@Model.Id" class="btn editButton mb-2">Modifica</a>
+                    <a asp-action="DeleteMatch" asp-route-id="@Model.Id" class="btn deleteButton mb-2">Annulla Partita</a>
+
+                    @if (!Model.Partecipanti.Any(p => p.Id == Model.CreatoreId))
+                    {
+                        <a asp-action="BookAndPay" asp-controller="Booking" asp-route-id="@Model.Id" class="btn firstButton mb-2">Completa il pagamento</a>
+                    }
                 }
-                else
+
+                @if (Model.Partecipanti.Any(p => p.Id == int.Parse(User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier))))
                 {
-                    @:Nessuna chat creata
+                    <a asp-action="ForMatch" asp-controller="Chat" asp-route-matchId="@Model.Id" class="btn firstButton mb-2">Accedi alla Chat</a>
                 }
-            </dd>
-        </dl>
 
-        <a asp-action="MatchList" class="btn btn-primary">Torna alla lista</a>
-
-        @if (Model.CreatoreId == int.Parse(User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier)))
-        {
-            <a asp-action="EditMatch" asp-route-id="@Model.Id" class="btn btn-warning">Modifica</a>
-            <a asp-action="CancelMatch" asp-route-id="@Model.Id" class="btn btn-danger">Annulla Partita</a>
-        }
-
-        @if (Model.Partecipanti.Any(p => p.Id == int.Parse(User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier))))
-        {
-            <a asp-action="ForMatch" asp-controller="Chat" asp-route-matchId="@Model.Id" class="btn btn-success">Accedi alla Chat</a>
-        }
-        <a href="@Url.Action("CreateReview", "Review", new { matchId = Model.Id })" class="btn btn-primary">Valuta il campo</a>
-
+                <!--<a href="@Url.Action("CreateReview", "Review", new { matchId = Model.Id })" class="btn btn-primary mb-2">Valuta il campo</a>-->
+            </div>
+        </div>
     </div>
 </div>

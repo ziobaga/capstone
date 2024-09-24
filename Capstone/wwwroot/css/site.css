@@ -1,47 +1,393 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Work+Sans&display=swap');
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+@media (max-width: 768px) {
+    #scrollStyle {
+        display: none; /* Nasconde la sidebar su schermi piccoli */
+    }
+
+    .dropdown {
+        text-align: right;
+    }
+}
+
+@media (min-width: 768px) {
+    .dropdown {
+        display: none; /* Nasconde il dropdown su schermi più grandi */
+    }
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #58ae82;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none; /* Rimuove il bordo predefinito */
+    box-shadow: 0 0 0 0.2rem rgba(88, 174, 130, 0.5); /* Colore verde per l'effetto focus */
+    border-color: #58ae82; /* Cambia il colore del bordo al verde */
+}
+
+/* Modifica lo stile delle opzioni durante il passaggio del mouse */
+select option:hover {
+    background-color: #58ae82; /* Cambia sfondo al verde */
+    color: white; /* Cambia il testo a bianco */
+}
+
+/* Modifica lo stile delle opzioni selezionate */
+select option:focus {
+    background-color: #58ae82; /* Cambia sfondo al verde */
+    color: white; /* Cambia il testo a bianco */
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    font-family: "Barlow", sans-serif !important;
 }
 
-/*STAR*/
-.star-rating {
-    direction: rtl;
-    display: inline-flex;
+main {
+    margin-bottom: 4em;
 }
 
-    .star-rating input {
-        display: none;
+#scrollStyle {
+    overflow-y: auto;
+    height: 100vh;
+    padding-bottom: 3em;
+    padding-top: 2em;
+}
+
+    #scrollStyle::-webkit-scrollbar {
+        width: 12px;
+        background-color: transparent;
     }
 
-    .star-rating label {
-        font-size: 2em;
-        color: #ccc;
+    #scrollStyle::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+        background-color: #58ae82;
+    }
+
+#scrollStyleTwo {
+    overflow-y: auto;
+    height: 100vh;
+    padding-bottom: 3em;
+    padding-top: 2em;
+}
+
+    #scrollStyleTwo::-webkit-scrollbar {
+        width: 12px;
+        background-color: transparent;
+    }
+
+    #scrollStyleTwo::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #58ae82;
+    }
+
+.text-red {
+    color: #CC1617 !important;
+}
+
+.mylink {
+    color: #c3c8db;
+    text-decoration: none;
+    position: relative;
+    left: 0;
+    transition: color 0.3s ease, left 0.3s ease;
+}
+
+    .mylink:hover {
+        color: #58ae82;
+        left: 10px;
+    }
+
+.myBg {
+    background-color: #58ae82 !important;
+}
+
+.myBgForm {
+    background-color: #d9dadb !important;
+}
+
+.myText {
+    color: #6e6e6e !important;
+}
+
+.myBlack {
+    background-color: white !important;
+}
+
+.myIcon {
+    color: white;
+    transition: 0.3s;
+}
+
+    .myIcon:hover {
+        color: #CC1617;
+    }
+
+.myImg {
+    transition: transform 0.3s ease;
+}
+
+    .myImg:hover {
+        transform: scale(1.1); /* Aumenta del 10% la dimensione */
+    }
+
+.img-fixed-size {
+    width: 100%; /* Rende l'immagine larga quanto la card */
+    height: 200px; /* Altezza fissa per uniformare le card */
+    object-fit: cover; /* Ridimensiona l'immagine mantenendo le proporzioni e coprendo l'intero spazio */
+}
+
+.myCard{
+    border-radius: 20px;
+}
+
+.myCardHoover:hover {
+    transform: scale(1.1);
+    border-color: #58ae82;
+}
+
+.mySideBar{
+    border-radius:20px;
+}
+
+.myBorder{
+    border-radius: 20px;
+}
+/*FIRST BUTTON*/
+.firstButton {
+    background-color: #58ae82;
+    color: white;
+    border-radius: 15px;
+}
+/*SECOND BUTTON*/
+.secondButton {
+    background-color: #a2a6a4;
+    color: white;
+    border-radius: 15px;
+}
+/*DELETE BUTTON*/
+.deleteButton {
+    background-color: #fa3e3e;
+    color: white;
+    border-radius: 15px;
+}
+/*EDIT BUTTON*/
+.editButton {
+    background-color: #f2b33d;
+    color: white;
+    border-radius: 15px;
+}
+
+
+
+/*CONFIRM BUTTON - TASTO CONFERMA*/
+
+
+
+/* TABLE */
+
+.table-dark-personal {
+    background-color: #58ae82;
+    border-left: 1px solid #818283 !important;
+    border-right: 1px solid #818283 !important;
+    border-top: 1px solid #818283 !important;
+    border-collapse: separate; /* Usa separate per mantenere la rotondit� dei bordi */
+    border-radius: 12px; /* Arrotonda i bordi della tabella */
+    border-spacing: 0; /* Rimuove gli spazi tra i td */
+    padding: 15px 20px 20px 20px !important;
+}
+
+hr {
+    color: #58ae82 !important;
+}
+
+/* Arrotonda il bordo superiore sinistro e destro del primo tr nel thead */
+.table-dark-personal thead tr:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+/* Arrotonda il bordo inferiore sinistro e destro dell'ultimo tr nel tbody */
+.table-dark-personal tbody tr:last-child {
+    border-radius: 0 0 12px 12px;
+}
+
+/* Applica il bordo solo al tbody */
+.table-dark-personal tbody tr {
+    border-bottom: 1px solid #818283 !important;
+}
+
+/* Rimuovi il bordo dal thead */
+.table-dark-personal thead tr, .table-dark-personal thead th {
+    border-bottom: none !important;
+}
+
+/* Rimuovi qualsiasi bordo dai tr specifici */
+.personal-tr {
+    border-style: none !important;
+}
+
+th, td, tr {
+    color: white !important;
+}
+
+tbody > tr:hover {
+    background-color: #4a4e63 !important;
+    transition: 0.5s;
+}
+
+/*************************/
+
+.btn-blu {
+    color: white !important;
+    border-radius: 1.4em !important;
+    background-color: #191C24 !important;
+    /* Background color for normal state */
+    border-color: #191C24 !important;
+    /* Border color for normal state */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+    .btn-blu:hover {
+        background-color: #6C7293 !important;
+        /* Background color for hover state */
+        border-color: #6C7293 !important;
+        /* Border color for hover state */
+    }
+
+    .btn-blu:focus,
+    .btn-blu:active {
+        box-shadow: 0 0 7px 3px rgba(25, 28, 36, 0.5) !important;
+        /* Shadow for focus and active state */
+        outline: none !important;
+    }
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+
+/* Hide the default checkbox appearance */
+.checkboxHelper input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+}
+
+    /* Create a custom checkbox appearance */
+    .checkboxHelper input[type="checkbox"] + span {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #CCCCCC;
+        background-color: #FFFFFF;
+        position: relative;
+        vertical-align: middle;
         cursor: pointer;
     }
 
-    .star-rating input:checked ~ label {
-        color: gold;
+    /* Style the custom checkbox when it is checked */
+    .checkboxHelper input[type="checkbox"]:checked + span {
+        background-color: #CC1617;
+        border-color: #CC1617;
     }
 
-    .star-rating label:hover,
-    .star-rating label:hover ~ label {
-        color: gold;
+        /* Add a checkmark or some indicator for the checked state */
+        .checkboxHelper input[type="checkbox"]:checked + span::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 6px;
+            height: 12px;
+            border: solid #c3c8db;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+/*    index      */
+.red {
+    background-color: #CC1617;
+}
+
+.gray {
+    background-color: #191C24;
+}
+
+
+
+/* CERCA ANIMALE */
+
+.text-personal {
+    color: black;
+}
+
+
+.bg-personal {
+    background-color: #191C24;
+}
+
+
+
+.form-group {
+    position: relative;
+}
+
+input[type="date"].form-control:disabled {
+    padding-right: 30px;
+    background-color: #e0e0e0;
+    border-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+}
+
+
+    input[type="date"].form-control:disabled::after {
+        content: '✖';
+        color: #CC1617;
+        position: absolute;
+        right: 20px;
+        top: 70%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        font-size: 18px;
     }
+
+
+
+
+
+/* Optional: Custom styling for the modal */
+.modal-content {
+    background-color: #191C24 !important;
+    color: #fff;
+}
+
+.modal-header {
+    border-bottom: 1px solid #444;
+}
+
+.modal-footer {
+    border-top: 1px solid #444;
+}

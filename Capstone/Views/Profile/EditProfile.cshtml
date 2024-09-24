@@ -1,44 +1,67 @@
 ﻿@model Capstone.Models.ViewModels.EditProfileViewModel
 
-<h2>Modifica Profilo</h2>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+        <div class="position-relative bg-custom rounded p-5 my-4 mx-3 shadow">
 
-<form asp-action="EditProfile" enctype="multipart/form-data">
-    <input type="hidden" asp-for="UserId" />
+            <!-- Immagine del profilo in alto a sinistra -->
+            @if (!string.IsNullOrEmpty(Model.ImmagineProfilo))
+            {
+                <img src="~/@Model.ImmagineProfilo" alt="Immagine del profilo"
+                     class="position-absolute rounded-circle border border-white shadow"
+                     style="top: -50px; left: 20px; width: 100px; height: 100px; z-index: 1;" />
+            }
 
-    <div class="form-group">
-        <label for="Nome">Nome</label>
-        <input asp-for="Nome" class="form-control" />
-        <span asp-validation-for="Nome" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="Cognome">Cognome</label>
-        <input asp-for="Cognome" class="form-control" />
-        <span asp-validation-for="Cognome" class="text-danger"></span>
-    </div>
+            <div class="text-center mb-4 mt-5">
+                <h2 class="text-green">Modifica Profilo</h2>
+            </div>
 
-    <div class="form-group">
-        <label for="RuoloPreferito">Ruolo Preferito</label>
-        <select asp-for="RuoloPreferito" class="form-control">
-            <option value="0">Portiere</option>
-            <option value="1">Difensore</option>
-            <option value="2">Centrocampista</option>
-            <option value="3">Attaccante</option>
-        </select>
-    </div>
+            <form asp-action="EditProfile" enctype="multipart/form-data">
+                <input type="hidden" asp-for="UserId" />
 
-    <div class="form-group">
-        <label for="Residenza">Residenza</label>
-        <input asp-for="Residenza" class="form-control" />
-        <span asp-validation-for="Residenza" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="ImmagineProfiloFile">Immagine del profilo</label>
-        <input type="file" asp-for="ImmagineProfiloFile" class="form-control" />
-        @if (!string.IsNullOrEmpty(Model.ImmagineProfilo))
-        {
-            <img src="~/@Model.ImmagineProfilo" alt="Immagine del profilo" width="150" />
-        }
-    </div>
+                <!-- Nome -->
+                <div class="form-group">
+                    <label for="Nome" >Nome</label>
+                    <input asp-for="Nome" class="form-control myBgForm myText" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
 
-    <button type="submit" class="btn btn-primary">Salva</button>
-</form>
+                <!-- Cognome -->
+                <div class="form-group mt-3">
+                    <label for="Cognome" >Cognome</label>
+                    <input asp-for="Cognome" class="form-control myBgForm myText" />
+                    <span asp-validation-for="Cognome" class="text-danger"></span>
+                </div>
+
+                <!-- Ruolo Preferito -->
+                <div class="form-group mt-3">
+                    <label for="RuoloPreferito" >Ruolo Preferito</label>
+                    <select asp-for="RuoloPreferito" class="form-control myBgForm myText">
+                        <option value="0">Portiere</option>
+                        <option value="1">Difensore</option>
+                        <option value="2">Centrocampista</option>
+                        <option value="3">Attaccante</option>
+                    </select>
+                </div>
+
+                <!-- Indirizzo -->
+                <div class="form-group mt-3">
+                    <label for="autocomplete" >Indirizzo</label>
+                    <input id="autocomplete" class="form-control myBgForm myText" placeholder="Inserisci il tuo indirizzo" type="text" />
+                    <input type="hidden" id="latitude" name="latitude">
+                    <input type="hidden" id="longitude" name="longitude">
+                </div>
+
+                <!-- Immagine del Profilo -->
+                <div class="form-group mt-3">
+                    <label for="ImmagineProfiloFile" >Immagine del profilo</label>
+                    <input type="file" asp-for="ImmagineProfiloFile" class="form-control myBgForm myText" />
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn firstButton px-4">Salva</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

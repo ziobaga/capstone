@@ -1,44 +1,54 @@
 ﻿@model IEnumerable<Capstone.Models.Fields>
 
-<h2>Lista dei Campi</h2>
+@{
+    ViewData["Title"] = "Lista dei Campi";
+}
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nome Campo</th>
-            <th>Città</th>
-            <th>Indirizzo</th>
-            <th>Prezzo Orario</th>
-            @if (User.IsInRole("gestore") || User.IsInRole("admin"))
+<div class="row">
+    <div class="col">
+        <h1 class="text-dark">Lista dei Campi</h1>
+        <hr />
+
+        <div class="row">
+            @foreach (var campo in Model)
             {
-                <th>Azioni</th>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm myCard">
+                        <!-- Immagine del Campo -->
+                        @if (!string.IsNullOrEmpty(campo.ImmagineCampo))
+                        {
+                            <img src="~/@campo.ImmagineCampo" class="card-img-top img-fixed-size" alt="Immagine del campo" />
+                        }
+                        <!-- Dettagli del Campo -->
+                        <div class="card-body">
+                            <h5 class="card-title">@campo.NomeCampo</h5>
+                            <p class="card-text">
+                                <strong>Città:</strong> @campo.Città<br />
+                                <strong>Indirizzo:</strong> @campo.Indirizzo<br />
+                                <strong>Prezzo Orario:</strong> @campo.PrezzoOrario €
+                            </p>
+
+                            <!-- Azioni per Gestore o Admin -->
+                            @if (User.IsInRole("gestore") || User.IsInRole("admin"))
+                            {
+                                <div class="d-flex gap-2">
+                                    <a asp-action="EditField" asp-route-id="@campo.Id" class="btn editButton btn-sm">Modifica</a>
+                                    <a asp-action="DeleteField" asp-route-id="@campo.Id" class="btn deleteButton btn-sm">Elimina</a>
+                                </div>
+                            }
+
+                            <!-- Azioni per l'utente normale -->
+                            @if (User.IsInRole("user"))
+                            {
+                                <div class="d-flex gap-2 mt-3">
+                                    <a asp-action="CreateMatch" asp-controller="Match" asp-route-fieldId="@campo.Id" class="btn firstButton btn-sm">Crea una Partita</a>
+                                    <a asp-action="AvailableMatches" asp-controller="Match" asp-route-fieldId="@campo.Id" class="btn secondButton btn-sm">Vedi Partite Disponibili</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
             }
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var campo in Model)
-        {
-            <tr>
-                <td>@campo.NomeCampo</td>
-                <td>@campo.Città</td>
-                <td>@campo.Indirizzo</td>
-                <td>@campo.PrezzoOrario €</td>
-                @if (User.IsInRole("gestore") || User.IsInRole("admin"))
-                {
-                    <td>
-                        <a asp-action="EditField" asp-route-id="@campo.Id" class="btn btn-warning">Modifica</a>
-                        <a asp-action="DeleteField" asp-route-id="@campo.Id" class="btn btn-danger">Elimina</a>
-                    </td>
-                }
-                @if (User.IsInRole("user"))
-                {
-                    <td>
-                        <a asp-action="CreateMatch" asp-controller="Match" asp-route-fieldId="@field.Id" class="btn btn-success">Crea una Partita</a>
-                        <!-- Link per vedere le partite disponibili su questo campo -->
-                        <a asp-action="AvailableMatches" asp-controller="Match" asp-route-fieldId="@field.Id" class="btn btn-primary">Vedi Partite Disponibili</a>
-                    </td>
-                }
-            </tr>
-        }
-    </tbody>
-</table>
+        </div>
+    </div>
+</div>

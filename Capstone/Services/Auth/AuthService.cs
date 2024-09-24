@@ -88,10 +88,7 @@ namespace Capstone.Services.Auth
                 .Where(u => u.Email == user.Email && u.PasswordHash == hashedPass)
                 .FirstOrDefaultAsync();
 
-            if (existingUser == null)
-            {
-                throw new Exception("Utente non trovato.");
-            }
+
 
 
 

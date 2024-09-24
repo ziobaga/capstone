@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Capstone.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\css\\auth.css",
+      "PackagePath": "staticwebassets\\css\\auth.css"
+    },
+    {
       "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -19,6 +23,14 @@
     {
       "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\imgDefault.avif",
       "PackagePath": "staticwebassets\\images\\imgDefault.avif"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\logo-match1.png",
+      "PackagePath": "staticwebassets\\images\\logo-match1.png"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\logo-match2.png",
+      "PackagePath": "staticwebassets\\images\\logo-match2.png"
     },
     {
       "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\js\\site.js",
@@ -275,6 +287,26 @@
     {
       "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\Screenshot 2024-07-08 020912.png",
       "PackagePath": "staticwebassets\\uploads\\Screenshot 2024-07-08 020912.png"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\fields\\Screenshot 2024-05-23 112145.png",
+      "PackagePath": "staticwebassets\\uploads\\fields\\Screenshot 2024-05-23 112145.png"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\fields\\Screenshot 2024-05-24 155008.png",
+      "PackagePath": "staticwebassets\\uploads\\fields\\Screenshot 2024-05-24 155008.png"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\fields\\Screenshot 2024-06-03 113817.png",
+      "PackagePath": "staticwebassets\\uploads\\fields\\Screenshot 2024-06-03 113817.png"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\fields\\campetto1.webp",
+      "PackagePath": "staticwebassets\\uploads\\fields\\campetto1.webp"
+    },
+    {
+      "Id": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\fields\\campetto2.jpg",
+      "PackagePath": "staticwebassets\\uploads\\fields\\campetto2.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Capstone.Microsoft.AspNetCore.StaticWebAssets.props",

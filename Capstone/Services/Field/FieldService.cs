@@ -1,5 +1,6 @@
 ﻿using Capstone.Models;
 using Capstone.Models.Context;
+using Capstone.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace Capstone.Services.Field
@@ -13,7 +14,7 @@ namespace Capstone.Services.Field
             _context = context;
         }
 
-        public async Task<Fields> CreateFieldAsync(Fields model, int userId)
+        public async Task<Fields> CreateFieldAsync(FieldViewModel model, int userId)
         {
             // Crea una nuova istanza di Fields e assegna i valori dal model
             var newField = new Fields
@@ -23,9 +24,34 @@ namespace Capstone.Services.Field
                 Città = model.Città,
                 TipoCampo = model.TipoCampo,
                 PrezzoOrario = model.PrezzoOrario,
+                ImmagineCampo = model.ImmagineCampo,
                 ValutazioneMedia = 0,  // Inizialmente la valutazione media è 0
                 UserId = userId  // Usa l'ID passato dal controller
             };
+
+            if (model.ImmagineCampoFile != null && model.ImmagineCampoFile.Length > 0)
+            {
+                var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "fields");
+
+                if (!Directory.Exists(uploadsPath))
+                {
+                    Directory.CreateDirectory(uploadsPath);
+                }
+
+                var fileName = Path.GetFileName(model.ImmagineCampoFile.FileName);
+                var filePath = Path.Combine(uploadsPath, fileName);
+
+                // Salva il file sul server
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.ImmagineCampoFile.CopyToAsync(stream);
+                }
+
+                newField.ImmagineCampo = Path.Combine("uploads", "fields", fileName);
+
+                // Aggiorna il percorso dell'immagine di profilo
+                // model.ImmagineCampo = Path.Combine("uploads", fileName);
+            }
 
             // Aggiungi il nuovo campo al contesto
             _context.Fields.Add(newField);
@@ -78,6 +104,7 @@ namespace Capstone.Services.Field
             existingField.Città = field.Città;
             existingField.TipoCampo = field.TipoCampo;
             existingField.PrezzoOrario = field.PrezzoOrario;
+
 
             await _context.SaveChangesAsync();
             return true;

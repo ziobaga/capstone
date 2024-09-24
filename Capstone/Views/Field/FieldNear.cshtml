@@ -1,0 +1,52 @@
+﻿@model Capstone.Models.Fields;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps Display</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsuWaJh3QTK6gQGId71xvW8FkeoWDw5bk"></script>
+    <script>
+        function initMap() {
+            // Recupera l'indirizzo dal ViewBag passato dal controller
+            var address = '@ViewBag.Address';
+
+            if (!address) {
+                alert("Nessun indirizzo specificato.");
+                return;
+            }
+
+            // Crea un'istanza del geocoder di Google Maps
+            var geocoder = new google.maps.Geocoder();
+
+            // Impostazioni della mappa (centrale approssimativa)
+            var mapOptions = {
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+            // Usa l'API Geocoding per convertire l'indirizzo in coordinate
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    // Se l'indirizzo è stato trovato, centra la mappa su quella posizione
+                    map.setCenter(results[0].geometry.location);
+
+                    // Aggiungi un marcatore sulla posizione trovata
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert("Impossibile trovare l'indirizzo: " + status);
+                }
+            });
+        }
+    </script>
+</head>
+<body onload="initMap()">
+    <h2>Posizione di: @ViewBag.Address</h2>
+
+    <!-- Mappa -->
+    <div id="map" style="height: 500px; width: 100%;"></div>
+</body>
+</html>

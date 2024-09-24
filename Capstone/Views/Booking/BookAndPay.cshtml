@@ -1,54 +1,75 @@
 ﻿@using System.Security.Claims
 @model Capstone.Models.Matches
 
-<h2>Dettagli della Partita</h2>
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <div class="bg-custom rounded p-5 my-4 mx-3 shadow">
+            <div class="text-center mb-4">
+                <h2 class="text-green">Dettagli della Partita</h2>
+            </div>
 
-<p><strong>Data:</strong> @Model.DataInizio.ToString("dd/MM/yyyy")</p>
-<p><strong>Ora Inizio:</strong> @Model.OraInizio.ToString(@"hh\:mm")</p>
-<p><strong>Ora Fine:</strong> @Model.OraFine.ToString(@"hh\:mm")</p>
-<p><strong>Campo:</strong> @Model.Campo.NomeCampo, @Model.Campo.Città</p>
+            <hr class="myBorder" />
 
-<hr />
+            <div class="mb-4">
+                <p><strong>Data:</strong> @Model.DataInizio.ToString("dd/MM/yyyy")</p>
+                <p><strong>Ora Inizio:</strong> @Model.OraInizio.ToString(@"hh\:mm")</p>
+                <p><strong>Ora Fine:</strong> @Model.OraFine.ToString(@"hh\:mm")</p>
+                <p><strong>Campo:</strong> @Model.Campo.NomeCampo, @Model.Campo.Città</p>
+            </div>
 
-<h3>Partecipanti</h3>
-@if (Model.Partecipanti != null && Model.Partecipanti.Any())
-{
-    <ul>
-        @foreach (var partecipante in Model.Partecipanti)
-        {
-            <li>
-                @partecipante.Nome @partecipante.Cognome (@partecipante.Email)
-                @if (partecipante.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+            <hr class="myBorder" />
+
+            <div class="mb-4">
+                <h3 class="mb-3">Partecipanti</h3>
+                @if (Model.Partecipanti != null && Model.Partecipanti.Any())
                 {
-                    <!-- Se l'utente clicca sul proprio profilo, reindirizza ai dettagli con pulsante modifica -->
-                    <a href="@Url.Action("Details", "Profile")" class="btn btn-info">Il mio profilo</a>
+                    <ul class="list-group">
+                        @foreach (var partecipante in Model.Partecipanti)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>
+                                    @partecipante.Nome @partecipante.Cognome (@partecipante.Email)
+                                </span>
+                                <span>
+                                    @if (partecipante.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+                                    {
+                                        <a href="@Url.Action("Details", "Profile")" class="btn btn-info btn-sm">Il mio profilo</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="btn btn-info btn-sm">Vedi profilo</a>
+                                    }
+                                </span>
+                            </li>
+                        }
+                    </ul>
                 }
                 else
                 {
-                    <!-- Se l'utente clicca sul profilo di un altro partecipante, visualizza "ViewProfile" -->
-                    <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="btn btn-info">Vedi profilo</a>
+                    <p>Non ci sono partecipanti attualmente registrati per questa partita.</p>
                 }
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>Non ci sono partecipanti attualmente registrati per questa partita.</p>
-}
+            </div>
 
-<h3>Effettua la prenotazione e paga con Stripe</h3>
+            <hr class="myBorder" />
 
-<form asp-action="ProcessPayment" method="post">
-    <input type="hidden" name="matchId" value="@Model.Id" />
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="pk_test_51Q0mODP563WlEe7GzbpE8o1vcQJohTT8ZVmlc0ELLPCGM1cdMX0tSfFW060DWExEoSl51A4OchRsjEmsqWP0Yyti00tyuIYFwP"
-            data-amount="@((long)((Model.OraFine - Model.OraInizio).TotalHours * (double)Model.Campo.PrezzoOrario * 100))"
-            data-name="Prenotazione Partita"
-        data-description="Prenota e paga la partita"
-        data-currency="eur"
-        data-locale="auto">
-    </script>
-</form>
+            <div class="mb-4">
+                <h3 class="mb-3">Effettua la prenotazione e paga con Stripe</h3>
+                <form asp-action="ProcessPayment" method="post">
+                    <input type="hidden" name="matchId" value="@Model.Id" />
+                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="pk_test_51Q0mODP563WlEe7GzbpE8o1vcQJohTT8ZVmlc0ELLPCGM1cdMX0tSfFW060DWExEoSl51A4OchRsjEmsqWP0Yyti00tyuIYFwP"
+                            data-amount="@((long)((Model.OraFine - Model.OraInizio).TotalHours * (double)Model.Campo.PrezzoOrario * 100))"
+                            data-name="Prenotazione Partita"
+                            data-description="Prenota e paga la partita"
+                            data-currency="eur"
+                            data-locale="auto">
+                    </script>
+                </form>
+            </div>
 
-<a asp-action="MatchList" class="btn btn-secondary">Annulla</a>
+            <div class="d-flex justify-content-between">
+                <a asp-controller="Match" asp-action="MatchList" class="btn secondButton">Annulla</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,19 +4,30 @@
     ViewData["Title"] = "Conferma Eliminazione Campo";
 }
 
-<h2>Conferma Eliminazione</h2>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+        <div class="bg-custom rounded p-5 my-4 mx-3 shadow">
+            <div class="text-center mb-4">
+                <h2 class="text-red">Conferma Eliminazione</h2>
+                <h3>Sei sicuro di voler eliminare questo campo?</h3>
+            </div>
 
-<h3>Sei sicuro di voler eliminare questo campo?</h3>
+            <hr class="myBorder" />
 
-<div>
-    <h4>@Model.NomeCampo</h4>
-    <p>Città: @Model.Città</p>
-    <p>Indirizzo: @Model.Indirizzo</p>
-    <p>Prezzo Orario: €@Model.PrezzoOrario</p>
+            <div class="mb-4">
+                <h4 class="text-green">@Model.NomeCampo</h4>
+                <p><strong>Città:</strong> @Model.Città</p>
+                <p><strong>Indirizzo:</strong> @Model.Indirizzo</p>
+                <p><strong>Prezzo Orario:</strong> €@Model.PrezzoOrario</p>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <form asp-action="DeleteConfirmed" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn deleteButton">Elimina</button>
+                </form>
+                <a asp-action="FieldList" class="btn secondButton">Annulla</a>
+            </div>
+        </div>
+    </div>
 </div>
-
-<form asp-action="DeleteConfirmed" method="post">
-    <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-danger">Elimina</button>
-    <a asp-action="FieldList" class="btn btn-secondary">Annulla</a>
-</form>

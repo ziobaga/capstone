@@ -58,12 +58,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmllbGRcRmllbGRMaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Field/FieldNear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmllbGRcRmllbGROZWFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Match/AvailableMatches.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWF0Y2hcQXZhaWxhYmxlTWF0Y2hlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/zioba/OneDrive/Desktop/EPICODE/Repository GitHub/capstone/Capstone/Views/Match/CreateMatch.cshtml]

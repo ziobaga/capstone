@@ -4,47 +4,60 @@
     ViewData["Title"] = "Modifica Partita";
 }
 
-<h2>Modifica Partita</h2>
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <div class="bg-custom rounded p-5 my-4 mx-3 shadow">
+            <div class="text-center mb-4">
+                <h2 class="text-green">Modifica Partita</h2>
+            </div>
 
-<form asp-action="EditMatch" asp-route-id="@Model.Id">
-    <div class="form-group">
-        <label for="DataInizio">Data Inizio</label>
-        <input type="date" class="form-control" asp-for="DataInizio" />
-        <span asp-validation-for="DataInizio" class="text-danger"></span>
+            <hr class="myBorder" />
+
+            <form asp-action="EditMatch" asp-route-id="@Model.Id">
+                <div class="form-group">
+                    <label for="DataInizio" class="myText">Data Inizio</label>
+                    <input type="date" class="form-control myBgForm myText" asp-for="DataInizio" />
+                    <span asp-validation-for="DataInizio" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="OraInizio" class="myText">Ora di Inizio</label>
+                    <input type="time" class="form-control myBgForm myText" asp-for="OraInizio" />
+                    <span asp-validation-for="OraInizio" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="OraFine" class="myText">Ora di Fine</label>
+                    <input type="time" class="form-control myBgForm myText" asp-for="OraFine" />
+                    <span asp-validation-for="OraFine" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="TipoPartita" class="myText">Tipo di Partita</label>
+                    <select class="form-control myBgForm myText" asp-for="TipoPartita">
+                        <option value="0">Calcio a 5</option>
+                        <option value="1">Calcio a 7</option>
+                    </select>
+                    <span asp-validation-for="TipoPartita" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="CampoId" class="myText">Campo</label>
+                    <select class="form-control myBgForm myText" asp-for="CampoId">
+                        @foreach (var campo in ViewBag.Campi)
+                        {
+                            <option value="@campo.Id">@campo.NomeCampo</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CampoId" class="text-danger"></span>
+                </div>
+
+                <!-- Raggruppa i bottoni in un d-flex per posizionarli vicini -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn firstButton">Salva Modifiche</button>
+                    <a asp-action="MatchList" class="btn secondButton">Torna alla Lista</a>
+                </div>
+            </form>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label for="OraInizio">Ora di Inizio</label>
-        <input type="time" class="form-control" asp-for="OraInizio" />
-        <span asp-validation-for="OraInizio" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="OraFine">Ora di Fine</label>
-        <input type="time" class="form-control" asp-for="OraFine" />
-        <span asp-validation-for="OraFine" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="TipoCampo">Tipo di Partita</label>
-        <select class="form-control" asp-for="TipoPartita">
-            <option value="0">Calcio a 5</option>
-            <option value="1">Calcio a 7</option>
-        </select>
-        <span asp-validation-for="TipoPartita" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label for="CampoId">Campo</label>
-        <select class="form-control" asp-for="CampoId">
-            @foreach (var campo in ViewBag.Campi)
-            {
-                <option value="@campo.Id">@campo.NomeCampo</option>
-            }
-        </select>
-        <span asp-validation-for="CampoId" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-success">Salva Modifiche</button>
-    <a asp-action="MatchList" class="btn btn-primary">Torna alla Lista</a>
-</form>
+</div>
