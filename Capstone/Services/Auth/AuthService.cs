@@ -37,7 +37,7 @@ namespace Capstone.Services.Auth
                     Nome = model.Nome,
                     Cognome = model.Cognome,
                     DataCreazione = DateTime.Now,
-                    ImmagineProfilo = "/images/default2.jpg", // Immagine di default ~
+                    ImmagineProfilo = "/images/downloadefault.png", // Immagine di default ~
                     Residenza = null
                 };
 

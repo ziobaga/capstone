@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "qw7SqRYOM7L/YvDFKX0zG7YiKQ1CYUljVlC/joz2oSc=",
+  "Hash": "syzvRkRKAElExkR9cv0cdd1nPo1YpFLIDsVr6w4l6Ag=",
   "Source": "Capstone",
   "BasePath": "_content/Capstone",
   "Mode": "Default",
@@ -150,6 +150,25 @@
       "OriginalItemSpec": "wwwroot\\images\\default2.jpg"
     },
     {
+      "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\downloadefault.png",
+      "SourceId": "Capstone",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\",
+      "BasePath": "_content/Capstone",
+      "RelativePath": "images/downloadefault.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\downloadefault.png"
+    },
+    {
       "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\logo-match2.png",
       "SourceId": "Capstone",
       "SourceType": "Discovered",
@@ -167,6 +186,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\logo-match2.png"
+    },
+    {
+      "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\images\\match-logo.png",
+      "SourceId": "Capstone",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\",
+      "BasePath": "_content/Capstone",
+      "RelativePath": "images/match-logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\match-logo.png"
     },
     {
       "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\js\\site.js",
@@ -1516,6 +1554,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\fields\\campetto3jpg.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\fields\\campettotest.jpg",
+      "SourceId": "Capstone",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\",
+      "BasePath": "_content/Capstone",
+      "RelativePath": "uploads/fields/campettotest.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\fields\\campettotest.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\uploads\\fields\\campettotest2.jpg",
+      "SourceId": "Capstone",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\zioba\\OneDrive\\Desktop\\EPICODE\\Repository GitHub\\capstone\\Capstone\\wwwroot\\",
+      "BasePath": "_content/Capstone",
+      "RelativePath": "uploads/fields/campettotest2.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\fields\\campettotest2.jpg"
     }
   ]
 }

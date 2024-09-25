@@ -23,8 +23,15 @@
 </div>
 
 <hr />
+@if (User.IsInRole("admin"))
+{
+    <h2>Tutte le Partite</h2>
+}
+else
+{
+    <h2>Partite a cui puoi partecipare</h2>
+}
 
-<h2>Partite a cui non partecipi</h2>
 <div class="row">
     @foreach (var match in Model.MatchesNonPartecipate)
     {
