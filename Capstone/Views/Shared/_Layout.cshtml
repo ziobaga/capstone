@@ -9,77 +9,64 @@
     <link rel="stylesheet" href="~/Capstone.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body class="overflow-hidden myBlack">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 p-0">
-                <nav class="navbar navbar-expand myBg sticky-top px-4 py-0">
-                    <div class="navbar-nav align-items-center flex-grow-1 justify-content-between px-4 py-2">
-                        <li>
-                            <a class="text-white mt-5 fs-4" asp-area="" asp-controller="Home" asp-action="Index">
-                                <img src="@Url.Content("~/images/logo-match1.png")" alt="Logo" class="img-fluid myImg" width="80" height="80" />
-                            </a>
-                        </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a class="fs-2" asp-area="" asp-controller="Auth" asp-action="Logout">
-                                    <i class="bi bi-door-closed myIcon"></i>
-                                </a>
-                            </li>
-                        }
-                        @if (!User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a class="fs-2" asp-area="" asp-controller="Auth" asp-action="Login">
-                                    <i class="bi bi-door-closed-fill myIcon"></i>
-                                </a>
-                            </li>
-                        }
-                    </div>
-                </nav>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar visibile solo per schermi più grandi di 700px -->
-            <div class="col-2 myBg d-none d-md-block" id="scrollStyle">
-                <ul class="list-unstyled ps-3 pb-4 mySideBar">
+            <!-- Sidebar visibile solo su schermi più grandi di 768px -->
+            <div class="col-2 myBg2 p-0" id="scrollStyle" style="min-height: 100vh;">
+                <!-- Logo -->
+                <div class="text-center py-4">
+                    <a class="text-white fs-4" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img src="@Url.Content("~/images/logo-match1.png")" alt="Logo" class="img-fluid myImg" width="100" />
+                    </a>
+                </div>
+                <ul class="list-unstyled pb-4 px-2 mySideBar">
                     @if (User.Identity.IsAuthenticated)
                     {
                         @if (User.IsInRole("user"))
                         {
-                            <li class="list-group-item">
-                                <a class="fs-5 mylink" asp-area="" asp-controller="Profile" asp-action="Details">Profilo</a>
+                            <li class="myLi">
+                                <a class="fs-5 mylink px-3" asp-area="" asp-controller="Profile" asp-action="Details">Profilo</a>
                             </li>
-                            <li class="list-group-item">
-                                <a class="fs-5 mylink" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi</a>
+                            <li class="myLi">
+                                <a class="fs-5 mylink px-3" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi</a>
                             </li>
-                            <li class="list-group-item">
-                                <a class="fs-5 mylink" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite</a>
+                            <li class="myLi">
+                                <a class="fs-5 mylink px-3" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite</a>
                             </li>
-                            <li class="list-group-item">
-                                <a class="fs-5 mylink" asp-area="" asp-controller="Match" asp-action="CreateMatch">Crea partita</a>
+                            <li class="myLi">
+                                <a class="fs-5 mylink px-3" asp-area="" asp-controller="Match" asp-action="CreateMatch">Crea partita</a>
                             </li>
                         }
                         @if (User.IsInRole("gestore") || User.IsInRole("admin"))
                         {
-                            <li class="list-group-item">
-                                <a class="fs-5 mylink" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi (Gestore/Admin)</a>
+                            <li class="myLi">
+                                <a class="fs-5 mylink px-3" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi</a>
                             </li>
-                            <li class="list-group-item">
-                                <a class="fs-5 mylink" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite (Gestore/Admin)</a>
+                            <li class="myLi">
+                                <a class="fs-5 mylink px-3" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite</a>
                             </li>
-                            <li class="list-group-item">
-                                <a class="fs-5 mylink" asp-area="" asp-controller="Field" asp-action="CreateField">Aggiungi campo</a>
+                            <li class="myLi">
+                                <a class="fs-5 mylink px-3" asp-area="" asp-controller="Field" asp-action="CreateField">Aggiungi campo</a>
                             </li>
                         }
+                    }
+                    else
+                    {
+                        <li class="myLi">
+                            <a class="fs-5 mylink px-3" asp-area="" asp-controller="Auth" asp-action="Login">Accedi</a>
+                        </li>
+                        <li class="myLi">
+                            <a class="fs-5 mylink px-3" asp-area="" asp-controller="Auth" asp-action="Register">Registrati</a>
+                        </li>
                     }
                 </ul>
             </div>
 
-            <!-- Dropdown visibile solo per schermi più piccoli di 700px -->
+            <!-- Dropdown visibile solo su schermi più piccoli di 768px -->
             <div class="col-12 d-md-none p-0">
                 <div class="dropdown myBg p-2 text-right">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -97,10 +84,15 @@
                             }
                             @if (User.IsInRole("gestore") || User.IsInRole("admin"))
                             {
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi (Gestore/Admin)</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite (Gestore/Admin)</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Field" asp-action="FieldList">Lista campi</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Match" asp-action="MatchList">Lista partite</a></li>
                                 <li><a class="dropdown-item" asp-area="" asp-controller="Field" asp-action="CreateField">Aggiungi campo</a></li>
                             }
+                        }
+                        else
+                        {
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Auth" asp-action="Login">Accedi</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Auth" asp-action="Register">Registrati</a></li>
                         }
                     </ul>
                 </div>
@@ -108,26 +100,81 @@
 
             <!-- Main content -->
             <div class="col-md-10 col-12 p-0" id="scrollStyleTwo">
-                <main role="main" class="py-5 container-fluid">
+                <!-- Icona di logout -->
+                <div class="text-end p-3" style="background-color: white;">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="fs-2 text-dark" asp-area="" asp-controller="Auth" asp-action="Logout">
+                            <i class="bi bi-door-closed"></i>
+                        </a>
+                    }
+                </div>
+
+                <!-- Contenuto principale -->
+                <main role="main" class=" container-fluid">
                     @RenderBody()
                 </main>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Capstone - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    
 
     <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsuWaJh3QTK6gQGId71xvW8FkeoWDw5bk&libraries=places&callback=initMap">
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsuWaJh3QTK6gQGId71xvW8FkeoWDw5bk&loading=async&libraries=places&callback=initMap">
+    </script>
+
+    <script>
+        function initMap() {
+            let autocomplete;
+
+            function initAutocomplete() {
+                autocomplete = new google.maps.places.Autocomplete(
+                    document.getElementById("autocomplete"),
+                    {
+                        types: ["establishment"],
+                        componentRestrictions: { country: ["IT"] },
+                        fields: ["place_id", "geometry", "name"]
+                    }
+                );
+
+                autocomplete.addListener("place_changed", onPlaceChanged);
+            }
+
+            function onPlaceChanged() {
+                const place = autocomplete.getPlace();
+
+                if (!place.geometry) {
+                    // User entered the name of a Place that was not suggested and pressed the Enter key,
+                    // or the Place Details request failed.
+                    swal("Please fill all the *Required fields", "Click okay to continue", "warning");
+                    return;
+                }
+            }
+
+            // Check before submit
+            document.getElementById('my-form').addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent form submit
+                const place = autocomplete.getPlace();
+                console.log("Sono qui", document.getElementById("autocomplete"));// Get place from autocomplete
+
+                /*if (!place.geometry) {
+                   // Check if valid location
+                    swal("Please fill all the *Required fields", "Click okay to continue", "warning");
+                    return;
+                }*/
+
+                // If everything is correct, you can submit the form here
+                this.submit();
+            });
+
+            // Initialize autocomplete
+            initAutocomplete();
+        }
+
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

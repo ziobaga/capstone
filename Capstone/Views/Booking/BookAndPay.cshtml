@@ -28,16 +28,17 @@
                         {
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <span>
-                                    @partecipante.Nome @partecipante.Cognome (@partecipante.Email)
-                                </span>
-                                <span>
                                     @if (partecipante.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
                                     {
-                                        <a href="@Url.Action("Details", "Profile")" class="btn btn-info btn-sm">Il mio profilo</a>
+                                        <a href="@Url.Action("Details", "Profile")" class="text-decoration-none" style="color: #58ae82;">
+                                            @partecipante.Nome @partecipante.Cognome (@partecipante.Email)
+                                        </a>
                                     }
                                     else
                                     {
-                                        <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="btn btn-info btn-sm">Vedi profilo</a>
+                                        <a href="@Url.Action("ViewProfile", "Profile", new { userId = partecipante.Id })" class="text-decoration-none" style="color: #58ae82;">
+                                            @partecipante.Nome @partecipante.Cognome (@partecipante.Email)
+                                        </a>
                                     }
                                 </span>
                             </li>

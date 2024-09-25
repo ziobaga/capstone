@@ -19,6 +19,8 @@ namespace Capstone.Models.Auth
 
         public string? Residenza { get; set; } // Nuovo campo per residenza
 
+        public string? Città { get; set; }
+
         public string? ImmagineProfilo { get; set; } // Nuovo campo per immagine profilo
 
         [Required]

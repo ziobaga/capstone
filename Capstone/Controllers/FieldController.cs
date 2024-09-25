@@ -13,6 +13,7 @@ namespace Capstone.Controllers
         private readonly IFieldService _fieldService;
         private readonly DataContext _context;
 
+
         public FieldController(IFieldService fieldService, DataContext dataContext)
         {
             _fieldService = fieldService;
@@ -112,6 +113,7 @@ namespace Capstone.Controllers
             // Reindirizza alla vista della lista dei campi
             return RedirectToAction(nameof(FieldList));
         }
+
 
 
         // GET: Field/Delete/5

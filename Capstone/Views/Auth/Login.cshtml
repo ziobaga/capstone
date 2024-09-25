@@ -5,12 +5,12 @@
 }
 <link rel="stylesheet" href="~/css/auth.css" />
 
-<div class="row align-items-center justify-content-center">
+<div class="row align-items-center justify-content-center myAuthMargin">
     <div class="col-12 col-sm-10 col-md-9 col-lg-8 col-xl-7">
         <div class="bg-custom rounded p-5 my-4 mx-3">
             <div class="d-flex align-items-center justify-content-between mb-3">
-                <h3 class="text-red">OASI</h3>
-                <h3 class="text-light">Accesso <i class="bi bi-person-check-fill text-red"></i></h3>
+                <h3 class="text-light">MATCH!</h3>
+                <h3 class="text-light">Accesso <i class="bi bi-person-check-fill"></i></h3>
             </div>
             <form asp-action="Login" method="post">
                 @Html.AntiForgeryToken()
@@ -25,13 +25,13 @@
 
                 <!-- Campo Email -->
                 <div class="form-group mb-3">
-                    <input asp-for="Email" class="form-control bg-secondary text-light" placeholder="Email" />
+                    <input asp-for="Email" class="form-control myBgForm text-light" placeholder="Email" />
                     <span asp-validation-for="Email" class="text-red"></span>
                 </div>
 
                 <!-- Campo Password -->
                 <div class="form-group mb-4 position-relative">
-                    <input asp-for="Password" id="password" class="form-control bg-secondary text-light" type="password" placeholder="Password" />
+                    <input asp-for="Password" id="password" class="form-control myBgForm text-light" type="password" placeholder="Password" />
                     <span asp-validation-for="Password" class="text-red"></span>
 
                     <button type="button" class="btn1 btn-pw text-decoration-none position-absolute end-0 top-0 mt-2 me-3" id="togglePassword" style="cursor: pointer;">
@@ -39,11 +39,15 @@
                     </button>
                 </div>
 
-                <!-- Bottone di invio -->
-                <input type="submit" value="Accedi" class="btn btn-red py-3 w-100 mb-4 text-white" />
-
+                <!-- Bottone di invio centrato e con larghezza ridotta -->
+                <div class="d-flex justify-content-center">
+                    <input type="submit" value="Accedi" class="btn secondButton text-white" />
+                </div>
+                
                 <!-- Link di registrazione -->
-                <p class="text-center mb-0 text-placeholder">Non hai un Account? <a asp-action="Register" class="text-red">Registrati</a></p>
+                <div class="mt-3">
+                    <p class="text-center mb-0 text-placeholder">Non hai un Account? <a asp-action="Register" class="text-white">Registrati</a></p>
+                </div>
             </form>
         </div>
     </div>

@@ -5,12 +5,12 @@
 }
 <link rel="stylesheet" href="~/css/auth.css" />
 
-<div class="row align-items-center justify-content-center">
+<div class="row align-items-center justify-content-center myAuthMargin2">
     <div class="col-12 col-sm-10 col-md-9 col-lg-8 col-xl-7">
         <div class="bg-custom rounded p-5 my-4 mx-3">
             <div class="d-flex align-items-center justify-content-between mb-3">
-                <h3 class="text-red">OASI</h3>
-                <h3 class="text-light">Registrazione <i class="bi bi-person-plus-fill text-red"></i></h3>
+                <h3 class="text-light">MATCH!</h3>
+                <h3 class="text-light">Registrazione <i class="bi bi-person-plus-fill "></i></h3>
             </div>
             <form asp-action="Register" method="post">
                 @Html.AntiForgeryToken()
@@ -25,49 +25,52 @@
 
                 <!-- Nome -->
                 <div class="form-group mb-3">
-                    <input asp-for="Nome" class="form-control bg-secondary text-light" placeholder="Nome" />
+                    <input asp-for="Nome" class="form-control myBgForm myText" placeholder="Nome" />
                     <span asp-validation-for="Nome" class="text-red"></span>
                 </div>
 
                 <!-- Cognome -->
                 <div class="form-group mb-3">
-                    <input asp-for="Cognome" class="form-control bg-secondary text-light" placeholder="Cognome" />
+                    <input asp-for="Cognome" class="form-control myBgForm myText" placeholder="Cognome" />
                     <span asp-validation-for="Cognome" class="text-red"></span>
                 </div>
 
                 <!-- Username -->
                 <div class="form-group mb-3">
-                    <input asp-for="Username" class="form-control bg-secondary text-light" placeholder="Username" />
+                    <input asp-for="Username" class="form-control myBgForm myText" placeholder="Username" />
                     <span asp-validation-for="Username" class="text-red"></span>
                 </div>
 
                 <!-- Email -->
                 <div class="form-group mb-3">
-                    <input asp-for="Email" class="form-control bg-secondary text-light" type="email" placeholder="Email" />
+                    <input asp-for="Email" class="form-control myBgForm myText" type="email" placeholder="Email" />
                     <span asp-validation-for="Email" class="text-red"></span>
                 </div>
 
                 <!-- Password -->
                 <div class="form-group mb-4 position-relative">
-                    <input asp-for="Password" id="password" class="form-control bg-secondary text-light" type="password" placeholder="Password" />
+                    <input asp-for="Password" id="password" class="form-control myBgForm myText" type="password" placeholder="Password" />
                     <span asp-validation-for="Password" class="text-red"></span>
 
                     <button type="button" class="btn1 btn-pw text-decoration-none position-absolute end-0 top-0 mt-2 me-3" id="togglePassword" style="cursor: pointer;">
-                        <i class="bi bi-eye text-light" id="toggleIcon"></i>
+                        <i class="bi bi-eye-fill text-light" id="toggleIcon"></i>
                     </button>
                 </div>
 
                 <!-- Conferma Password -->
                 <div class="form-group mb-4">
-                    <input asp-for="ConfirmPassword" class="form-control bg-secondary text-light" type="password" placeholder="Conferma Password" />
+                    <input asp-for="ConfirmPassword" class="form-control myBgForm myText" type="password" placeholder="Conferma Password" />
                     <span asp-validation-for="ConfirmPassword" class="text-red"></span>
                 </div>
 
-                <!-- Bottone di registrazione -->
-                <input type="submit" value="Registrati" class="btn btn-red py-3 w-100 mb-4 text-white" />
-
+                <!-- Bottone di registrazione centrato e con larghezza ridotta -->
+                <div class="d-flex justify-content-center">
+                    <input type="submit" value="Registrati" class="btn secondButton text-white" />
+                </div>
+                <div class="mt-3">
                 <!-- Link al login -->
-                <p class="text-center mb-0 text-placeholder">Hai già un Account? <a asp-action="Login" class="text-red">Accedi</a></p>
+                    <p class="text-center mb-0 text-placeholder">Hai già un Account? <a asp-action="Login" class="text-white">Accedi</a></p>
+                </div>
             </form>
         </div>
     </div>

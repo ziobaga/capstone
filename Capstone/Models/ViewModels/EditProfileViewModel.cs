@@ -7,6 +7,9 @@ namespace Capstone.Models.ViewModels
         public int UserId { get; set; }
         public string Nome { get; set; }
         public string Cognome { get; set; }
+        public string Username { get; set; }
+
+        public string Città { get; set; }
         public string Residenza { get; set; }
         public string ImmagineProfilo { get; set; }
 

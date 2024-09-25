@@ -16,7 +16,7 @@
                 <h2 class="text-green">Modifica Profilo</h2>
             </div>
 
-            <form asp-action="EditProfile" enctype="multipart/form-data">
+            <form asp-action="EditProfile" enctype="multipart/form-data" id="my-form">
                 <input type="hidden" asp-for="UserId" />
 
                 <!-- Nome -->
@@ -33,6 +33,12 @@
                     <span asp-validation-for="Cognome" class="text-danger"></span>
                 </div>
 
+                <div class="form-group mt-3">
+                    <label for="Username">Username</label>
+                    <input asp-for="Username" class="form-control myBgForm myText" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+
                 <!-- Ruolo Preferito -->
                 <div class="form-group mt-3">
                     <label for="RuoloPreferito" >Ruolo Preferito</label>
@@ -44,12 +50,13 @@
                     </select>
                 </div>
 
+               
+
                 <!-- Indirizzo -->
                 <div class="form-group mt-3">
-                    <label for="autocomplete" >Indirizzo</label>
-                    <input id="autocomplete" class="form-control myBgForm myText" placeholder="Inserisci il tuo indirizzo" type="text" />
-                    <input type="hidden" id="latitude" name="latitude">
-                    <input type="hidden" id="longitude" name="longitude">
+                    <label for="Residenza">Indirizzo</label>
+                    <input asp-for="Residenza" id="autocomplete" type="text" class="form-control myBgForm myText" placeholder="Inserisci indirizzo"/>
+                    <span asp-validation-for="Residenza" class="text-danger"></span>
                 </div>
 
                 <!-- Immagine del Profilo -->
@@ -65,3 +72,5 @@
         </div>
     </div>
 </div>
+
+

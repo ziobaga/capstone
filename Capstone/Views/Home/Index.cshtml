@@ -7,9 +7,9 @@
 }
 
 <!-- Header -->
-<header class="myBg text-white text-center py-5 myBorder">
+<header class=" text-green text-center py-3 myBorder">
     <div class="container">
-        <h1 class="display-4 fst-italic">Benvenuti su Match!</h1>
+        <h1 class="myTytle display-4 ">Benvenuti su Match!</h1>
         <p class="lead">Il calcetto a portata di click!</p>
     </div>
 </header>
@@ -18,11 +18,17 @@
 @if (User.Identity.IsAuthenticated)
 {
     <div class="container py-4">
-        <h1>@User.Identity.Name</h1>
+        <div class="d-flex align-items-center">
+            <!-- Icona posizionata a sinistra del nome utente -->
+            <i class="bi bi-person-fill" style="font-size: 24px; color: black; margin-right: 10px;"></i>
+
+            <!-- Nome utente -->
+            <h1 class="mb-0" style="font-size: 24px;">@User.Identity.Name</h1>
+        </div>
 
         @if (Model.ProfiloIncompleto)
         {
-            <div class="alert alert-info">
+            <div class="alert alert-info mt-4">
                 Completa il tuo profilo! <a asp-controller="Profile" asp-action="EditProfile">Clicca qui</a> per modificare il profilo.
             </div>
         }
@@ -66,7 +72,7 @@
 <!-- Partite partecipate -->
 <section class="py-5">
     <div class="container">
-        <h2 class="text-center fs-2 mb-4">Partite a cui hai partecipato</h2>
+        <h2 class="text-center fs-2 mb-4">Partite a cui stai partecipando</h2>
         @if (Model.PartitePartecipate != null && Model.PartitePartecipate.Any())
         {
             <div class="row">

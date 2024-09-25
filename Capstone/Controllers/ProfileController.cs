@@ -36,7 +36,9 @@ namespace Capstone.Controllers
                 UserId = user.Id,
                 Nome = user.Nome,
                 Cognome = user.Cognome,
+                Username = user.Username,
                 Residenza = user.Residenza,
+                Città = user.Città,
                 ImmagineProfilo = user.ImmagineProfilo // Percorso dell'immagine profilo esistente
             };
 
@@ -60,7 +62,9 @@ namespace Capstone.Controllers
             // Aggiorna i campi dell'utente con i dati del ViewModel
             user.Nome = model.Nome;
             user.Cognome = model.Cognome;
+            user.Username = model.Username;
             user.Residenza = model.Residenza;
+            user.Città = model.Città;
             user.RuoloPreferito = model.RuoloPreferito;
 
             // Se l'utente ha caricato una nuova immagine di profilo

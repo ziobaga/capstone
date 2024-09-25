@@ -37,13 +37,13 @@ namespace Capstone.Services.Auth
                     Nome = model.Nome,
                     Cognome = model.Cognome,
                     DataCreazione = DateTime.Now,
-                    ImmagineProfilo = "/images/default.jpg", // Immagine di default
+                    ImmagineProfilo = "/images/default2.jpg", // Immagine di default ~
                     Residenza = null
                 };
 
                 userRegister.PasswordHash = _passwordHelper.HashPassword(model.Password);
 
-                var userRole = await _ctx.Roles.FirstOrDefaultAsync(r => r.Id == 1);
+                var userRole = await _ctx.Roles.FirstOrDefaultAsync(r => r.Id == 3);
                 if (userRole == null)
                 {
                     throw new Exception("Ruolo non trovato");
